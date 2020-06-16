@@ -1,0 +1,117 @@
+/* SIGNUP */
+body {
+  margin: 0;
+}
+
+[class*="signup"] {
+  font-family: sans-serif
+}
+
+.signup-container {
+  background-image: url("./session-ingredients.jpg");
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-div {
+  display: flex;
+  flex-direction: column;
+  width: 405px;
+  height: 540px;
+  margin: auto;
+  border: 1px solid white; 
+  background-color: lightgray;
+  opacity: 0.75;
+}
+
+.signup-div > h1 {
+  text-align: center;
+  margin-top: 60px;
+  /* color: white; */
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signup-form > input {
+  text-align: center;
+  width: 80%;
+  height: 35px;
+  margin-bottom: 25px;
+  background-color: transparent;
+  border-bottom: 2px solid white;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 4px;
+}
+
+.signup-form > input:focus {
+  background-color: white;
+  opacity: 1;
+  outline: none;
+  box-shadow: 0 0 2px 5px white;
+  /* EDIT BOX SHADOW WHEN U CAN REMOVE OPACITY */
+}
+
+.signup-form > ::placeholder {
+  color: black;
+}
+
+.signup-submit {
+  border: none;
+  background-color: white;
+  width: 80%;
+  height: 45px;
+  border-radius: 30px;
+  margin-bottom: 150px;
+  outline: none;
+  cursor: pointer;
+}
+
+.signup-bottom-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-self: start;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 14px;
+}
+
+.signup-bottom-buttons > span {
+  margin-right: -80px;
+}
+
+.signup-bottom-buttons > button {
+  border: none;
+  text-decoration: underline;
+  color: blue;
+  background-color: transparent;
+}
+
+.signup-bottom-buttons > button:focus {
+  outline: none;
+  cursor: pointer;
+}
+
+.session-footer {
+  align-self: flex-end;
+  position: relative;
+  top: 25px;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-size: 13px;
+  color: white;
+}
+
+
+
+

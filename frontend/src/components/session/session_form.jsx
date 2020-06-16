@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import './session.css';
 
 //ARRAY OF SAMPLE USERS FOR DEMO //
 
@@ -73,15 +74,15 @@ class SessionForm extends React.Component {
 
     // let session = this.props.formType;
     let otherLink;
-    let otherLinkText;
-    let otherLinkLinkText;
-    let sessionHeader;
-    let submitButton;
+    // let otherLinkText;
+    // let otherLinkLinkText;
+    // let sessionHeader;
+    // let submitButton;
     let baseColor;
-    let placeholderEmail;
-    let placeholderPW;
-    let labelEmail;
-    let labelPW;
+    // let placeholderEmail;
+    // let placeholderPW;
+    // let labelEmail;
+    // let labelPW;
     // if (this.props.formType === "login") {
     //   otherLink = "signup";
     //   sessionHeader = "Welcome to RobinsJacket";
@@ -105,71 +106,65 @@ class SessionForm extends React.Component {
     //   otherLinkLinkText = "Log In to start trading";
     // }
 
-    let session = "signup"
+    let session = "signup"    
 
     return (
+      //     this.props.formType == "login" ? (
 
-  //     this.props.formType == "login" ? (
+      //     <div className={`${session}-div`}>
+      //       <div className="other-link-div">
+      //         <span>Have an account?</span>
+      //         <Link
+      //           to={`/${otherLink}`}
+      //           className={`link-${baseColor}-only other-link`}>
+      //           Log In
+      //         </Link>
+      //       </div>
 
-  //     <div className={`${session}-div`}>
-  //       <div className="other-link-div">
-  //         <span>Have an account?</span>
-  //         <Link
-  //           to={`/${otherLink}`}
-  //           className={`link-${baseColor}-only other-link`}>
-  //           Log In
-  //         </Link>
-  //       </div>
+      //       <Link className={`logo-small ${session}-logo`} to="/">
+      //         <img
+      //           src={window.small_logo}  ///////////////NEED LOGO
+      //           className={`logo-small ${session}-logo`}
+      //           draggable="false"/>
+      //       </Link>
+      //       <h1>Member Login</h1>
 
-  //       <Link className={`logo-small ${session}-logo`} to="/">
-  //         <img
-  //           src={window.small_logo}  ///////////////NEED LOGO
-  //           className={`logo-small ${session}-logo`}
-  //           draggable="false"/>
-  //       </Link>
-  //       <h1>Member Login</h1>
+      //       <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
+      //         <input
+      //           type="text"
+      //           value={this.state.username}
+      //           placeholder="username"
+      //           onChange={this.update("username")}
+      //           className={`${session}-input ${session}-username`}/>
+      //         <input
+      //           type="password"
+      //           value={this.state.password}
+      //           placeholder="Password (min. 8 characters)"
+      //           onChange={this.update("password")}
+      //           className={`${session}-input ${session}-password`}/>
 
-  //       <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
-  //         <input
-  //           type="text"
-  //           value={this.state.username}
-  //           placeholder="username"
-  //           onChange={this.update("username")}
-  //           className={`${session}-input ${session}-username`}/>
-  //         <input
-  //           type="password"
-  //           value={this.state.password}
-  //           placeholder="Password (min. 8 characters)"
-  //           onChange={this.update("password")}
-  //           className={`${session}-input ${session}-password`}/>
+      //         <button className={`button-${baseColor} ${session}-submit`}>
+      //           Login
+      //         </button>
 
-  //         <button className={`button-${baseColor} ${session}-submit`}>
-  //           Login
-  //         </button>
+      //           <button
+      //             onClick={this.demoUser()}
+      //             className={`button-${baseColor}`}>
+      //             Demo Page
+      //           </button>
+      //         </div>
 
+      //         {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
+      //         <div className={`${session}-errors-div`}>
+      //           {this.props.errors ? this.displayErrors() : null}
+      //         </div>
 
+      //       </form>
 
-
-  //           <button 
-  //             onClick={this.demoUser()}
-  //             className={`button-${baseColor}`}>
-  //             Demo Page
-  //           </button>
-  //         </div>
-
-  //         {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-  //         <div className={`${session}-errors-div`}> 
-  //           {this.props.errors ? this.displayErrors() : null}
-  //         </div>
-
-  //       </form>
-
-
-
-
-  // ) : ( 
-      <div className={`${session}-div`}>
-        {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
+      // ) : (
+      <div className="signup-container">
+        <div className={`${session}-div`}>
+          {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
           <img
             src={window.small_logo}  ///////////////NEED LOGO
             className="logo-small signup-logo"
@@ -177,58 +172,63 @@ class SessionForm extends React.Component {
           />
         </Link> */}
 
-        <h1>Member Signup</h1>
+          <h1>Member Signup</h1>
 
-        <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
-          <input
-            type="text"
-            value={this.state.username}
-            placeholder="username"
-            onChange={this.update("username")}
-            className={`${session}-input ${session}-username`}/>
-          <input
-            type="text"
-            value={this.state.email}
-            placeholder="email"
-            onChange={this.update("email")}
-            className={`${session}-input ${session}-email`}/>
-          <input
-            type="password"
-            value={this.state.password}
-            placeholder="Password (min. 8 characters)"
-            onChange={this.update("password")}
-            className={`${session}-input ${session}-password`}/>
+          <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
+            <div className={`${session}-form`}>
+              <input
+                type="text"
+                value={this.state.username}
+                placeholder="username"
+                onChange={this.update("username")}
+                className={`${session}-input ${session}-username`}
+              />
+              <input
+                type="text"
+                value={this.state.email}
+                placeholder="email"
+                onChange={this.update("email")}
+                className={`${session}-input ${session}-email`}
+              />
+              <input
+                type="password"
+                value={this.state.password}
+                placeholder="Password (min. 8 characters)"
+                onChange={this.update("password")}
+                className={`${session}-input ${session}-password`}
+              />
 
-          <button className={`button-${baseColor} ${session}-submit`}>
-            Get Cookin'
-          </button>
+              <button className={`${session}-submit`}>Get Cookin'</button>
 
-          <div>
-            <Link
-              to={`/${otherLink}`}
-              className={`link-${baseColor}-only other-link`}>
-              Have an account? Log In
-            </Link>
+              <div className="signup-bottom-buttons">
+                <span>Have an account?</span>
+                <Link
+                  to={`/${otherLink}`}
+                  className={`link-${baseColor}-only other-link`}
+                >
+                  Log In
+                </Link>
 
-            <button 
-              onClick={this.demoUser()}
-              className={`button-${baseColor}`}>
-              Demo Page
-            </button>
-          </div>
+                <button
+                  onClick={this.demoUser()}
+                  className={`button-${baseColor}`}
+                >
+                  Demo Page
+                </button>
+              </div>
 
-          {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-          {/* <div className={`${session}-errors-div`}> 
+              {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
+              {/* <div className={`${session}-errors-div`}> 
             {this.props.errors ? this.displayErrors() : null}
           </div> */}
+            </div>
+          </form>
 
-        </form>
-
-        <div className="session-footer">
-          <p>openFridge Est. Mar 2020</p>
+          <div className="session-footer">
+            <p>openFridge Est. Mar 2020</p>
+          </div>
         </div>
       </div>
-
     ); //close return
   }
 }

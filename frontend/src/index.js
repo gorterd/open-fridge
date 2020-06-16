@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // } else {
     store = configureStore({});
   // }
-  debugger
   const root = document.getElementById("root");
 
   // ReactDOM.render(<h1>hello from inside inde</h1>, root);
