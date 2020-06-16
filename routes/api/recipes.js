@@ -6,18 +6,25 @@ const validateRecipeInput = require('../../validation/recipe');
 const FilterResults = require('../../util/filter_results');
 
 router.get('/', (req, res) => {
-  let results = Recipe.find();
-  let { ingredients, skip, num } = req.query;
+  let results = Recipe.aggregate();
+  let { ingredients, skip, num, verbose } = req.query;
   
   results = new FilterResults(results)
     .byIngredients(ingredients)
     .complete();
+
+  if (!verbose){
+    results.append({ $unset: ['instructions', 'ingredients']})
+  }
   
   results
-    .skip(skip || 0)
-    .limit(num || 20)
+    .skip(parseInt(skip) || 0)
+    .limit(parseInt(num) || 20)
     .then(recipes => res.json(recipes))
-    .catch( () => res.status(404).json({ norecipesfound: 'No recipes found' }));      
+    .catch( err => {
+      console.log(err)
+      res.status(404).json({ norecipesfound: 'No recipes found' })
+    });      
 });
 
 router.get('/:id', (req, res) => {
