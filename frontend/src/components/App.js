@@ -4,9 +4,8 @@ import { Switch, Route, } from "react-router-dom";
 import SplashContainer from './splash/splash_container'
 
 
-// import LoginFormContainer from "./session/login_form_container";
+import LoginFormContainer from "./session/login_container";
 import SignupFormContainer from "./session/signup_container";
-// import './session/session.css';
 
 const App = () => (
   <div>
@@ -15,7 +14,7 @@ const App = () => (
 
       <Route exact path="/" component={SplashContainer} />
       {/* <AuthRoute exact path="/" component={SplashContainer} /> */}
-      {/* <AuthRoute exact path="/login" component={LoginFormContainer} />*/}
+      <Route exact path="/login" component={LoginFormContainer} />  {/* NEED TO CHANGE TO AUTH ROUTES */}
       <Route exact path="/signup" component={SignupFormContainer} /> 
     </Switch>
   </div>

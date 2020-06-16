@@ -2,10 +2,10 @@ import { connect } from "react-redux";
 import SessionForm from "./session_form";
 // import { signup, login, clearErrors } from "../../actions/session_actions";
 
-// const mapStateToProps = (state, ownProps) => ({
-//   formType: "signup",
+const mapStateToProps = (state, ownProps) => ({
+  formType: "signup",
 //   errors: state.errors.session,
-// });
+});
 
 // const mapDispatchToProps = (dispatch) => ({
 //   processForm: (user) => dispatch(signup(user)),
@@ -13,11 +13,9 @@ import SessionForm from "./session_form";
 //   clearErrors: () => dispatch(clearErrors()),
 // });
 
-// const SignupFormContainer = connect(
-//   mapStateToProps,
+const SignupFormContainer = connect(
+  mapStateToProps,
 //   mapDispatchToProps
-// )(SessionForm);
-
-const SignupFormContainer = connect(null, null)(SessionForm);
+)(SessionForm);
 
 export default SignupFormContainer;
