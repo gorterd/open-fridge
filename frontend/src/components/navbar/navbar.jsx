@@ -7,7 +7,6 @@ class NavBar extends React.Component {
   render() {
     return (
       <div className="navbar-main">
-
         <div className="navbar-left">
           <Link className="nbl-homeLink" to="/">
             openFridge
@@ -15,14 +14,13 @@ class NavBar extends React.Component {
         </div>
 
         <div className="navbar-left">
-          <button className="signupButton sessionButton">
-            <Link to="/signup">Sign Up</Link>
-          </button>
-          <button className="loginButton sessionButton">
-            <Link to="/login">Log In</Link>
-          </button>
+          <Link className="signupButton sessionButton" to="/signup">
+            Sign Up
+          </Link>
+          <Link className="loginButton sessionButton" to="/login">
+            Log In
+          </Link>
         </div>
-
       </div>
     );
   }
