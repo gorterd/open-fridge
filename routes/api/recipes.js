@@ -11,12 +11,51 @@ router.get('/', (req, res) => {
     .catch(err => res.status(404).json({ norecipesfound: 'No recipes found' }));
 });
 
-router.get('/:id', (req, res) => {
-  Recipe.findById(req.params.id)
+router.get('/:recipeId', (req, res) => {
+  Recipe.findById(req.params.recipeId)
     .then(recipe => res.json(recipe))
     .catch(err =>
       res.status(404).json({ norecipefound: 'No recipe found with that ID' })
     );
+});
+
+// router.patch('/:recipeId', (req, res) => {
+//   Recipe.findById(req.params.recipeId, function(err, recipe) {
+//     if (!recipe) {
+//       return next(new Error('Recipe not found'))
+//     } else {
+      // var updateRecipe = req.body;
+      // var id = req.params.recipeId;
+      // db.recipe.update({ _id: ObjectId(id) }, { $set: updateRecipe });
+//       db.recipe.save().then((recipe) => res.json(recipe));
+//     }
+//   })
+//     // .then(recipe => res.json(recipe))
+//     // .catch(err =>
+//     //   res.status(404).json({ norecipefound: 'No recipe found with that ID' })
+//     // );
+//     newRecipe.save().then((recipe) => res.json(recipe));
+// });
+// router.patch('/:recipeId', (req, res) => {
+//   recipe = Recipe.findById(req.params.recipeId, function(errors, recipe) {
+//     if (!recipe) {
+//       return res.status(400).json(errors);
+//     } else {
+//       return recipe;
+//     }})
+//   var updateRecipe = req.body;
+//   var id = req.params.recipeId;
+//   recipe.update({ _id: ObjectId(id) }, { $set: updateRecipe });
+// });
+
+router.patch('/:recipeId', (req, res) => {
+  Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+    if (!recipe) {
+      return res.status(400).json("Recipe not found");
+    } else {
+        res.send(recipe)
+        // res.json(recipe);
+    }})
 });
 
 router.post('/new',
@@ -39,6 +78,5 @@ router.post('/new',
     newRecipe.save().then(recipe => res.json(recipe));
   }
 );
-
 
 module.exports = router;
