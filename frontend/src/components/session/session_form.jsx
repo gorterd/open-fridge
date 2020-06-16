@@ -14,7 +14,7 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    // this.displayErrors = this.displayErrors.bind(this);
+    this.displayErrors = this.displayErrors.bind(this);
   }
 
   // componentWillUnmount() {
@@ -29,7 +29,7 @@ class SessionForm extends React.Component {
     //   user.username === "**ENTER A SEEDED DEMO USERR**" ///////
     // )
     //   this.props.demoUser(user);
-    // else this.props.processForm(user);
+    this.props.processForm(user);
     if (this.props.formType === "login") {
       this.setState({toggle: true})
     }
@@ -53,21 +53,22 @@ class SessionForm extends React.Component {
     };
   }
 
-  // displayErrors() {
-  //   let session = this.props.formType;
+  displayErrors() {
+    let session = this.props.formType;
 
-  //   return (
-  //     <ul className={`${session}-error-list`}>
-  //       {this.props.errors.map((error, idx) => {
-  //         return (
-  //           <li key={`error-${idx}`} id={`error-${idx}`}>
-  //             {error}
-  //           </li>
-  //         );
-  //       })}
-  //     </ul>
-  //   );
-  // }
+    return (
+      // <ul className={`${session}-error-list`}>
+      //   {this.props.errors.map((error, idx) => {
+      //     return (
+      //       <li key={`error-${idx}`} id={`error-${idx}`}>
+      //         {error}
+      //       </li>
+      //     );
+      //   })}
+      // </ul>
+      <div>{Object.values(this.props.errors)}</div>
+    );
+  }
 
 
 
@@ -141,9 +142,9 @@ class SessionForm extends React.Component {
             /> */}
 
           {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-          {/* <div className={`${session}-errors-div`}>
-                {this.props.errors ? this.displayErrors() : null}
-              </div> */}
+          <div className={`${session}-errors-div`}>
+              {this.props.errors ? this.displayErrors() : null}
+          </div>
         </div>
       </div>
     ) : (
@@ -200,9 +201,9 @@ class SessionForm extends React.Component {
               </div>
 
               {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-              {/* <div className={`${session}-errors-div`}> 
-            {this.props.errors ? this.displayErrors() : null}
-          </div> */}
+              <div className={`${session}-errors-div`}> 
+                {this.props.errors ? this.displayErrors() : null}
+              </div>
             </div>
           </form>
 
@@ -211,7 +212,7 @@ class SessionForm extends React.Component {
           </div>
         </div>
       </div>
-    ); //close return
+    ); 
   }
 }
 
