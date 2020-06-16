@@ -31,7 +31,9 @@ const RecipeSchema = new Schema({
     type: String
   },
 
-  source: String
+  source: String,
+
+  url: String
 
   // comments: [ Comment ]
 
