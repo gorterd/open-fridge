@@ -3,12 +3,36 @@ const router = express.Router();
 const Recipe = require("../../models/Recipe");
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe');
+const FilterResults = require('../../util/filter_results');
+
+// available query string params:
+  // ingredients: comma-separated list of ingredients recipes should include
+  // skip: buffer / offset, how far into the results to start (for fetching
+  //    more results, such as for infinite scroll ); default 0
+  // num: how many results to fetch; default 20
+  // verbose: if ANY value is given here, will include instructions & 
+  //    ingredients, otherwise won't
 
 router.get('/', (req, res) => {
-  Recipe.find()
-    .sort({ name: -1 })
+  let results = Recipe.aggregate();
+  let { ingredients, skip, num, verbose } = req.query;
+  
+  results = new FilterResults(results)
+    .byIngredients(ingredients)
+    .complete();
+
+  if (!verbose){
+    results.append({ $unset: ['instructions', 'ingredients']})
+  }
+  
+  results
+    .skip(parseInt(skip) || 0)
+    .limit(parseInt(num) || 20)
     .then(recipes => res.json(recipes))
-    .catch(err => res.status(404).json({ norecipesfound: 'No recipes found' }));
+    .catch( err => {
+      console.log(err)
+      res.status(404).json({ norecipesfound: 'No recipes found' })
+    });      
 });
 
 router.post(
