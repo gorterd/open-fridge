@@ -19,17 +19,25 @@ module.exports = function validateRecipeInput(data) {
     errors.servings = "Servings is required";
   }
 
-  // if (data.ingredients.length < 1) {
-  //   errors.ingredients = "Ingredients list cannot be empty";
-  // }
-
-  if (Validator.isEmpty(data.ingredients[i]['name'])) {
-      errors.ingredients = "Name of ingredient is required"
+  if (is_Empty(data.ingredients)) {
+      errors.ingredients = "Recipe must have at least 1 ingredient";
   }
 
+  if (is_Empty(data.instruction)) {
+      errors.instructions = "Missing instructions for recipe"
+  }
 
   return {
     errors,
     isValid: Object.keys(errors).length === 0,
   };
-};;
+};
+
+
+function is_Empty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
