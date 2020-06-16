@@ -33,6 +33,7 @@ module.exports = function validateSignupInput(data) {
     errors.password = 'Password must be at least 8 characters';
   }
 
+
 //   if (Validator.isEmpty(data.password2)) {
 //     errors.password2 = 'Confirm Password field is required';
 //   }

@@ -6,7 +6,7 @@ const validateRecipeInput = require('../../validation/recipe');
 
 router.get('/', (req, res) => {
   Recipe.find()
-    .sort({ date: -1 })
+    .sort({ name: -1 })
     .then(recipes => res.json(recipes))
     .catch(err => res.status(404).json({ norecipesfound: 'No recipes found' }));
 });
@@ -19,7 +19,7 @@ router.get('/:id', (req, res) => {
     );
 });
 
-router.post('/',
+router.post('/new',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
@@ -29,8 +29,11 @@ router.post('/',
     }
 
     const newRecipe = new Recipe({
-      text: req.body.text,
-      user: req.user.id
+      name: req.body.name,
+      servings: req.body.servings,
+      ingredients: req.body.ingredients,
+      instructions: req.body.instructions,
+      time: req.body.time
     });
 
     newRecipe.save().then(recipe => res.json(recipe));
