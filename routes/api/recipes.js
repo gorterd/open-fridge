@@ -6,21 +6,14 @@ const validateRecipeInput = require('../../validation/recipe');
 
 router.get('/', (req, res) => {
   Recipe.find()
-    .sort({ date: -1 })
+    .sort({ name: -1 })
     .then(recipes => res.json(recipes))
     .catch(err => res.status(404).json({ norecipesfound: 'No recipes found' }));
 });
 
-router.get('/:id', (req, res) => {
-  Recipe.findById(req.params.id)
-    .then(recipe => res.json(recipe))
-    .catch(err =>
-      res.status(404).json({ norecipefound: 'No recipe found with that ID' })
-    );
-});
-
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
 
@@ -29,13 +22,43 @@ router.post('/',
     }
 
     const newRecipe = new Recipe({
-      text: req.body.text,
-      user: req.user.id
+      name: req.body.name,
+      servings: req.body.servings,
+      ingredients: req.body.ingredients,
+      instructions: req.body.instructions,
+      time: req.body.time,
     });
 
-    newRecipe.save().then(recipe => res.json(recipe));
+    newRecipe.save().then((recipe) => res.json(recipe));
   }
 );
+
+router.get('/:recipeId', (req, res) => {
+  Recipe.findById(req.params.recipeId)
+    .then(recipe => res.json(recipe))
+    .catch(err =>
+      res.status(404).json({ norecipefound: 'No recipe found with that ID' })
+    );
+});
+
+router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+    if (!recipe) {
+      return res.status(400).json("Recipe not found");
+    } else {
+        res.send(recipe)
+    }})
+});
+
+router.delete('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findOneAndDelete({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+    if (!recipe) {
+      return res.status(400).json("Recipe not found");
+    } else {
+      res.status(204).send("Recipe successfully removed");
+    }
+  });
+});
 
 
 module.exports = router;
