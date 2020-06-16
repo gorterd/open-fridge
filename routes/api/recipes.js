@@ -5,6 +5,14 @@ const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe');
 const FilterResults = require('../../util/filter_results');
 
+// available query string params:
+  // ingredients: comma-separated list of ingredients recipes should include
+  // skip: buffer / offset, how far into the results to start (for fetching
+  //    more results, such as for infinite scroll ); default 0
+  // num: how many results to fetch; default 20
+  // verbose: if ANY value is given here, will include instructions & 
+  //    ingredients, otherwise won't
+
 router.get('/', (req, res) => {
   let results = Recipe.aggregate();
   let { ingredients, skip, num, verbose } = req.query;
@@ -27,16 +35,9 @@ router.get('/', (req, res) => {
     });      
 });
 
-router.get('/:id', (req, res) => {
-  Recipe.findById(req.params.id)
-    .then(recipe => res.json(recipe))
-    .catch(err =>
-      res.status(404).json({ norecipefound: 'No recipe found with that ID' })
-    );
-});
-
-router.post('/',
-  passport.authenticate('jwt', { session: false }),
+router.post(
+  "/",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
 
@@ -49,11 +50,39 @@ router.post('/',
       servings: req.body.servings,
       ingredients: req.body.ingredients,
       instructions: req.body.instructions,
-      time: req.body.time
+      time: req.body.time,
     });
 
-    newRecipe.save().then(recipe => res.json(recipe));
+    newRecipe.save().then((recipe) => res.json(recipe));
   }
 );
+
+router.get('/:recipeId', (req, res) => {
+  Recipe.findById(req.params.recipeId)
+    .then(recipe => res.json(recipe))
+    .catch(err =>
+      res.status(404).json({ norecipefound: 'No recipe found with that ID' })
+    );
+});
+
+router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+    if (!recipe) {
+      return res.status(400).json("Recipe not found");
+    } else {
+        res.send(recipe)
+    }})
+});
+
+router.delete('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findOneAndDelete({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+    if (!recipe) {
+      return res.status(400).json("Recipe not found");
+    } else {
+      res.status(204).send("Recipe successfully removed");
+    }
+  });
+});
+
 
 module.exports = router;
