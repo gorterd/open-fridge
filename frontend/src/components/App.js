@@ -3,7 +3,7 @@ import React from "react";
 import { Switch, Route, } from "react-router-dom";
 import NavBarContainer from "./navbar/navbar_container";
 import SplashContainer from './splash/splash_container';
-
+import Modal from './modal/modal';
 
 
 import LoginFormContainer from "./session/login_container";
@@ -11,6 +11,7 @@ import SignupFormContainer from "./session/signup_container";
 
 const App = () => (
   <div>
+    <Modal />
     <NavBarContainer />
     <Switch>
 

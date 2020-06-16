@@ -1,0 +1,21 @@
+.modal-background {
+  background: rgba(242, 242, 242, 0.8);
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  opacity: 1;
+  transition: opacity 0.2s linear;
+  z-index: 10;
+}
+
+.modal-child {
+  background-color: white;
+  height: 555px;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 450px;
+}
