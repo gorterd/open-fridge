@@ -22,6 +22,7 @@ router.post(
     }
 
     const newRecipe = new Recipe({
+      author: req.user.id,
       name: req.body.name,
       servings: req.body.servings,
       ingredients: req.body.ingredients,
@@ -41,24 +42,53 @@ router.get('/:recipeId', (req, res) => {
     );
 });
 
-router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
-    if (!recipe) {
-      return res.status(400).json("Recipe not found");
-    } else {
-        res.send(recipe)
-    }})
-});
+router.get("/user/:userId", (req, res) => {
+  Recipe.find({ author: req.params.userId })
+    .then((recipes) => res.json(recipes))
+    .catch((err) =>
+      res.status(404).json({ notweetsfound: "No recipes found from that user" })
+    );
+}); //finds all recipes authored by the same user
 
-router.delete('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Recipe.findOneAndDelete({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+
+
+router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findById(req.params.recipeId, function (err, recipe) {
     if (!recipe) {
       return res.status(400).json("Recipe not found");
+    } else if (recipe.author != req.user.id) {
+      return res.status(400).json("Permission denied, invalid credentials");
     } else {
-      res.status(204).send("Recipe successfully removed");
+      Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+        if (err) {
+         return res.status(400).json(err);
+        } else {
+          res.send(recipe)
+        }
+      })
     }
   });
-});
+})
+
+router.delete("/:recipeId", passport.authenticate("jwt", { session: false }),(req, res) => {
+    Recipe.findById(req.params.recipeId, function (err, recipe) {
+      if (!recipe) {
+        return res.status(400).json("Recipe not found");
+      } else if (recipe.author != req.user.id) {
+        return res.status(400).json("Permission denied, invalid credentials");
+      } else {
+        Recipe.findOneAndDelete({ _id: req.params.recipeId }, function (err, recipe) {
+            if (err) {
+              return res.status(400).json(err);
+            } else {
+              res.send("Deleted successfully");
+            }
+          }
+        );
+      }
+    });
+  }
+);
 
 
 module.exports = router;
