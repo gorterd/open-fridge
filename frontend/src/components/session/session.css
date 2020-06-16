@@ -132,7 +132,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .login-container {
@@ -153,10 +152,11 @@ body {
   margin-top: 130px;
 }
 
-.login-div > h1 {
+.login-container > h1 {
   font-size: 60px;
   text-align: center;
   width: 100%;
+  /* margin-top: 40px; */
 }
 
 .login-form-div {
@@ -164,6 +164,7 @@ body {
   /* flex-direction: column; */
   justify-content: space-between;
   height: 75%;
+  margin-top: 50px;
 }
 
 .login-form-div > input {
