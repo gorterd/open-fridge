@@ -12,7 +12,8 @@ const RecipeSchema = new Schema({
     { 
       amount: String,
       unit: String,
-      ingredient: String,
+      name: String,
+      fullName: String,
       prep: String
     }
   ],
@@ -29,6 +30,8 @@ const RecipeSchema = new Schema({
   image: {
     type: String
   },
+
+  source: String
 
   // comments: [ Comment ]
 

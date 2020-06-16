@@ -28,7 +28,7 @@ router.post('/',
       return res.status(400).json(errors);
     }
 
-    const newRecipe = new Tweet({
+    const newRecipe = new Recipe({
       text: req.body.text,
       user: req.user.id
     });
