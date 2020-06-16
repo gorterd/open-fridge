@@ -18,6 +18,12 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now,
     },
+    recipes: [
+        {
+        type: Schema.Types.ObjectId,
+        ref: 'recipes'
+        }
+    ]
 });
 
 module.exports = User = mongoose.model('User', UserSchema);
