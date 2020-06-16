@@ -23,7 +23,7 @@ module.exports = function validateRecipeInput(data) {
       errors.ingredients = "Recipe must have at least 1 ingredient";
   }
 
-  if (is_Empty(data.instruction)) {
+  if (is_Empty(data.instructions)) {
       errors.instructions = "Missing instructions for recipe"
   }
 
