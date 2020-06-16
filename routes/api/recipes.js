@@ -55,7 +55,7 @@ router.delete('/:recipeId', passport.authenticate('jwt', { session: false }), (r
     if (!recipe) {
       return res.status(400).json("Recipe not found");
     } else {
-      res.send(recipe);
+      res.status(204).send("Recipe successfully removed");
     }
   });
 });
