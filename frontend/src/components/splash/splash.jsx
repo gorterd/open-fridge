@@ -20,6 +20,7 @@ class Splash extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
+    
   }
 
   render() {
@@ -65,11 +66,20 @@ class Splash extends React.Component {
             <h2>Explore trending recipes</h2>
             <ul className="smc-trendingRecipes">
               {/* list of recipes */}
+              recipes.map(recipe)
               <li>
                 <button
                   type="button"
-                  onClick={() => openModal("recipePreview")}
+                  // onClick={() => openModal("recipePreview")}
+                  onClick={() => {
+                    openModal({
+                      type: "recipePreview",
+                      data: recipe
+                    })}
+                  }
                 >
+
+
                   More info
                 </button>
               </li>
