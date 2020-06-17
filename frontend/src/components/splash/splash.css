@@ -1,5 +1,5 @@
 .splash-main {
-  background: #fff0c2;
+  background: #fff;
 }
 
 .splash-main-searchbar {
@@ -29,6 +29,7 @@
 }
 
 .splash-main-recipes {
+  background: #F2F8F9;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,6 +47,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 800px;
+  margin-bottom: 30px;
 }
 
 .smc-trendingRecipes li {
@@ -56,13 +58,12 @@
 }
 
 .splash-main-tagline {
-  background: url('./splash03.jpg');
+  background: url('./splash02.jpg');
   background-size: 100%;
-  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.2);
+  /* box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.2); */
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 20px 0 10px 0;
   position: relative;
   height: 350px;
 }
@@ -72,17 +73,19 @@
   font-weight: 200;
   padding: 20px;
   position: absolute;
+  text-align: right;
   top: 25px;
-  left: 25px;
+  right: 25px;
   width: 450px;
 }
 
 .splash-main-footer {
+  background: #fff0c2;
   color: #999;
   display: flex;
   font-size: 14px;
   justify-content: space-between;
-  padding: 20px 50px 40px;
+  padding: 40px 50px 40px;
 }
 
 .smf-social {
