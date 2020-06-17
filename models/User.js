@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Recipe = require('./Recipe').schema;
 
 const UserSchema = new Schema({
     username: {
@@ -18,12 +19,7 @@ const UserSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    recipes: [
-        {
-        type: Schema.Types.ObjectId,
-        ref: 'recipes'
-        }
-    ]
+    pinnedRecipes: [ Recipe ]
 });
 
 module.exports = User = mongoose.model('User', UserSchema);
