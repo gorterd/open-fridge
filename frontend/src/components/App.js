@@ -11,7 +11,7 @@ import SignupFormContainer from "./session/signup_container";
 
 const App = () => (
   <div>
-    <NavBarContainer />
+    {/* <NavBarContainer /> */}
     <Switch>
 
       <Route exact path="/" component={SplashContainer} />
