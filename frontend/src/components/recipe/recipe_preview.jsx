@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+// import { connect } from 'react-redux';
 
 class RecipePreview extends React.Component {
   render() {
@@ -9,9 +9,9 @@ class RecipePreview extends React.Component {
   }
 }
 
-const mSTP = state => ({
-  // recipe: state.entities.recipe
-})
+// const mSTP = state => ({
+//   recipe: state.entities.recipe
+// })
 
 // export default connect(mSTP)(RecipePreview);
 

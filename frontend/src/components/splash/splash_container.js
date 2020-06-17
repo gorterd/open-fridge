@@ -2,12 +2,16 @@ import { connect } from 'react-redux';
 
 import Splash from './splash';
 import { openModal, closeModal } from '../../actions/modal_actions';
+import { fetchRecipe } from '../../actions/recipe_actions';
 
-const mSTP = state => {
-  return {}
+const mSTP = ({ entities: { recipes } }) => {
+  return {
+    recipes: Object.values(recipes),
+  }
 }
 
 const mDTP = dispatch => ({
+  fetchRecipe: recipeId => dispatch(fetchRecipe(recipeId)),
   openModal: modal => dispatch(openModal(modal)),
   closeModal: () => dispatch(closeModal()),
 });

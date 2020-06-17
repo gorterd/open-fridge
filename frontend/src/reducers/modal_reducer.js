@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { OPEN_MODAL, CLOSE_MODAL } from '../actions/modal_actions';
 
 const modalReducer = (oldState = {}, action) => {
