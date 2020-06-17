@@ -45,16 +45,18 @@
 
 .smc-trendingRecipes {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  width: 800px;
   margin-bottom: 30px;
+  position: relative;
+  width: 1200px;
 }
 
 .smc-trendingRecipes li {
   background: #5C80BC;
   margin: 20px;
-  height: 200px;
-  width: 200px;
+  height: 100%;
+  width: 300px;
 }
 
 .splash-main-tagline {

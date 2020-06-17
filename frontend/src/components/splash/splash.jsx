@@ -14,8 +14,7 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
-    // testing fetching recipe
-    this.props.fetchRecipe("5ee7fc07ba311916faf4b571");
+    this.props.fetchRecipes({"num": "6"});
   }
 
   handleSearch(e) {
@@ -24,29 +23,25 @@ class Splash extends React.Component {
   }
 
   render() {
-    const { recipes, openModal, fetchRecipe } = this.props;
-    let recipeGrid;
+    const { recipes, openModal } = this.props;
 
-    if (Object.keys(recipes).length === 0) {
-      // testing fetching recipe
+    const recipeGrid = recipes.map(recipe => {
+      // refactor to include img as background on li element
+      // const recipeImg = <img className="splashGrid-recipeImg" src={recipe.image}></img>;
       return (
-        <button onClick={() => fetchRecipe("5ee7fc07ba311916faf4b571")}>Loading...</button>
-      )
-    } else {
-      recipeGrid = recipes.map(recipe => {
-        // refactor to include img as background on li element
-        const recipeImg = <img className="splashGrid-recipeImg" src={recipe.image}></img>;
-        return <li>
+        <li className="splashGrid-item" key={recipe._id}>
           <button
             type="button"
-            onClick={() => openModal("recipePreview")}
+            onClick={() => {
+              openModal({ type: "recipePreview", data: recipe });
+            }}
           >
-            {recipeImg}
-            More info
+            <img className="splashGrid-recipeImg" src={recipe.image}></img>
+            <h3>{recipe.name}</h3>
           </button>
-        </li>;
-      });
-    };
+        </li>
+      );
+    })
 
     return (
       <>
@@ -65,29 +60,7 @@ class Splash extends React.Component {
           <div className="splash-main-recipes">
             <h2>Explore trending recipes</h2>
             <ul className="smc-trendingRecipes">
-              {/* list of recipes */}
-              recipes.map(recipe)
-              <li>
-                <button
-                  type="button"
-                  // onClick={() => openModal("recipePreview")}
-                  onClick={() => {
-                    openModal({
-                      type: "recipePreview",
-                      data: recipe
-                    })}
-                  }
-                >
-
-
-                  More info
-                </button>
-              </li>
               {recipeGrid}
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
             </ul>
           </div>
 

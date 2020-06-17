@@ -2,16 +2,17 @@ import { connect } from 'react-redux';
 
 import Splash from './splash';
 import { openModal, closeModal } from '../../actions/modal_actions';
-import { fetchRecipe } from '../../actions/recipe_actions';
+import { fetchRecipes } from '../../actions/recipe_actions';
 
 const mSTP = ({ entities: { recipes } }) => {
+  debugger;
   return {
     recipes: Object.values(recipes),
   }
 }
 
 const mDTP = dispatch => ({
-  fetchRecipe: recipeId => dispatch(fetchRecipe(recipeId)),
+  fetchRecipes: query => dispatch(fetchRecipes(query)),
   openModal: modal => dispatch(openModal(modal)),
   closeModal: () => dispatch(closeModal()),
 });
