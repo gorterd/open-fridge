@@ -8,21 +8,19 @@ import Modal from './modal/modal';
 
 import LoginFormContainer from "./session/login_container";
 import SignupFormContainer from "./session/signup_container";
+import RecipeCreate from "./recipe/recipe_create"
 
 const App = () => (
   <div>
-<<<<<<< HEAD
-    {/* <NavBarContainer /> */}
-=======
     <Modal />
-    <NavBarContainer />
->>>>>>> master
+    {/* <NavBarContainer /> */}
     <Switch>
 
       <Route exact path="/" component={SplashContainer} />
       {/* <AuthRoute exact path="/" component={SplashContainer} /> */}
       <Route exact path="/login" component={LoginFormContainer} />  {/* NEED TO CHANGE TO AUTH ROUTES */}
-      <Route exact path="/signup" component={SignupFormContainer} /> 
+      <Route exact path="/signup" component={SignupFormContainer} />
+      <Route exact path="/new-recipe" component={RecipeCreate} />
     </Switch>
   </div>
 );

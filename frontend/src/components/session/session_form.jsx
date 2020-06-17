@@ -191,7 +191,8 @@ class SessionForm extends React.Component {
                 </Link>
 
                 <button
-                  onClick={this.demoUser()}
+                  type="button"
+                  onClick={this.demoUser() }
                   className={`${session}-demo-button`}
                 >
                   Demo Page

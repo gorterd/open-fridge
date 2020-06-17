@@ -45,8 +45,6 @@ export const login = (user) => (dispatch) => {
 
 export const signup = (user) => (dispatch) => {
   return sessionUtil.signup(user)
-    .then((user) => {
-      // debugger
-      return dispatch(receiveCurrentUser(user))})
+    .then((user) => dispatch(receiveCurrentUser(user)))
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 }; 
