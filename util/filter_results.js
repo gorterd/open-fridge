@@ -3,12 +3,30 @@ class FilterResults {
     this.results = results;
   }
 
+  with(included){
+    switch (included) {
+      case 'all': 
+        break;
+      case 'ingredients':
+        this.results.append({ $unset: 'instructions' })
+        break;
+      case 'instructions':
+        this.results.append({ $unset: 'ingredients' })
+        break;
+      case "none":
+        this.results.append({ $unset: ['instructions', 'ingredients'] });
+        break
+      default:
+        break;
+    }
+
+    return this;
+  }
+
   // to search by ingredient(s), use comma separated list of ingredients with key `ingredients`
   // eg. ingredients=ingredient1,ingredient2,ingredient3
-  byIngredients(ingredientsList) {
-    if (ingredientsList) {
-      let ingredients = ingredientsList.split(',');
-
+  byIngredients(ingredients) {
+    if (ingredients) {
       let conditions = ingredients
         .map(ing => {
           return { 'ingredients.name': { $regex: new RegExp(ing, 'i') } };
@@ -79,7 +97,7 @@ class FilterResults {
 
     //sort by ingredients weighting, desc, and remove the field for weighting
     this.results
-      .sort({ingredientsWeight: -1})
+      .sort({ingredientsWeight: -1, _id: 1})
       .append({ $unset: "ingredientsWeight" });
 
     return this;

@@ -16,16 +16,13 @@ const User = require("../../models/User");
 
 router.get('/', (req, res) => {
   let results = Recipe.aggregate();
-  let { ingredients, skip, num, verbose } = req.query;
+  let { ingredients, skip, num, include } = req.body;
   
   results = new FilterResults(results)
     .byIngredients(ingredients)
+    .with(include)
     .complete();
 
-  if (!verbose){
-    results.append({ $unset: ['instructions', 'ingredients']})
-  }
-  
   results
     .skip(parseInt(skip) || 0)
     .limit(parseInt(num) || 20)
