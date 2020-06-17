@@ -20,7 +20,11 @@ class Splash extends React.Component {
           <h2>Explore trending recipes</h2>
           <ul className="smc-trendingRecipes">
             {/* list of recipes */}
-            <li></li>
+            <li>
+              <button type="button" onClick={() => this.props.openModal("recipePreview")}>
+                Open Modal
+              </button>
+            </li>
             <li></li>
             <li></li>
             <li></li>

@@ -3,12 +3,35 @@ const router = express.Router();
 const Recipe = require("../../models/Recipe");
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe');
+const FilterResults = require('../../util/filter_results');
+
+// available query string params:
+  // ingredients: comma-separated list of ingredients recipes should include
+  // skip: buffer / offset, how far into the results to start (for fetching
+  //    more results, such as for infinite scroll ); default 0
+  // num: how many results to fetch; default 20
+  // verbose: if ANY value is given here, will include instructions & 
+  //    ingredients, otherwise won't
 
 router.get('/', (req, res) => {
-  Recipe.find()
-    .sort({ name: -1 })
+  let results = Recipe.aggregate();
+  let { ingredients, skip, num, verbose } = req.query;
+  
+  results = new FilterResults(results)
+    .byIngredients(ingredients)
+    .complete();
+
+  if (!verbose){
+    results.append({ $unset: ['instructions', 'ingredients']})
+  }
+  
+  results
+    .skip(parseInt(skip) || 0)
+    .limit(parseInt(num) || 20)
     .then(recipes => res.json(recipes))
-    .catch(err => res.status(404).json({ norecipesfound: 'No recipes found' }));
+    .catch( err => {
+      res.status(404).json({ norecipesfound: 'No recipes found' })
+    });      
 });
 
 router.post(
@@ -22,6 +45,7 @@ router.post(
     }
 
     const newRecipe = new Recipe({
+      author: req.user.id,
       name: req.body.name,
       servings: req.body.servings,
       ingredients: req.body.ingredients,
@@ -41,24 +65,53 @@ router.get('/:recipeId', (req, res) => {
     );
 });
 
-router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
-    if (!recipe) {
-      return res.status(400).json("Recipe not found");
-    } else {
-        res.send(recipe)
-    }})
-});
+router.get("/user/:userId", (req, res) => {
+  Recipe.find({ author: req.params.userId })
+    .then((recipes) => res.json(recipes))
+    .catch((err) =>
+      res.status(404).json({ notweetsfound: "No recipes found from that user" })
+    );
+}); //finds all recipes authored by the same user
 
-router.delete('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
-  Recipe.findOneAndDelete({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+
+
+router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
+  Recipe.findById(req.params.recipeId, function (err, recipe) {
     if (!recipe) {
       return res.status(400).json("Recipe not found");
+    } else if (recipe.author != req.user.id) {
+      return res.status(400).json("Permission denied, invalid credentials");
     } else {
-      res.status(204).send("Recipe successfully removed");
+      Recipe.findOneAndUpdate({ _id: req.params.recipeId }, req.body, function (err, recipe) {
+        if (err) {
+         return res.status(400).json(err);
+        } else {
+          res.send(recipe)
+        }
+      })
     }
   });
-});
+})
+
+router.delete("/:recipeId", passport.authenticate("jwt", { session: false }),(req, res) => {
+    Recipe.findById(req.params.recipeId, function (err, recipe) {
+      if (!recipe) {
+        return res.status(400).json("Recipe not found");
+      } else if (recipe.author != req.user.id) {
+        return res.status(400).json("Permission denied, invalid credentials");
+      } else {
+        Recipe.findOneAndDelete({ _id: req.params.recipeId }, function (err, recipe) {
+            if (err) {
+              return res.status(400).json(err);
+            } else {
+              res.send("Deleted successfully");
+            }
+          }
+        );
+      }
+    });
+  }
+);
 
 
 module.exports = router;
