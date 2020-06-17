@@ -59,6 +59,15 @@ class SessionForm extends React.Component {
     let otherLink;
     otherLink = (this.props.formType === "login") ? "signup" : "login";
 
+    let loginError = "";
+    let loginErrorMsg = " ";
+    let loginErrorClass = "";
+    if (this.props.formType === "login" && Object.values(this.props.errors).length) {
+      loginError = "animated shake"; 
+      loginErrorMsg = "invalid username & password combination";
+      loginErrorClass = "login-error-class";
+    }
+
     let usernameErrors = null;
     let userErrorsCN = ""
     let emailErrors = null;
@@ -99,7 +108,7 @@ class SessionForm extends React.Component {
                 value={this.state.username}
                 placeholder="username"
                 onChange={this.update("username")}
-                className={`${session}-input ${session}-username`}
+                className={`${session}-input ${loginError}`}
               />
 
               <input
@@ -107,14 +116,16 @@ class SessionForm extends React.Component {
                 value={this.state.password}
                 placeholder="password"
                 onChange={this.update("password")}
-                className={`${session}-input ${session}-password`}
+                className={`${session}-input ${loginError}`}
               />
             </div>
 
             <button className={`${session}-submit`}>Login</button>
           </form>
+          
 
           <div className="other-link-wrap">
+            <div className={loginErrorClass}>{loginErrorMsg}</div>
             <Link to={`/${otherLink}`} className={`${session}-other-link`}>
               Create an Account
             </Link>

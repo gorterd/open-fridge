@@ -154,8 +154,6 @@ body {
   src: url("./Selima/Selima.otf");
 }
 
-
-
 [class*="login-"] {
   font-family: loginFont;
   /* font-family: inherit; */
@@ -179,6 +177,7 @@ body {
   width: 50%;
   height: 60%;
   justify-content: center;
+  padding-top: 60px;
 }
 
 .other-link-div {
@@ -236,15 +235,100 @@ body {
 }
 
 .other-link-wrap {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  width: 100%;
-  align-items: flex-end;
-  padding-right: 34px;
-  margin-top: 10px;
+  align-items: flex-end; */
+  display: grid;
+  grid-template-columns: 50% 50%;
+  width: 528px;
+  /* padding-right: 95px; */
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .login-other-link {
-  font-weight: 5;
   font-size: 18px;
+  letter-spacing: 1px;
+  text-align: right;
+}
+
+.login-demo-button {
+  letter-spacing: 1px;
+  grid-column-start: 2;
+  text-align: right;
+}
+
+.login-error-class {
+  color: rgb(172, 84, 84);
+}
+
+
+/* SHAKE ANIMATION */
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
+}
+
+.animated.bounceIn,
+.animated.bounceOut {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+.animated.flipOutX,
+.animated.flipOutY {
+  -webkit-animation-duration: .75s;
+  animation-duration: .75s;
+}
+
+@-webkit-keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+@keyframes shake {
+  from, to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translate3d(-10px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translate3d(10px, 0, 0);
+    transform: translate3d(10px, 0, 0);
+  }
+}
+
+.shake {
+  -webkit-animation-name: shake;
+  animation-name: shake;
 }
