@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './session.css';
-import sandwich from './session-sandwich-flat.png'
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -11,15 +10,15 @@ class SessionForm extends React.Component {
       email: "",
       password: "",
       toggle: false,
+      // errors: {}, ///render errors on tab to input
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.displayErrors = this.displayErrors.bind(this);
   }
 
-  // componentWillUnmount() {
-  //   this.props.clearErrors();
-  // }
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -29,6 +28,7 @@ class SessionForm extends React.Component {
     //   user.username === "**ENTER A SEEDED DEMO USERR**" ///////
     // )
     //   this.props.demoUser(user);
+    // this.setState({errors: this.props.errors}) RE-EVAL ERRORS ON INPUT??
     this.props.processForm(user);
     if (this.props.formType === "login") {
       this.setState({toggle: true})
@@ -53,64 +53,52 @@ class SessionForm extends React.Component {
     };
   }
 
-  displayErrors() {
-    let session = this.props.formType;
-
-    return (
-      // <ul className={`${session}-error-list`}>
-      //   {this.props.errors.map((error, idx) => {
-      //     return (
-      //       <li key={`error-${idx}`} id={`error-${idx}`}>
-      //         {error}
-      //       </li>
-      //     );
-      //   })}
-      // </ul>
-      <div>{Object.values(this.props.errors)}</div>
-    );
-  }
-
-
-
-
   render() {
 
     let session = this.props.formType;
     let otherLink;
-    let loginImage;
-    if (this.props.formType === "login") {
-      otherLink = "signup";
+    otherLink = (this.props.formType === "login") ? "signup" : "login";
 
-    } else {
-      otherLink = "login";
-    }
-    if (this.state.toggle) {
-      loginImage = "https://media.giphy.com/media/3oz8xISxzK7kuAQ3zq/giphy.gif";
-    } else {
-      loginImage = sandwich;
+    let loginError = "";
+    let loginErrorMsg = " ";
+    let loginErrorClass = "";
+    if (this.props.formType === "login" && Object.values(this.props.errors).length) {
+      loginError = "animated shake"; 
+      loginErrorMsg = "invalid username & password combination";
+      loginErrorClass = "login-error-class";
     }
 
-    return this.props.formType == "login" ? (
+    let usernameErrors = null;
+    let userErrorsCN = ""
+    let emailErrors = null;
+    let emailErrorsCN = ""
+    let passwordErrors = null;
+    let passErrorsCN = "";
+    if (this.props.errors) {
+      if (this.props.errors.username) {
+        usernameErrors = this.props.errors.username;
+        userErrorsCN = "userErrors";
+      };
+      if (this.props.errors.email) {
+        emailErrors = this.props.errors.email;
+        emailErrorsCN = "emailErrors";
+      };
+      if (this.props.errors.password) {
+        passwordErrors = this.props.errors.password;
+        passErrorsCN = "passErrors";
+      };
+    }
+
+    return this.props.formType === "login" ? (
       <div className={`${session}-div`}>
         <div className={`${session}-container`}>
-          <div className="other-link-div">
-            <Link to={`/${otherLink}`} className="other-link">
-              Sign Up
-            </Link>
-
-            <button
-              onClick={this.demoUser()}
-              className={`${session}-demo-button`}>
-              Demo Page
-            </button>
-          </div>
-
           {/* <Link className={`logo-small ${session}-logo`} to="/">
             <img
               src={window.small_logo}  ///////////////NEED LOGO
               className={`logo-small ${session}-logo`}
               draggable="false"/>
           </Link> */}
+
           <h1>Member Login</h1>
 
           <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
@@ -120,30 +108,33 @@ class SessionForm extends React.Component {
                 value={this.state.username}
                 placeholder="username"
                 onChange={this.update("username")}
-                className={`${session}-input ${session}-username`}
+                className={`${session}-input ${loginError}`}
               />
+
               <input
                 type="password"
                 value={this.state.password}
                 placeholder="password"
                 onChange={this.update("password")}
-                className={`${session}-input ${session}-password`}
+                className={`${session}-input ${loginError}`}
               />
-
-              <button className={`${session}-submit`}>Login</button>
             </div>
+
+            <button className={`${session}-submit`}>Login</button>
           </form>
+          
 
-          <img src={loginImage} draggable="false" className="login-img" />
+          <div className="other-link-wrap">
+            <div className={loginErrorClass}>{loginErrorMsg}</div>
+            <Link to={`/${otherLink}`} className={`${session}-other-link`}>
+              Create an Account
+            </Link>
 
-          {/* <img
-              src="https://media.giphy.com/media/3o85g3loeiLcF26OZy/giphy.gif"
-              draggable="false"
-            /> */}
-
-          {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-          <div className={`${session}-errors-div`}>
-              {this.props.errors ? this.displayErrors() : null}
+            <button
+              onClick={this.demoUser()}
+              className={`${session}-demo-button`}>
+              Demo Page
+            </button>
           </div>
         </div>
       </div>
@@ -151,12 +142,11 @@ class SessionForm extends React.Component {
       <div className="signup-container">
         <div className={`${session}-div`}>
           {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
-          <img
-            src={window.small_logo}  ///////////////NEED LOGO
-            className="logo-small signup-logo"
-            draggable="false"
-          />
-        </Link> */}
+            <img
+              src={window.small_logo}  ///////////////NEED LOGO
+              className="logo-small signup-logo"
+              draggable="false"/>
+          </Link> */}
 
           <h1>Member Signup</h1>
 
@@ -168,27 +158,35 @@ class SessionForm extends React.Component {
                 placeholder="username"
                 onChange={this.update("username")}
                 className={`${session}-input ${session}-username`}
+                id={userErrorsCN}
               />
+              <div className={`${userErrorsCN}-signup`}>{usernameErrors}</div>
+
               <input
                 type="text"
                 value={this.state.email}
                 placeholder="email"
                 onChange={this.update("email")}
                 className={`${session}-input ${session}-email`}
+                id={emailErrorsCN}
               />
+              <div className={`${emailErrorsCN}-signup`}>{emailErrors}</div>
+
               <input
                 type="password"
                 value={this.state.password}
                 placeholder="Password (min. 8 characters)"
                 onChange={this.update("password")}
                 className={`${session}-input ${session}-password`}
+                id={passErrorsCN}
               />
+              <div className={`${passErrorsCN}-signup`}>{passwordErrors}</div>
 
               <button className={`${session}-submit`}>Get Cookin'</button>
 
               <div className="signup-bottom-buttons">
                 <span>Have an account?</span>
-                <Link to={`/${otherLink}`} className={`other-link`}>
+                <Link to={`/${otherLink}`} className={`${session}-other-link`}>
                   Log In
                 </Link>
 
@@ -198,11 +196,6 @@ class SessionForm extends React.Component {
                 >
                   Demo Page
                 </button>
-              </div>
-
-              {/* FIGURE OUT BEST WAY TO RENDER ERRORS */}
-              <div className={`${session}-errors-div`}> 
-                {this.props.errors ? this.displayErrors() : null}
               </div>
             </div>
           </form>
