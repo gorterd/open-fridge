@@ -33,7 +33,8 @@ class Splash extends React.Component {
       )
     } else {
       recipeGrid = recipes.map(recipe => {
-        const recipeImg = <img src={recipe.image}></img>;
+        // refactor to include img as background on li element
+        const recipeImg = <img className="splashGrid-recipeImg" src={recipe.image}></img>;
         return <li>
           <button
             type="button"

@@ -3,13 +3,19 @@
 }
 
 .splash-main-searchbar {
+  background: url('./splash01.jpeg');
+  background-size: 100%;
+  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.2);
   display: flex;
+  align-items: center;
   justify-content: center;
+  height: 300px;
 }
 
 .sms-searchForm input {
+  background: white;
   border: 1px solid #999;
-  border-radius: 3px;
+  border-radius: 18px;
   padding: 10px 10px;
   position: relative;
   width: 400px;
@@ -49,6 +55,28 @@
   width: 200px;
 }
 
+.splash-main-tagline {
+  background: url('./splash03.jpg');
+  background-size: 100%;
+  box-shadow: 10px 0 10px 0 rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0 10px 0;
+  position: relative;
+  height: 350px;
+}
+
+.splash-main-tagline p {
+  font-size: 35px;
+  font-weight: 200;
+  padding: 20px;
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 450px;
+}
+
 .splash-main-footer {
   color: #999;
   display: flex;
@@ -70,19 +98,5 @@
 .smf-promo-links h3 {
   color: #393E41;
   font-size: 16px;
-}
-
-.splash-main-tagline {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* height: 300px; */
-}
-
-.splash-main-tagline p {
-  font-size: 35px;
-  font-weight: 200;
-  padding: 20px;
-  width: 350px;
 }
 
