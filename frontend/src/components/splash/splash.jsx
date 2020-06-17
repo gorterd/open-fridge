@@ -8,26 +8,34 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      query: {},
+      result: [],
     }
     this.handleSearch = this.handleSearch.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchRecipes({"num": "6"});
+    this.props.fetchRecipes({"num": "8"});
+  }
+
+  update(e) {
+    const { value } = e.target;
+    // debugger;
+    this.setState({ query: {"ingredients": [value], "num": "8"} });
   }
 
   handleSearch(e) {
     e.preventDefault();
-    
+    debugger;
+    this.props.fetchRecipes(this.state.query);
+    this.setState.query = {};
   }
 
   render() {
     const { recipes, openModal } = this.props;
 
     const recipeGrid = recipes.map(recipe => {
-      // refactor to include img as background on li element
-      // const recipeImg = <img className="splashGrid-recipeImg" src={recipe.image}></img>;
       return (
         <li className="splashGrid-item" key={recipe._id}>
           <button
@@ -36,8 +44,8 @@ class Splash extends React.Component {
               openModal({ type: "recipePreview", data: recipe });
             }}
           >
-            <img className="splashGrid-recipeImg" src={recipe.image}></img>
-            <h3>{recipe.name}</h3>
+            <img className="splashGrid-recipeImg" src={recipe.image} alt="recipe-img"></img>
+            <h3 className="splashGrid-recipeName">{recipe.name}</h3>
           </button>
         </li>
       );
@@ -49,9 +57,13 @@ class Splash extends React.Component {
 
         <div className="splash-main">
           <div className="splash-main-searchbar">
-            <form className="sms-searchForm" onSumbit={this.handleSearch}>
-              <input type="search" placeholder="Search" />
-              <button type="button">
+            <form className="sms-searchForm">
+              <input
+                type="search"
+                placeholder="Search by ingredients or dish name"
+                onChange={this.update}
+              />
+              <button type="submit" onClick={this.handleSearch}>
                 <FaSearch />
               </button>
             </form>
@@ -59,9 +71,7 @@ class Splash extends React.Component {
 
           <div className="splash-main-recipes">
             <h2>Explore trending recipes</h2>
-            <ul className="smc-trendingRecipes">
-              {recipeGrid}
-            </ul>
+            <ul className="smc-trendingRecipes">{recipeGrid}</ul>
           </div>
 
           <div className="splash-main-tagline">

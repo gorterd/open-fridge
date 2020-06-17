@@ -1,0 +1,38 @@
+.recipePreview-main {
+  display: flex;
+  flex-direction: column;
+  height: 365px;
+  padding: 20px 40px;
+}
+
+.rpm-time {
+  margin-top: 10px;
+}
+
+.rpm-servings, .rpm-time {
+  color: #333;
+  font-size: 14px;
+}
+
+.recipePreview-main h3 {
+  font-size: 24px;
+  font-weight: 400;
+  margin-top: 10px;
+}
+
+.rpm-ingredientsList {
+  margin: 10px 0;
+  height: 300px;
+  overflow: auto;
+}
+
+.rpm-ingredientsList li {
+  list-style: circle;
+  margin-left: 20px;
+}
+
+.rpm-navLinks {
+  font-size: 24px;
+  margin-top: 5px;
+}
+

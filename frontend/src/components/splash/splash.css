@@ -47,14 +47,19 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  margin-bottom: 30px;
-  position: relative;
-  width: 1200px;
+  margin: 30px 0;
+}
+
+.splashGrid-recipeName {
+  color: white;
+  position: absolute;
+  bottom: 20px;
+  margin: 0 20px;
 }
 
 .smc-trendingRecipes li {
-  background: #5C80BC;
   margin: 20px;
+  position: relative;
   height: 100%;
   width: 300px;
 }

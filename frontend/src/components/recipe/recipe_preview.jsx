@@ -1,33 +1,40 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+import './recipe_preview.css';
+import { BsThreeDots } from 'react-icons/bs';
+import { closeModal } from '../../actions/modal_actions';
 
 const RecipePreview = props => {
-  const { currentRecipe } = props;
+  const { currentRecipe, closeModal } = props;
 
   return (
-    <div className="recipePreview-main">
-      <div>
-        <img src={currentRecipe.image} alt="" />
+    <>
+      <img src={currentRecipe.image} alt="" />
+      <div className="recipePreview-main">
+        <div className="rpm-time">{currentRecipe.time.total}</div>
+
+        <h3>{currentRecipe.name}</h3>
+
+        <ul className="rpm-ingredientsList">
+          {currentRecipe.ingredients.map((ingredient) => (
+            <li key={ingredient._id}>{ingredient.fullName}</li>
+          ))}
+        </ul>
+
+        <div className="rpm-servings">Servings: {currentRecipe.servings}</div>
+
+        <div className="rpm-navLinks">
+          <Link
+            to={`/api/recipes/${currentRecipe._id}`}
+            onClick={() => closeModal()}
+          >
+            <BsThreeDots />
+          </Link>
+        </div>
       </div>
-
-      <div className="rpm-time">
-        {currentRecipe.time.total}
-      </div>
-
-      <h3>{currentRecipe.name}</h3>
-
-      <div className=""></div>
-
-      <div className="rpm-ingredientsList">
-        {currentRecipe.ingredients.map((ingredient) => (
-          <li key={ingredient._id}>{ingredient.fullName}</li>
-        ))}
-      </div>
-
-      <div className="rpm-navLinks">
-        
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -35,4 +42,8 @@ const mSTP = ({ ui: { modal }}) => ({
   currentRecipe: modal.data,
 })
 
-export default connect(mSTP)(RecipePreview);
+const mDTP = dispatch => ({
+  closeModal: () => dispatch(closeModal()),
+})
+
+export default connect(mSTP, mDTP)(RecipePreview);
