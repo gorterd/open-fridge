@@ -30,7 +30,6 @@ router.get('/', (req, res) => {
     .limit(parseInt(num) || 20)
     .then(recipes => res.json(recipes))
     .catch( err => {
-      console.log(err)
       res.status(404).json({ norecipesfound: 'No recipes found' })
     });      
 });
