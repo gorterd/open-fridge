@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require("../../models/Recipe");
 const passport = require('passport');
 const validateRecipeInput = require('../../validation/recipe');
 const FilterResults = require('../../util/filter_results');
 
+const Recipe = require("../../models/Recipe");
+const User = require("../../models/User");
 // available query string params:
   // ingredients: comma-separated list of ingredients recipes should include
   // skip: buffer / offset, how far into the results to start (for fetching
@@ -58,15 +59,42 @@ router.post(
 );
 
 
-router.post(
+router.patch(
   "/:recipeId/pin",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+  passport.authenticate("jwt", { session: false }), (req, res) => {
     Recipe.findById(req.params.recipeId, function (err, recipe) {
-      req.user.pinnedRecipes.push({recipe});
-      res.json("Recipe sucessfully pinned")
+      User.findOneAndUpdate(
+        { _id: req.user.id }, 
+        { $addToSet: { pinnedRecipes: recipe } }, 
+        function (err, user) {
+          if (err) {
+            return res.status(400).json(err);
+          } else {
+            res.json("Pinned successfully");
+          }
+        }
+      );
+    })
   }
-);
+); //pinning a recipe
+
+router.delete(
+  "/:recipeId/pin", passport.authenticate("jwt", { session: false }), (req, res) => {
+    Recipe.findById(req.params.recipeId, function (err, recipe) {
+      User.findOneAndUpdate(
+        { _id: req.user.id }, 
+        { $pull: { pinnedRecipes: recipe } }, 
+        function (err, user) {
+          if (err) {
+            return res.status(400).json(err);
+          } else {
+            res.json("Unpinned successfully");
+          }
+        }
+      );
+    })
+  }
+); //unpinning a recipe
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
@@ -80,7 +108,7 @@ router.get("/user/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>
-      res.status(404).json({ notrecipesfound: "No recipes found from that user" })
+      res.status(404).json({ norecipesfound: "No recipes found from that user" })
     );
 }); //finds all recipes authored by the same user
 

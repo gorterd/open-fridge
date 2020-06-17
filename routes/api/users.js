@@ -89,12 +89,11 @@ router.post("/login", (req, res) => {
   });
 });
 
-router.get("/:userId/pinned-recipes", passport.authenticate("jwt", { session: false }),
-  (req, res) => {
+router.get("/:userId/pins", (req, res) => {
     User.findById(req.params.userId) 
       .then(user => res.json(user.pinnedRecipes))
       .catch(err => res.status(404).json({ nouserfound: 'No user found'}))
-})
+}) //finds all recipes pinned by a user
 
 
 module.exports = router;
