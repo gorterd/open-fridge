@@ -57,6 +57,17 @@ router.post(
   }
 );
 
+
+router.post(
+  "/:recipeId/pin",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Recipe.findById(req.params.recipeId, function (err, recipe) {
+      req.user.pinnedRecipes.push({recipe});
+      res.json("Recipe sucessfully pinned")
+  }
+);
+
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
     .then(recipe => res.json(recipe))
@@ -69,7 +80,7 @@ router.get("/user/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>
-      res.status(404).json({ notweetsfound: "No recipes found from that user" })
+      res.status(404).json({ notrecipesfound: "No recipes found from that user" })
     );
 }); //finds all recipes authored by the same user
 
