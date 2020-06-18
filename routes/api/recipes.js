@@ -7,7 +7,7 @@ const FilterResults = require('../../util/filter_results');
 
 const Recipe = require("../../models/Recipe");
 const User = require("../../models/User");
-// const Comment = require("../../models/Comment");
+const Comment = require("../../models/Comment");
 
 // available query string params:
   // ingredients: comma-separated list of ingredients recipes should include
@@ -107,7 +107,11 @@ router.delete(
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .then(recipe => res.json(recipe))
+    .then(recipe => {
+      Comment.find({ recipe: recipe._id }).then( comments => {
+        res.json({recipe, comments});
+      })
+    })
     .catch(err =>
       res.status(404).json({ norecipefound: 'No recipe found with that ID' })
     );

@@ -11,9 +11,9 @@ export const receiveCurrentRecipe = recipe => ({
   recipe
 })
 
-const receiveRecipe = recipe => ({
+const receiveRecipe = data => ({
   type: RECEIVE_RECIPE,
-  recipe
+  data
 })
 
 const receiveRecipes = recipes => ({
@@ -27,8 +27,8 @@ export const clearRecipes = () => ({
 
 export const fetchRecipe = recipeId => dispatch => {
   return RecipeAPIUtil.fetchRecipe(recipeId)
-    .then(recipe => dispatch(receiveRecipe(recipe.data)))
-    .catch(err => dispatch(receiveErrors(err.response.data)));
+    .then(recipe => dispatch(receiveRecipe(recipe.data)), 
+      err => dispatch(receiveErrors(err.response.data)));
 }
 
 export const fetchRecipes = query => dispatch => {

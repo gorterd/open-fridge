@@ -9,7 +9,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     recipe: state.entities.recipes[recipeId],
     comments: recipeComments(state, recipeId),
-    loggedIn: state.session.isAuthenticated,
+    session: state.session,
     recipeId
   }
 };

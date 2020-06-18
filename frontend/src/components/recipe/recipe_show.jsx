@@ -1,7 +1,7 @@
 import React from 'react';
 import Comments from './comments/comments';
 import CommentsPopout from './comments/comments_popout';
-import NavBar from '../navbar/navbar';
+import NavBar from '../navbar/navbar_container';
 import './recipe.scss'
 
 class RecipeShow extends React.Component {
@@ -22,21 +22,22 @@ class RecipeShow extends React.Component {
     switch (key) {
       case "ingredients":
       case "instructions":
-        return comments.some( comment => (
+        return comments.filter( comment => (
+          comment &&
           comment.section.key === key &&
-          comment.section.idx === idx
+          parseInt(comment.section.idx) === idx
         ));
       case "time":
       case "servings":
       case "recipe":
-        return comments.some( comment => comment.section.key === key);
+        return comments.filter( comment => comment.section.key === key);
       default:
         return null;
     }
   }
 
   render() {
-    const { recipe, addComment, deleteComment, loggedIn } = this.props;
+    const { recipe, addComment, deleteComment, session } = this.props;
 
     if ( !recipe ) { return <></> };
 
@@ -57,7 +58,7 @@ class RecipeShow extends React.Component {
           sectionKey='ingredients'
           idx={idx}
           comments={this._comments('ingredients', idx)}
-          loggedIn={loggedIn}
+          session={session}
           addComment={addComment}
           deleteComment={deleteComment}
         />
@@ -73,7 +74,7 @@ class RecipeShow extends React.Component {
           sectionKey='instructions'
           idx={idx}
           comments={this._comments('instructions', idx)}
-          loggedIn={loggedIn}
+          session={session}
           addComment={addComment}
           deleteComment={deleteComment}
         />
@@ -112,7 +113,7 @@ class RecipeShow extends React.Component {
                 recipeId={recipe._id}
                 sectionKey='servings'
                 comments={this._comments('servings')}
-                loggedIn={loggedIn}
+                session={session}
                 addComment={addComment}
                 deleteComment={deleteComment}
               />
@@ -125,7 +126,7 @@ class RecipeShow extends React.Component {
                 recipeId={recipe._id}
                 sectionKey='time'
                 comments={this._comments('time')}
-                loggedIn={loggedIn}
+                session={session}
                 addComment={addComment}
                 deleteComment={deleteComment}
               />
@@ -135,11 +136,12 @@ class RecipeShow extends React.Component {
           
 
           <div className="recipe-general-comments">
+            <h2>Comments</h2>
             <Comments
               recipeId={recipe._id}
               sectionKey='recipe'
               comments={this._comments('recipe')}
-              loggedIn={loggedIn}
+              session={session}
               addComment={addComment}
               deleteComment={deleteComment}
             />
