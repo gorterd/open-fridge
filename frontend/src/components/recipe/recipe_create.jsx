@@ -1,87 +1,101 @@
 import React from 'react';
-import ReactDOM from "react-dom";
 import './recipe_create.css'
 
 class RecipeCreate extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       name: "",
       servings: "",
-      ingredients: "", //double check item
-      instructions: "", //double check item
-    }
+      ingredients: [],
+      instructions: "",
+      inputs: ["input-0"],
+      test: "",
+    };
 
-    // this.genNew = this.genNew.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    console.log("handleSubmit"); // this.props.generateRecipe(); //////////
   }
 
   update(field) {
     return (e) => {
-      // if (field === "ingredients") {
-      //   let foods = this.state.ingredients;
-      //   foods.push(e.currentTarget.value)
-      //   this.setState({ingredients: foods})
-      // } else {
-        console.log("BEEPs")
-        this.setState({ [field]: e.currentTarget.value })
-      // }
-    }
+      this.setState({ [field]: e.currentTarget.value });
+    };
   }
 
-  newInput(){
+  addInput() {
+    console.log("add input");
+    const newInput = `input-${this.state.inputs.length}`;
+
     return (e) => {
-      if(e.keyCode === 13) {
-        const newIng = document.createElement("INPUT");
-        newIng.setAttribute("type", "text");
-        newIng.onkeyup = this.newInput();
-        newIng.onchange = this.update("ingredients");
-        document
-          .getElementsByClassName("ingredient-inputs")[0]
-          .appendChild(newIng);
-        newIng.focus()
-      }
-    }
+      this.setState((prevState) => ({
+        inputs: prevState.inputs.concat([newInput]),
+      }));
+    };
   }
 
 
   render() {
     return (
       <div className="recipe-create-div">
-        <div className="recipe-create-wrapper">
-          <h1>Build Your Dish!</h1>
-          {/* Name, servings, ingredients, instructions */}
-          <form className="recipe-create-form">
-            <label htmlFor="recipe-title">Recipe Name</label>
-            <input
-              type="text"
-              id="recipe-title"
-              onChange={this.update("name")}
-            />
-            <br />
-
-            <div className="ingredient-inputs">
-              <label htmlFor="recipe-ingredients">Ingredients</label>
-              <input
-                type="text"
-                // value={this.state.ingredients}
-                onKeyUp={this.newInput()}
-                onChange={this.update("ingredients")}
-              />
+        <div className="recipe-create-div-wrap">
+          <form onSubmit={this.addInput()} className="ingredient-outer-form">
+            <div className="recipe-ingredients-div">
+              <label className="recipe-ingredients">
+                Ingredients:
+                <div className="ingredient-input-div">
+                  {this.state.inputs.map((input, idx) => (
+                    <input
+                      key={input}
+                      type="text"
+                      onChange={this.update("test")}
+                      className={`ingredient-num-${idx}`}
+                    />
+                  ))}
+                </div>
+              </label>
+              <button>Add</button>
             </div>
+          </form>
 
-            
+          <form onSubmit={this.handleSubmit}>
+            <div className="recipe-not-ingredients">
+              <h1>Recipe</h1>
+              <label htmlFor="recipe-name" className="recipe-name">
+                Recipe Name:
+                <input
+                  type="text"
+                  id="recipe-name"
+                  onChange={this.update("name")}
+                />
+              </label>
 
+              <label htmlFor="recipe-servings" className="recipe-servings">
+                Serving Size:
+                <input
+                  type="text"
+                  id="recipe-servings"
+                  onChange={this.update("servings")}
+                />
+              </label>
 
+              <label htmlFor="recipe-directions" className="recipe-directions">
+                Directions:
+                <textarea id="recipe-directions" cols="30" rows="10" />
+              </label>
 
-            
+              <button>Chef</button>
+              {/* </div> */}
+            </div>
           </form>
         </div>
-      </div> 
+      </div>
     );
   }
-
-
-
 }
 
 export default RecipeCreate;
