@@ -23,7 +23,6 @@ const receiveRecipes = recipes => ({
   recipes
 })
 
-<<<<<<< HEAD
 const receiveNewRecipeErrors = errors => ({
   type: RECEIVE_NEW_RECIPE_ERRORS,
   errors
@@ -31,10 +30,10 @@ const receiveNewRecipeErrors = errors => ({
 
 export const clearRecipeErrors = () => ({
   type: CLEAR_RECIPE_ERRORS
-=======
+})
+
 export const clearRecipes = () => ({
   type: CLEAR_RECIPES,
->>>>>>> master
 })
 
 export const fetchRecipe = recipeId => dispatch => {

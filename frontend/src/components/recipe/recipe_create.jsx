@@ -175,7 +175,7 @@ class RecipeCreate extends React.Component {
                   htmlFor="recipe-servings"
                   className={`recipe-servings ${servingErrorsCN}`}
                 >
-                  Serving Size:
+                  Servings:
                   <input
                     type="text"
                     id="recipe-servings"
@@ -183,7 +183,9 @@ class RecipeCreate extends React.Component {
                   />
                 </label>
 
-                <div className={`${instructErrorsCN}-create`}>{instructErrors}</div>
+                <div className={`${instructErrorsCN}-create`}>
+                  {instructErrors}
+                </div>
                 <label
                   htmlFor="recipe-directions"
                   className="recipe-directions"
@@ -194,10 +196,11 @@ class RecipeCreate extends React.Component {
                     cols="30"
                     rows="17"
                     className={`${instructErrorsCN}`}
-                    onChange={this.update("instructions")}/>
+                    onChange={this.update("instructions")}
+                  />
                 </label>
 
-                <button id="recipe-create-btn">Chef</button>
+                  <button id="recipe-create-btn">Chef</button>
               </div>
             </form>
           </div>

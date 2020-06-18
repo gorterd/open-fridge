@@ -42,7 +42,7 @@
   text-align: center;
   text-decoration: underline;
   margin-top: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 .recipe-name, .recipe-servings, .recipe-directions {
@@ -151,16 +151,26 @@ label {
   font-size: 20px;
   text-align: center;
   width: 85%;
-  height: 40px;
+  height: 50px;
+  margin-top: 10px;
   border: 4px;
   border-radius: 6px;
   border-style: outset;
-  border-color: rgb(87, 86, 86);
-  margin-top: 10px;
+
+  border: solid 8px rgb(126, 126, 126); 
+  clip-path: polygon( 
+    calc(0% + 3px) calc(0% + 3px), 
+    calc(100% - 3px) calc(0% + 3px), 
+    calc(100% - 3px) calc(100% - 3px),
+    calc(0% + 3px) calc(100% - 3px)
+  );
+  transition: clip-path 0.3s linear;
+
 }
 
-#recipe-create-btn:active {
-  border-style: inset;
+#recipe-create-btn:hover {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  border-color: rgb(45, 164, 45)
 }
 
 input textarea {
