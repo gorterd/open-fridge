@@ -4,12 +4,17 @@ import NavBar from '../navbar/navbar_container';
 import './splash.css';
 import { FaSearch, FaGithub } from "react-icons/fa";
 
+const RecipeGrid = props => {
+  return (
+    <div></div>
+  )
+}
+
 class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       query: {},
-      result: [],
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.update = this.update.bind(this);
@@ -19,9 +24,12 @@ class Splash extends React.Component {
     this.props.fetchRecipes({"num": "8"});
   }
 
+  next() {
+
+  }
+
   update(e) {
     const { value } = e.target;
-    // debugger;
     this.setState({ query: {"ingredients": [value], "num": "8"} });
   }
 
@@ -34,7 +42,6 @@ class Splash extends React.Component {
 
   render() {
     const { recipes, openModal } = this.props;
-
     const recipeGrid = recipes.map(recipe => {
       return (
         <li className="splashGrid-item" key={recipe._id}>
@@ -70,7 +77,7 @@ class Splash extends React.Component {
           </div>
 
           <div className="splash-main-recipes">
-            <h2>Explore trending recipes</h2>
+            <h2>Explore recipes</h2>
             <ul className="smc-trendingRecipes">{recipeGrid}</ul>
           </div>
 

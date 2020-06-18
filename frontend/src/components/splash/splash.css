@@ -36,10 +36,10 @@
 }
 
 .splash-main-recipes h2 {
-  color: #5C80BC;
-  font-size: 25px;
+  color: #F25C0E;
+  font-size: 28px;
   font-weight: 300;
-  margin: 30px 25px 0;
+  margin: 50px 25px 0;
   text-align: center;
 }
 
@@ -51,13 +51,14 @@
 }
 
 .splashGrid-recipeName {
-  color: white;
-  position: absolute;
-  bottom: 20px;
-  margin: 0 20px;
+  background: #FFFAEB;
+  color: #333;
+  height: 52px;
+  padding: 10px 20px;
 }
 
 .smc-trendingRecipes li {
+  box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2);
   margin: 20px;
   position: relative;
   height: 100%;
@@ -87,7 +88,7 @@
 }
 
 .splash-main-footer {
-  background: #fff0c2;
+  background: #FFFAEB;
   color: #999;
   display: flex;
   font-size: 14px;
