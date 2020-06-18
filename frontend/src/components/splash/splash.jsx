@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NavBar from '../navbar/navbar_container';
+import NavBar from '../navbar/navbar';
 import './splash.css';
 import { FaSearch, FaGithub } from "react-icons/fa";
 
@@ -12,7 +12,7 @@ class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: {},
+      query: "",
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.update = this.update.bind(this);
@@ -24,7 +24,9 @@ class Splash extends React.Component {
 
   update(e) {
     const { value } = e.target;
-    this.setState({ query: {"ingredients": [value], "num": "8"} });
+    let searchTerms = value.split(", ")
+    searchTerms = { "ingredients": searchTerms };
+    this.setState({ query: searchTerms });
   }
 
   handleSearch(e) {
@@ -35,6 +37,7 @@ class Splash extends React.Component {
 
   render() {
     const { recipes, openModal } = this.props;
+
     const recipeGrid = recipes.map(recipe => {
       return (
         <li className="splashGrid-item" key={recipe._id}>
@@ -60,6 +63,7 @@ class Splash extends React.Component {
             <form className="sms-searchForm">
               <input
                 type="search"
+                name="ingredients"
                 placeholder="Search by ingredients or dish name"
                 onChange={this.update}
               />
