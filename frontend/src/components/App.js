@@ -6,6 +6,7 @@ import Modal from './modal/modal';
 import SplashContainer from './splash/splash_container';
 import LoginFormContainer from "./session/login_container";
 import SignupFormContainer from "./session/signup_container";
+import RecipeShowContainer from "./recipe/recipe_show_container";
 
 const App = () => (
   <div>
@@ -16,6 +17,7 @@ const App = () => (
       {/* <AuthRoute exact path="/" component={SplashContainer} /> */}
       <Route exact path="/login" component={LoginFormContainer} />  {/* NEED TO CHANGE TO AUTH ROUTES */}
       <Route exact path="/signup" component={SignupFormContainer} /> 
+      <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> 
     </Switch>
   </div>
 );
