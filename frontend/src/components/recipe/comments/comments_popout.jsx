@@ -19,14 +19,14 @@ class CommentsPopout extends React.Component {
   }
 
   handleBlur() {
-    // this.disableBlur = false;
-    // window.setTimeout(() => {
-    //   if (!this.disableBlur) {
-    //     this.setState({ display: false });
-    //   }
+    this.disableBlur = false;
+    window.setTimeout(() => {
+      if (!this.disableBlur) {
+        this.setState({ display: false });
+      }
 
-    //   this.disableBlur = false;
-    // }, 10)
+      this.disableBlur = false;
+    }, 10)
   }
 
   render() {
