@@ -10,7 +10,7 @@ class SessionForm extends React.Component {
       email: "",
       password: "",
       toggle: false,
-      // errors: {}, ///render errors on tab to input
+      errors: this.props.errors ///prepare local state
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -191,7 +191,8 @@ class SessionForm extends React.Component {
                 </Link>
 
                 <button
-                  onClick={this.demoUser()}
+                type="button"
+                  onClick={this.demoUser() }
                   className={`${session}-demo-button`}
                 >
                   Demo Page
