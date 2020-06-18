@@ -6,11 +6,11 @@ import { closeModal } from '../../actions/modal_actions';
 import RecipePreview from '../recipe/recipe_preview';
 
 function Modal({ modal, closeModal }) {
-  if (!modal) {
+  if (!modal.type) {
     return null;
   }
   let component;
-  switch (modal) {
+  switch (modal.type) {
     case "recipePreview":
       component = <RecipePreview />;
       break;

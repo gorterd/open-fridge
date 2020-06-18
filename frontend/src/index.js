@@ -7,8 +7,8 @@ import Root from "./components/root";
 import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
 
-import { fetchRecipe, fetchRecipes } from './actions/recipe_actions';
-// import { logout } from "./actions/session_actions";
+import { fetchRecipes } from './actions/recipe_actions';
+import { logout } from "./actions/session_actions";
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   window.getState = store.getState;
   window.dispatch = store.dispatch;
-  window.fetchRecipe = fetchRecipe;
   window.fetchRecipes = fetchRecipes;
+  window.logout = logout;
 
   ReactDOM.render(<Root store={store} />, root);
 });

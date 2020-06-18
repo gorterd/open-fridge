@@ -1,0 +1,125 @@
+.recipe-create-div {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: khaki; */
+  overflow: hidden;
+  border: 30px solid rgba(245, 245, 245, 0.692);
+  border-radius: 60px;
+  background-image: url('create-food.jpg');
+  background-size: cover;
+}
+
+.recipe-create-div-wrap {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  width: 100vw;
+  height: 100vh;
+}
+
+.recipe-not-ingredients {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-not-ingredients > h1 {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  margin-bottom: 25px;
+}
+
+.recipe-name, .recipe-servings, .recipe-directions {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  border-radius: 6px;
+  width: 70%;
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+}
+
+#recipe-name, #recipe-servings, #recipe-directions {
+  padding-top: 8px;
+  font-size: 18px;
+  /* box-sizing: border-box; */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+label {
+  font-size: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+
+
+/* INGREDIENTS */
+.ingredient-outer-form {
+  display: flex;
+}
+
+.recipe-ingredients-div {
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: flex-end;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 15vh;
+}
+
+.ingredient-input-div {
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe-ingredients {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+  background-color: white;
+  /* opacity: .75; */
+  border: 3px solid black;
+  border-radius: 6px;
+  width: 70%;
+  z-index: 2;
+  /* margin-top: -50px; */
+}
+
+[class*="ingredient-num-"] {
+  border-bottom: 1px solid gray;
+  padding-top: 5px;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+#add-ingredient-btn {
+  position: absolute;
+  font-size: 25px;
+  font-weight: bold;
+  right: 15vh;
+}
+
+
+/* RECIPE INPUTS */
+input textarea {
+  background-color: white;
+  border-radius: 6px;
+}
+
+/* #ingredients-img {
+  width: 75%;
+  float: right;
+  margin-top: -50px;
+  z-index: 1;
+} */
+
+    

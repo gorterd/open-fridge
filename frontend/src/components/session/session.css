@@ -8,8 +8,8 @@ body {
 }
 
 .signup-container {
-  background-image: url("./session-ingredients.jpg");
-  background-size: cover;
+  background-image: url("./session-ingredients1.jpg");
+  background-size: 100%;
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -203,10 +203,11 @@ body {
   display: flex;
   height: 75%;
   margin-top: 30px;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin-left: auto;
   margin-right: auto;
+  width: 530px;
 }
 
 .login-form-div > input {
@@ -216,8 +217,8 @@ body {
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 4px;
-  margin-left: 15px;
-  margin-right: 15px;
+  margin-left: 0;
+  margin-right: 0;
   font-weight: normal;
 }
 

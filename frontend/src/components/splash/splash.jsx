@@ -4,48 +4,52 @@ import NavBar from '../navbar/navbar_container';
 import './splash.css';
 import { FaSearch, FaGithub } from "react-icons/fa";
 
+// NEED TO FIX:
+// recipes showing up twice once you navigate to recipe show page and back 
+// recipe is stored in state
+
 class Splash extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      query: {},
     }
     this.handleSearch = this.handleSearch.bind(this);
+    this.update = this.update.bind(this);
   }
 
   componentDidMount() {
-    // testing fetching recipe
-    this.props.fetchRecipe("5ee7fc07ba311916faf4b571");
+    this.props.fetchRecipes({"num": "8"});
+  }
+
+  update(e) {
+    const { value } = e.target;
+    this.setState({ query: {"ingredients": [value], "num": "8"} });
   }
 
   handleSearch(e) {
     e.preventDefault();
+    this.props.fetchRecipes(this.state.query);
+    this.setState.query = {};
   }
 
   render() {
-    const { recipes, openModal, fetchRecipe } = this.props;
-    let recipeGrid;
-
-    if (Object.keys(recipes).length === 0) {
-      // testing fetching recipe
+    const { recipes, openModal } = this.props;
+    const recipeGrid = recipes.map(recipe => {
       return (
-        <button onClick={() => fetchRecipe("5ee7fc07ba311916faf4b571")}>Loading...</button>
-      )
-    } else {
-      recipeGrid = recipes.map(recipe => {
-        // refactor to include img as background on li element
-        const recipeImg = <img className="splashGrid-recipeImg" src={recipe.image}></img>;
-        return <li>
+        <li className="splashGrid-item" key={recipe._id}>
           <button
             type="button"
-            onClick={() => openModal("recipePreview")}
+            onClick={() => {
+              openModal({ type: "recipePreview", data: recipe });
+            }}
           >
-            {recipeImg}
-            More info
+            <img className="splashGrid-recipeImg" src={recipe.image} alt="recipe-img"></img>
+            <h3 className="splashGrid-recipeName">{recipe.name}</h3>
           </button>
-        </li>;
-      });
-    };
+        </li>
+      );
+    })
 
     return (
       <>
@@ -53,32 +57,21 @@ class Splash extends React.Component {
 
         <div className="splash-main">
           <div className="splash-main-searchbar">
-            <form className="sms-searchForm" onSumbit={this.handleSearch}>
-              <input type="search" placeholder="Search" />
-              <button type="button">
+            <form className="sms-searchForm">
+              <input
+                type="search"
+                placeholder="Search by ingredients or dish name"
+                onChange={this.update}
+              />
+              <button type="submit" onClick={this.handleSearch}>
                 <FaSearch />
               </button>
             </form>
           </div>
 
           <div className="splash-main-recipes">
-            <h2>Explore trending recipes</h2>
-            <ul className="smc-trendingRecipes">
-              {/* list of recipes */}
-              <li>
-                <button
-                  type="button"
-                  onClick={() => openModal("recipePreview")}
-                >
-                  More info
-                </button>
-              </li>
-              {recipeGrid}
-              <li></li>
-              <li></li>
-              <li></li>
-              <li></li>
-            </ul>
+            <h2>Explore recipes</h2>
+            <ul className="smc-trendingRecipes">{recipeGrid}</ul>
           </div>
 
           <div className="splash-main-tagline">
