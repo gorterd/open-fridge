@@ -4,11 +4,9 @@ import NavBar from '../navbar/navbar_container';
 import './splash.css';
 import { FaSearch, FaGithub } from "react-icons/fa";
 
-const RecipeGrid = props => {
-  return (
-    <div></div>
-  )
-}
+// NEED TO FIX:
+// recipes showing up twice once you navigate to recipe show page and back 
+// recipe is stored in state
 
 class Splash extends React.Component {
   constructor(props) {
@@ -24,10 +22,6 @@ class Splash extends React.Component {
     this.props.fetchRecipes({"num": "8"});
   }
 
-  next() {
-
-  }
-
   update(e) {
     const { value } = e.target;
     this.setState({ query: {"ingredients": [value], "num": "8"} });
@@ -35,7 +29,6 @@ class Splash extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
-    debugger;
     this.props.fetchRecipes(this.state.query);
     this.setState.query = {};
   }

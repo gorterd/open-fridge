@@ -27,7 +27,7 @@ const RecipePreview = props => {
 
         <div className="rpm-navLinks">
           <Link
-            to={`/api/recipes/${currentRecipe._id}`}
+            to={`/recipes/${currentRecipe._id}`}
             onClick={() => closeModal()}
           >
             <BsThreeDots />
