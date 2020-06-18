@@ -7,7 +7,7 @@ class RecipeCreate extends React.Component {
     this.state = {
       name: "",
       servings: "",
-      ingredients: [],
+      ingredients: [],//{input:val},
       instructions: "",
       inputs: [
         "input-0",
