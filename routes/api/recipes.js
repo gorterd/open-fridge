@@ -6,6 +6,8 @@ const FilterResults = require('../../util/filter_results');
 
 const Recipe = require("../../models/Recipe");
 const User = require("../../models/User");
+const Comment = require("../../models/Comment");
+
 // available query string params:
   // ingredients: comma-separated list of ingredients recipes should include
   // skip: buffer / offset, how far into the results to start (for fetching
@@ -149,5 +151,24 @@ router.delete("/:recipeId", passport.authenticate("jwt", { session: false }),(re
   }
 );
 
+// router.get("/:recipeId/comments", (req, res) = {
+
+// })
+
+router.post("/:recipeId/comments", passport.authenticate("jwt", { session: false }),(req, res) => {
+    Recipe.findById(req.params.recipeId, function (err, recipe) {
+       
+      const newComment = new Comment({
+         author: req.user.id,
+         name: req.body.name,
+         servings: req.body.servings,
+         ingredients: req.body.ingredients,
+         instructions: req.body.instructions,
+         time: req.body.time,
+       });
+
+       newRecipe.save().then((recipe) => res.json(recipe));
+    }
+)})
 
 module.exports = router;
