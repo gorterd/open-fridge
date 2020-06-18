@@ -52,9 +52,6 @@ export const login = (user) => (dispatch) => {
 
 export const signup = (user) => (dispatch) => {
   return sessionUtil.signup(user)
-<<<<<<< HEAD
-    .then((user) => dispatch(receiveCurrentUser(user)))
-=======
     .then((response) => {
       const { token } = response.data;
       localStorage.setItem('jwtToken', token);
@@ -62,6 +59,5 @@ export const signup = (user) => (dispatch) => {
       const user = jwt_decode(token);
       dispatch(receiveCurrentUser(user));
     })
->>>>>>> master
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 }; 
