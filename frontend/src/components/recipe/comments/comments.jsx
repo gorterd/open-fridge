@@ -9,14 +9,15 @@ class Comments extends React.Component {
     }
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.submitComment = this.submitComment.bind(this);
   };
 
   handleChange(e){
     this.setState({ text: e.target.value})
   }
 
-  handleClick(){
+  submitComment(e){
+    e.preventDefault();
     const {text} = this.state;
     const { sectionKey: key, idx, recipeId } = this.props;
 
@@ -28,16 +29,19 @@ class Comments extends React.Component {
   }
 
   render() {
-    const { comments, loggedIn } = this.props;
+    const { comments, session, deleteComment } = this.props;
 
-    const commentForm = loggedIn ? (
-      <>
-        <span>Add comment: </span>
+    const commentForm = session.isAuthenticated ? (
+      <form onSubmit={this.submitComment}>
         <textarea value={this.state.text} onChange={this.handleChange} />
-      </>
+        <span className='submit-comment' onClick={this.submitComment}>
+          Add Comment
+        </span>
+      </form>
     ) : <>
       <Link className='link-login' to='/login'>Login</Link> to comment
     </>;
+
 
     return (
       <div className='recipe-comments'>
@@ -45,7 +49,14 @@ class Comments extends React.Component {
           { comments ? comments.map(comment => (
             <li key={comment._id}>
               <span className='comment-text'>{comment.text}</span>
-              <span className='comment-author'>{comment.author}</span>
+              <div className='comment-author'>
+                {(session.user && session.user.id === comment.author._id) ? 
+                (<span className='comment-delete' onClick={ () => {
+                  // debugger;
+                    deleteComment(comment._id)
+                  }}><i className="fas fa-times-circle"></i></span>) : null}
+                <span className='comment-username'>{comment.author.username}</span>
+              </div>
             </li>
           )) : null}
         </ul>

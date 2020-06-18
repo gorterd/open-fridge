@@ -16,12 +16,16 @@ const removeComment = comment => ({
 
 export const addComment = comment => dispatch => {
   return CommentAPIUtil.addComment(comment)
-    .then(comment => dispatch(receiveComment(comment)))
-    // .catch(err => dispatch(receiveErrors(err.response.data)));
-}
-
-export const deleteComment = commentId => dispatch => {
-  return CommentAPIUtil.deleteComment(commentId)
-    .then(comment => dispatch(removeComment(comment)))
-    // .catch(err => dispatch(receiveErrors(err.response.data)));
+    .then(res => {
+      dispatch(receiveComment(res.data));
+    },
+      () => console.log('Could not add comment'));
+  }
+  
+  export const deleteComment = commentId => dispatch => {
+    return CommentAPIUtil.deleteComment(commentId)
+    .then(res => {
+        // debugger  
+        dispatch(removeComment(res.data))
+      },() => console.log('Could not delete comment'));
 }

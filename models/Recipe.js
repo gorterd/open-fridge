@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+// const Comment = require('./Comment').schema;
 
 const RecipeSchema = new Schema({
   author: {
@@ -44,7 +45,6 @@ const RecipeSchema = new Schema({
 
   url: String,
 
-  // comments: [ Comment ]
 });
 
 module.exports = Recipe = mongoose.model('Recipe', RecipeSchema);

@@ -5,9 +5,9 @@ const commentsReducer = (state = {}, action) => {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_RECIPE:
-      if (action.recipe.comments){
+      if (action.data.comments){
         let normalizedComments = {};
-        action.recipe.comments.forEach( comment => 
+        action.data.comments.forEach( comment => 
           ( normalizedComments[comment._id] = comment ));
         return Object.assign({}, state, normalizedComments);
       } else {
