@@ -1,18 +1,49 @@
 import React from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-class RecipePreview extends React.Component {
-  render() {
-    return (
-      <div>Recipe Preview here</div>
-    )
-  }
+import './recipe_preview.css';
+import { BsThreeDots } from 'react-icons/bs';
+import { closeModal } from '../../actions/modal_actions';
+
+const RecipePreview = props => {
+  const { currentRecipe, closeModal } = props;
+
+  return (
+    <>
+      <img src={currentRecipe.image} alt="" />
+      <div className="recipePreview-main">
+        <div className="rpm-time">{currentRecipe.time.total}</div>
+
+        <h3>{currentRecipe.name}</h3>
+
+        <ul className="rpm-ingredientsList">
+          {currentRecipe.ingredients.map((ingredient) => (
+            <li key={ingredient._id}>{ingredient.fullName}</li>
+          ))}
+        </ul>
+
+        <div className="rpm-servings">Servings: {currentRecipe.servings}</div>
+
+        <div className="rpm-navLinks">
+          <Link
+            to={`/recipes/${currentRecipe._id}`}
+            onClick={() => closeModal()}
+          >
+            <BsThreeDots />
+          </Link>
+        </div>
+      </div>
+    </>
+  );
 }
 
-// const mSTP = state => ({
-//   recipe: state.entities.recipe
-// })
+const mSTP = ({ ui: { modal }}) => ({
+  currentRecipe: modal.data,
+})
 
-// export default connect(mSTP)(RecipePreview);
+const mDTP = dispatch => ({
+  closeModal: () => dispatch(closeModal()),
+})
 
-export default RecipePreview;
+export default connect(mSTP, mDTP)(RecipePreview);

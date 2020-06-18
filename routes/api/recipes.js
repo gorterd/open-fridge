@@ -18,7 +18,7 @@ const User = require("../../models/User");
 
 router.get('/', (req, res) => {
   let results = Recipe.aggregate();
-  let { ingredients, skip, num, include } = req.body;
+  let { ingredients, skip, num, include } = req.query;
   
   results = new FilterResults(results)
     .byIngredients(ingredients)
