@@ -1,4 +1,4 @@
-import { RECEIVE_RECIPE, RECEIVE_RECIPES } from '../actions/recipe_actions';
+import { RECEIVE_RECIPE, RECEIVE_RECIPES, CLEAR_RECIPES } from '../actions/recipe_actions';
 import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comment_actions';
 
 const recipesReducer = (state = {}, action) => {
@@ -13,7 +13,13 @@ const recipesReducer = (state = {}, action) => {
 
       return Object.assign({}, state, { [recipe._id]: recipe });
     case RECEIVE_RECIPES:
-      return Object.assign({}, state, action.recipes);
+      let normalizedRecipes = {};
+      action.recipes.forEach(recipe =>
+        (normalizedRecipes[recipe._id] = recipe));
+
+      return Object.assign({}, state, normalizedRecipes);
+    case CLEAR_RECIPES:
+      return {};
     case RECEIVE_COMMENT:
       comments = [...state[action.comment.recipe].comments, action.comment._id];
       recipe = Object.assign({}, state[action.comment.recipe], { comments });

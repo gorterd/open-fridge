@@ -7,7 +7,7 @@
   }
 }
 
-.recipe-container{
+.recipe-show-container{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -17,7 +17,7 @@
     width: 100%;
   }
 
-  .recipe-information{
+  .recipe-show-information{
     position: absolute;
     right: 6%;
     top: 175px;
@@ -59,22 +59,22 @@
     }
   }
 
-  .recipe-main {
+  .recipe-show-main {
     width: 70%;
     margin-bottom: 200px;
   }
 
-  .recipe-ingredients, .recipe-instructions, .recipe-servings, .recipe-time {
+  .recipe-show-ingredients, .recipe-show-instructions, .recipe-show-servings, .recipe-show-time {
     margin: 40px 0 ;
+    width: 70%;
     
     h2 {
       font-size: 4rem;
-      margin: 40px 0 20px 0;
+      margin: 40px 0 20px 40px;
     }
 
     li > .comments-container, > .comments-container {
       border-radius: 5px;
-      width: 70%;
       display: flex;
       justify-content: space-between;
       position: relative;
@@ -120,7 +120,7 @@
           width: calc((100vw / 3) );
           min-height: 150px;
           left: 60px;
-          background-color: white;
+          background-color: hsl(45, 100%, 98%);
           border-radius: 10px;
 
 
@@ -138,10 +138,18 @@
   }
 }
 
-.recipe-ingredients {
+.recipe-show-ingredients {
+  border: 1px solid black;
+  background-color: hsl(45, 100%, 98%);;
+  border-radius: 10px;
+  padding-bottom: 20px;
+
+  > h2:first-child { margin-top: 30px;}
+
   li > .comments-container {
     font-size: 1.75rem;
     padding: 20px;
+    padding-left: 40px;
     
     .recipe-comments {
       top: -20px;
@@ -149,35 +157,35 @@
   }
 }
 
-.recipe-instructions {
-  counter-reset: instruction;
+.recipe-show-instructions {
 
   li > .comments-container {
     font-size: 1.75rem;
     line-height: 1.75rem;
-    padding: 10px 20px;
+    padding: 15px 20px;
 
     >span { 
       font-size: 1.25rem;
       margin-right: 25px;
+
+      >span:first-child {
+        position: absolute;
+      }
+      >span:nth-child(2) {
+        padding-left: 25px;
+        display: inline-block;
+      }
     }
 
     .recipe-comments {
-      top: -10px;
+      top: -15px;
 
     }
 
-    &::before {
-      counter-increment: instruction;
-      content: counter(instruction) ".";
-      position: relative;
-      left: -12px;
-      top: 4px;
-    }
   }
 }
 
-.recipe-time, .recipe-servings {
+.recipe-show-time, .recipe-show-servings {
   .comments-container {
     font-size: 1.75rem;
     line-height: 1.75rem;
