@@ -4,6 +4,8 @@ import { receiveErrors } from './session_actions';
 export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_CURRENT_RECIPE = "RECEIVE_CURRENT_RECIPE";
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
+export const RECEIVE_NEW_RECIPE_ERRORS = "RECEIVE_NEW_RECIPE_ERRORS";
+export const CLEAR_RECIPE_ERRORS = "CLEAR_RECIPE_ERRORS";
 export const CLEAR_RECIPES = "CLEAR_RECIPES";
 
 export const receiveCurrentRecipe = recipe => ({
@@ -19,6 +21,15 @@ const receiveRecipe = recipe => ({
 const receiveRecipes = recipes => ({
   type: RECEIVE_RECIPES,
   recipes
+})
+
+const receiveNewRecipeErrors = errors => ({
+  type: RECEIVE_NEW_RECIPE_ERRORS,
+  errors
+})
+
+export const clearRecipeErrors = () => ({
+  type: CLEAR_RECIPE_ERRORS
 })
 
 export const clearRecipes = () => ({
@@ -38,6 +49,7 @@ export const fetchRecipes = query => dispatch => {
     .catch(err => dispatch(receiveErrors(err.response.data)));
 }
 
+<<<<<<< HEAD
 export const fetchPinnedRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchPinnedRecipes(userId)
     .then((recipes) => {
@@ -54,3 +66,12 @@ export const fetchOwnRecipes = (userId) => (dispatch) => {
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
+=======
+export const createNewRecipe = recipe => dispatch => {
+  return RecipeAPIUtil.createRecipe(recipe)
+    .then(recipe => {
+      dispatch(receiveRecipe(recipe))}) 
+    .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
+}
+
+>>>>>>> master

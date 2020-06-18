@@ -18,3 +18,7 @@ export const fetchPinnedRecipes = userId => {
 export const fetchOwnRecipes = userId => {
   return axios.get(`/api/recipes/${userId}`)
 }
+
+export const createRecipe = recipe => {
+  return axios.post('/api/recipes/', recipe)
+}
