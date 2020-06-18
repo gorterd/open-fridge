@@ -2,13 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import jwt_decode from "jwt-decode";
 
-import './index.css';
+import "./index.css";
 import Root from "./components/root";
 import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
-
-import { fetchRecipes } from './actions/recipe_actions';
 import { logout } from "./actions/session_actions";
+
+// for testing purposes
+import { fetchRecipes } from './actions/recipe_actions';
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -37,7 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
   window.getState = store.getState;
   window.dispatch = store.dispatch;
   window.fetchRecipes = fetchRecipes;
-  window.logout = logout;
 
   ReactDOM.render(<Root store={store} />, root);
 });

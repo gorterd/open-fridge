@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import './profile_show.css';
-import NavBar from '../navbar/navbar_container';
+import NavBar from '../navbar/navbar';
 
 const ProfileShow = props => {
   const { currentUser } = props;
