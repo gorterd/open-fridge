@@ -7,7 +7,7 @@ const mSTP = state => ({
 });
 
 const mDTP = dispatch => ({
-  createRecipe: recipe => dispatch(createNewRecipe(recipe)),
+  createRecipe: (recipe) => dispatch(createNewRecipe(recipe)),
   clearErrors: () => dispatch(clearRecipeErrors()),
 });
 

@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 });
 
 router.post(
-  "/new",
+  "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);

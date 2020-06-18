@@ -12,5 +12,6 @@ export const fetchRecipes = query => {
 }
 
 export const createRecipe = recipe => {
-  return axios.post('/api/recipes/new', recipe)
+  debugger
+  return axios.post('/api/recipes/', recipe)
 }

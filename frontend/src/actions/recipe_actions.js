@@ -46,7 +46,8 @@ export const fetchRecipes = query => dispatch => {
 
 export const createNewRecipe = recipe => dispatch => {
   return RecipeAPIUtil.createRecipe(recipe)
-    .then(recipe => dispatch(receiveRecipe(recipe))) 
+    .then(recipe => {
+      dispatch(receiveRecipe(recipe))}) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
 }
 

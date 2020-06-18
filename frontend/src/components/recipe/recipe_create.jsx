@@ -1,5 +1,6 @@
 import React from 'react';
 import './recipe_create.css';
+import storage from './create-storage.jpg'
 
 class RecipeCreate extends React.Component {
   constructor(props) {
@@ -7,9 +8,10 @@ class RecipeCreate extends React.Component {
     this.state = {
       name: "",
       servings: "",
-      ingredients: {},   //{ input-0 : "1 large peeled potato" },
+      ingredients: [],
       instructions: "",
-      image: "", 
+      image: "",
+      time: "",
       inputs: [
         "input-0",
         "input-1",
@@ -17,14 +19,25 @@ class RecipeCreate extends React.Component {
         "input-3",
         "input-4",
         "input-5",
+        "input-6",
+        "input-7",
+        "input-8",
+        "input-9",
+        "input-10",
+        "input-11",
+        "input-12",
+        // "input-8",
       ],
+      ingredientString: {}, //{ input-0 : "1 large peeled potato" },
+      errors: this.props.errors,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-
-  //////////ADD IMAGE!!!!
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
 
   handleSubmit(e) {
     e.preventDefault();
@@ -40,8 +53,9 @@ class RecipeCreate extends React.Component {
 
   updateIngredient(key) {
     return (e) => {
-        const update = Object.assign({}, this.state.ingredients, {[key]:e.currentTarget.value})
-        this.setState({ ingredients: update })
+        const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
+        this.setState({ ingredientString: update })
+        this.setState({ ingredients: Object.values(this.state.ingredientString) });
     }
   }
 
@@ -56,57 +70,98 @@ class RecipeCreate extends React.Component {
     };
   }
 
+  renderErrors(){
+
+  }
+
 
   render() {
     return (
       <div className="recipe-create-div">
+        <img
+          src={storage}
+          alt="openFridge"
+          draggable="false"
+          className="recipe-create-image"
+        />
+
         <div className="recipe-create-div-wrap">
-          <form onSubmit={this.addInput()} className="ingredient-outer-form">
-            <div className="recipe-ingredients-div">
-              <label className="recipe-ingredients">
-                Ingredients:
-                <button id="add-ingredient-btn">+</button>
-                {this.state.inputs.map((input, idx) => (
+          <div className="recipe-create-right">
+            <form onSubmit={this.addInput()} className="ingredient-outer-form">
+              <div className="recipe-ingredients-div">
+                <label className="recipe-ingredients">
+                  Ingredients:
+                  <button id="add-ingredient-btn">+</button>
+                  {this.state.inputs.map((input, idx) => (
+                    <input
+                      key={input}
+                      type="text"
+                      onChange={this.updateIngredient(input)}
+                      className={`ingredient-num-${idx}`}
+                    />
+                  ))}
+                </label>
+              </div>
+            </form>
+
+            <label htmlFor="recipe-time" className="recipe-time">
+              Time to Cook:
+              <input
+                type="text"
+                id="recipe-time"
+                onChange={this.update("time")}
+              />
+            </label>
+
+            <label htmlFor="recipe-image" className="recipe-image">
+              Link to image:
+              <input
+                type="text"
+                id="recipe-image"
+                onChange={this.update("image")}
+              />
+            </label>
+          </div>
+
+          <div className="recipe-create-left">
+            <form onSubmit={this.handleSubmit}>
+              <div className="recipe-not-ingredients">
+                <h1>Recipe</h1>
+                <label htmlFor="recipe-name" className="recipe-name">
+                  Recipe Name:
                   <input
-                    key={input}
                     type="text"
-                    onChange={this.updateIngredient(input)}
-                    className={`ingredient-num-${idx}`}
+                    id="recipe-name"
+                    onChange={this.update("name")}
                   />
-                ))}
-              </label>
-            </div>
-          </form>
+                </label>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="recipe-not-ingredients">
-              <h1>Recipe</h1>
-              <label htmlFor="recipe-name" className="recipe-name">
-                Recipe Name:
-                <input
-                  type="text"
-                  id="recipe-name"
-                  onChange={this.update("name")}
-                />
-              </label>
+                <label htmlFor="recipe-servings" className="recipe-servings">
+                  Serving Size:
+                  <input
+                    type="text"
+                    id="recipe-servings"
+                    onChange={this.update("servings")}
+                  />
+                </label>
 
-              <label htmlFor="recipe-servings" className="recipe-servings">
-                Serving Size:
-                <input
-                  type="text"
-                  id="recipe-servings"
-                  onChange={this.update("servings")}
-                />
-              </label>
+                <label
+                  htmlFor="recipe-directions"
+                  className="recipe-directions"
+                >
+                  Directions:
+                  <textarea
+                    id="recipe-directions"
+                    cols="30"
+                    rows="20"
+                    onChange={this.update("instructions")}
+                  />
+                </label>
 
-              <label htmlFor="recipe-directions" className="recipe-directions">
-                Directions:
-                <textarea id="recipe-directions" cols="30" rows="10" onChange={this.update("instructions")}/>
-              </label>
-
-              <button>Chef</button>
-            </div>
-          </form>
+                <button id="recipe-create-btn">Chef</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );
