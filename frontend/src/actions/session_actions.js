@@ -1,4 +1,5 @@
 import * as sessionUtil from '../util/session_api_util'
+import jwt_decode from "jwt-decode";
 
 export const RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 export const LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
@@ -33,7 +34,13 @@ export const clearErrors = () => {
 
 export const login = (user) => (dispatch) => {
   return sessionUtil.login(user)
-    .then((user) => dispatch(receiveCurrentUser(user)))
+    .then((response) => {
+      const { token } = response.data;
+      localStorage.setItem('jwtToken', token);
+      sessionUtil.setAuthToken(token);
+      const user = jwt_decode(token);
+      dispatch(receiveCurrentUser(user));
+    })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
 
@@ -45,6 +52,16 @@ export const login = (user) => (dispatch) => {
 
 export const signup = (user) => (dispatch) => {
   return sessionUtil.signup(user)
+<<<<<<< HEAD
     .then((user) => dispatch(receiveCurrentUser(user)))
+=======
+    .then((response) => {
+      const { token } = response.data;
+      localStorage.setItem('jwtToken', token);
+      sessionUtil.setAuthToken(token);
+      const user = jwt_decode(token);
+      dispatch(receiveCurrentUser(user));
+    })
+>>>>>>> master
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 }; 
