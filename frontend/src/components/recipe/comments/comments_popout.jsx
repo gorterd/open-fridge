@@ -32,16 +32,26 @@ class CommentsPopout extends React.Component {
   render() {
 
     const commentsBubble = this.state.display ? (
+      // <span>HELOLALKSDJLAKSDJ</span>
       <Comments {...this.props}/>
     ) : null;
 
     return (
-      <button className='recipe-comments-popout' onBlur={this.handleBlur}>
-        <span onClick={this.toggleBubble}>Show Comments</span>
-        <div className='recipe-comments-bubble' onClick={() => this.disableBlur = true }>
-          {commentsBubble}
-        </div>
-      </button>
+      <div className={'comments-container' + (this.state.display ? ' active':'')}>
+        <span>{this.props.spanContent}</span>
+        <button className='recipe-comments-popout' onBlur={this.handleBlur}>
+          <span onClick={this.toggleBubble}>
+            <i className="far fa-comment-alt">
+              <span className='comment-balloon-content'>
+                {this.props.comments ? this.props.comments.length : '+'}
+              </span>
+            </i>
+          </span>
+          <div className='recipe-comments-bubble' onClick={() => this.disableBlur = true }>
+            {commentsBubble}
+          </div>
+        </button>
+      </div>
     )
   }
 };

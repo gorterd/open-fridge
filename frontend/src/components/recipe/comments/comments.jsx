@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class Comments extends React.Component {
   constructor(props) {
@@ -34,7 +35,9 @@ class Comments extends React.Component {
         <span>Add comment: </span>
         <textarea value={this.state.text} onChange={this.handleChange} />
       </>
-    ) : null;
+    ) : <>
+      <Link className='link-login' to='/login'>Login</Link> to comment
+    </>;
 
     return (
       <div className='recipe-comments'>
