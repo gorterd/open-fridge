@@ -12,10 +12,10 @@
 
 .modal-child {
   background-color: white;
-  height: 555px;
+  height: 655px;
   top: 50%;
   left: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
-  width: 450px;
+  width: 550px;
 }

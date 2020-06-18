@@ -13,11 +13,9 @@ export const receiveCurrentUser = (currentUser) => {
   };
 };
 
-// export const logoutCurrentUser = () => {
-//   return {
-//     type: LOGOUT_CURRENT_USER,
-//   };
-// };
+export const logoutUser = () => ({
+  type: LOGOUT_CURRENT_USER,
+});
 
 export const receiveErrors = (errors) => {
   return {
@@ -44,11 +42,11 @@ export const login = (user) => (dispatch) => {
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
 
-// export const logout = () => (dispatch) => {
-//   return sessionUtil.logoutUser()
-//     .then(() => dispatch(logoutCurrentUser()))
-//     .fail((err) => dispatch(receiveErrors(err)));
-// };
+export const logout = () => dispatch => {
+  localStorage.removeItem('jwtToken');
+  sessionUtil.setAuthToken(false);
+  dispatch(logoutUser());
+};
 
 export const signup = (user) => (dispatch) => {
   return sessionUtil.signup(user)
