@@ -6,6 +6,17 @@
   padding: 40px 50px;
 }
 
+.navbar-right {
+  color: #499F68;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-right p {
+  color: #333;
+  margin-right: 15px;
+}
+
 .nbl-homeLink {
   color: #499F68;
   font-size: 20px;
