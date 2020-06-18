@@ -1,0 +1,29 @@
+.profile-banner {
+  background: url('./profile01.jpg');
+  background-size: cover;
+  height: 200px;
+  width: 100%;
+}
+
+.profile-pic {
+  background: url('./demo-profile.jpg');
+  background-size: cover;
+  box-shadow: 1px 0px 5px #333;
+  border-radius: 50%;
+  transform: translateY(-50px);
+  height: 100px;
+  width: 100px;
+}
+
+.upm-profileDetails {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upm-profileDetails h3 {
+  font-size: 30px;
+  padding: 10px;
+  transform: translateY(-50px);
+}
+
