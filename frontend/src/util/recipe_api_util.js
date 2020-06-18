@@ -10,3 +10,8 @@ export const fetchRecipes = query => {
     params: query  
   })
 }
+
+export const fetchPinnedRecipes = userId => {
+  return axios.get(`/api/users/${recipeId}/pins`)
+}
+
