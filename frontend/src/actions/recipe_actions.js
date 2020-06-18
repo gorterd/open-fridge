@@ -29,7 +29,6 @@ export const fetchRecipe = recipeId => dispatch => {
 export const fetchRecipes = query => dispatch => {
   return RecipeAPIUtil.fetchRecipes(query)
     .then(recipes => { 
-      // debugger;
       dispatch(receiveRecipes(recipes.data)) })
     .catch(err => dispatch(receiveErrors(err.response.data)));
 }
