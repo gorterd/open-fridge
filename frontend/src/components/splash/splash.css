@@ -30,39 +30,57 @@
 
 .splash-main-recipes {
   background: #F2F8F9;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .splash-main-recipes h2 {
   color: #F25C0E;
   font-size: 28px;
   font-weight: 300;
-  margin: 50px 25px 0;
+  padding: 50px 25px 20px;
   text-align: center;
 }
 
-.smc-trendingRecipes {
+.smc-recipes {
+  height: 580px;
+  width: 1400px; 
+}
+
+.carouselButton {
+  transform: translateX(49vw) translateY(-380px);
+}
+
+.carousel__inner-slide {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  margin: 30px 0;
+  justify-content: center;
+}
+
+.horizontalSlider___281Ls.carousel__slider.carousel__slider--horizontal {
+  height: 900px;
+  transform: translateX(20px);
+}
+
+.slideInner___2mfX9.carousel__inner-slide {
+  height: 300px;
+}
+
+.splashGrid-item {
+  box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2);
+  margin: 20px;
+  height: 210px;
+  width: 300px;
 }
 
 .splashGrid-recipeName {
   background: #FFFAEB;
   color: #333;
-  height: 52px;
+  height: 52px;    
+  width: 300px;
   padding: 10px 20px;
 }
 
-.smc-trendingRecipes li {
-  box-shadow: 1px 0 10px 0 rgba(0, 0, 0, 0.2);
-  margin: 20px;
-  position: relative;
-  height: 100%;
-  width: 300px;
+.splashGrid-recipeImg {
+  height: 160px;
 }
 
 .splash-main-tagline {
@@ -110,4 +128,3 @@
   color: #393E41;
   font-size: 16px;
 }
-
