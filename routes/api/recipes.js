@@ -113,7 +113,7 @@ router.get('/:recipeId', (req, res) => {
     );
 });
 
-router.get("/user/:userId", (req, res) => {
+router.get("/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>

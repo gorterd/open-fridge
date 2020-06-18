@@ -12,6 +12,9 @@ export const fetchRecipes = query => {
 }
 
 export const fetchPinnedRecipes = userId => {
-  return axios.get(`/api/users/${recipeId}/pins`)
+  return axios.get(`/api/users/${userId}/pins`)
 }
 
+export const fetchOwnRecipes = userId => {
+  return axios.get(`/api/recipes/${userId}`)
+}
