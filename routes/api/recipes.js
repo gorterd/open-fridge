@@ -33,7 +33,7 @@ router.get('/', (req, res) => {
 });
 
 router.post(
-  "/",
+  "/new",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
@@ -54,7 +54,6 @@ router.post(
     newRecipe.save().then((recipe) => res.json(recipe));
   }
 );
-
 
 router.patch(
   "/:recipeId/pin",
@@ -108,8 +107,6 @@ router.get("/user/:userId", (req, res) => {
       res.status(404).json({ norecipesfound: "No recipes found from that user" })
     );
 }); //finds all recipes authored by the same user
-
-
 
 router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
   Recipe.findById(req.params.recipeId, function (err, recipe) {

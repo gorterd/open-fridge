@@ -7,8 +7,9 @@ class RecipeCreate extends React.Component {
     this.state = {
       name: "",
       servings: "",
-      ingredients: [],//{input:val},
+      ingredients: {},   //{ input-0 : "1 large peeled potato" },
       instructions: "",
+      image: "", 
       inputs: [
         "input-0",
         "input-1",
@@ -17,16 +18,18 @@ class RecipeCreate extends React.Component {
         "input-4",
         "input-5",
       ],
-      test: "",
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
+  //////////ADD IMAGE!!!!
+
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state)
-    // console.log("handleSubmit"); // this.props.generateRecipe(); //////////
+    this.props.createRecipe(this.state);
   }
 
   update(field) {
@@ -37,8 +40,8 @@ class RecipeCreate extends React.Component {
 
   updateIngredient(key) {
     return (e) => {
-      // if (this.state.ingredients[key])
-        // this.setState({ ingredients: this.state.ingredients
+        const update = Object.assign({}, this.state.ingredients, {[key]:e.currentTarget.value})
+        this.setState({ ingredients: update })
     }
   }
 
@@ -98,7 +101,7 @@ class RecipeCreate extends React.Component {
 
               <label htmlFor="recipe-directions" className="recipe-directions">
                 Directions:
-                <textarea id="recipe-directions" cols="30" rows="10" />
+                <textarea id="recipe-directions" cols="30" rows="10" onChange={this.update("instructions")}/>
               </label>
 
               <button>Chef</button>

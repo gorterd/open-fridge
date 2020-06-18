@@ -10,3 +10,7 @@ export const fetchRecipes = query => {
     params: query  
   })
 }
+
+export const createRecipe = recipe => {
+  return axios.post('/api/recipes/new', recipe)
+}
