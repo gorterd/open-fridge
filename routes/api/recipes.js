@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require('passport');
+const ingParser = require('ingredientparser');
 const validateRecipeInput = require('../../validation/recipe');
 const FilterResults = require('../../util/filter_results');
 
@@ -44,13 +45,22 @@ router.post(
       return res.status(400).json(errors);
     }
 
+    let ingredients = ( typeof req.body.ingredients[0] === 'string' ) ?
+      req.body.ingredients.map( ing => Object.assign(ingParser.parse(ing), { fullName: ing }) )
+      : req.body.ingredients; 
+
+    let time = ( typeof req.body.time === 'string' ) ?
+      { total: req.body.time } : req.body.time; 
+
     const newRecipe = new Recipe({
       author: req.user.id,
       name: req.body.name,
       servings: req.body.servings,
-      ingredients: req.body.ingredients,
       instructions: req.body.instructions,
-      time: req.body.time,
+      image: req.body.image,
+      source: 'user',
+      ingredients,
+      time,
     });
 
     newRecipe.save().then((recipe) => res.json(recipe));
