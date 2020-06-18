@@ -1,6 +1,5 @@
 import React from 'react';
 import './recipe_create.css';
-// import herbs from './create-herbs.png';
 
 class RecipeCreate extends React.Component {
   constructor(props) {
@@ -26,7 +25,8 @@ class RecipeCreate extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log("handleSubmit"); // this.props.generateRecipe(); //////////
+    console.log(this.state)
+    // console.log("handleSubmit"); // this.props.generateRecipe(); //////////
   }
 
   update(field) {
@@ -35,14 +35,21 @@ class RecipeCreate extends React.Component {
     };
   }
 
+  updateIngredient(key) {
+    return (e) => {
+      // if (this.state.ingredients[key])
+        // this.setState({ ingredients: this.state.ingredients
+    }
+  }
+
   addInput() {
-    console.log("add input");
     const newInput = `input-${this.state.inputs.length}`;
 
     return (e) => {
       this.setState((prevState) => ({
         inputs: prevState.inputs.concat([newInput]),
       }));
+      // this.state.inputs[this.state.inputs.length-1].select()
     };
   }
 
@@ -52,7 +59,6 @@ class RecipeCreate extends React.Component {
       <div className="recipe-create-div">
         <div className="recipe-create-div-wrap">
           <form onSubmit={this.addInput()} className="ingredient-outer-form">
-            {/* <img src={herbs} alt="" draggable="false" id="ingredients-img"/> */}
             <div className="recipe-ingredients-div">
               <label className="recipe-ingredients">
                 Ingredients:
@@ -61,7 +67,7 @@ class RecipeCreate extends React.Component {
                   <input
                     key={input}
                     type="text"
-                    onChange={this.update("test")}
+                    onChange={this.updateIngredient(input)}
                     className={`ingredient-num-${idx}`}
                   />
                 ))}
@@ -96,7 +102,6 @@ class RecipeCreate extends React.Component {
               </label>
 
               <button>Chef</button>
-              {/* </div> */}
             </div>
           </form>
         </div>
