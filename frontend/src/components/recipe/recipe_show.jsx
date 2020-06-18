@@ -1,7 +1,7 @@
 import React from 'react';
 import Comments from './comments/comments';
 import CommentsPopout from './comments/comments_popout';
-import NavBar from '../navbar/navbar_container';
+import NavBar from '../navbar/navbar';
 import './recipe.scss'
 
 class RecipeShow extends React.Component {
