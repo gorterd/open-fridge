@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 const RecipeSchema = new Schema({
   author: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
+    ref: "users",
   },
 
   name: {
@@ -33,6 +33,11 @@ const RecipeSchema = new Schema({
 
   image: {
     type: String,
+  },
+
+  date: {
+    type: Date,
+    default: Date.now,
   },
 
   source: String,

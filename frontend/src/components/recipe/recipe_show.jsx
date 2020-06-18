@@ -68,7 +68,7 @@ class RecipeShow extends React.Component {
       <li key={idx}>
         {/* <span>{instruction}</span> */}
         <CommentsPopout
-          spanContent={instruction}
+          spanContent={<><span>{`${(idx + 1)}. `}</span><span>{instruction}</span></>}
           recipeId={recipe._id}
           sectionKey='instructions'
           idx={idx}
@@ -83,29 +83,29 @@ class RecipeShow extends React.Component {
     return (
       <section className='recipe-show-page'>
         <NavBar />
-        <div className='recipe-container'>
+        <div className='recipe-show-container'>
 
           {image}
 
-          <div className='recipe-information'>
+          <div className='recipe-show-information'>
             <h1>{recipe.name}</h1>
             {author}
             <span><span>Servings:</span> {recipe.servings}</span>
             <span><span>Total Time:</span> {recipe.time.total}</span>
           </div>
 
-          <div className='recipe-main'>
-            <div className="recipe-ingredients">
+          <div className='recipe-show-main'>
+            <div className="recipe-show-ingredients">
               <h2>Ingredients</h2>
               <ul>{ingredients}</ul>
             </div>
 
-            <div className="recipe-instructions">
+            <div className="recipe-show-instructions">
               <h2>Instructions</h2>
               <ul>{instructions}</ul>
             </div>
 
-            <div className="recipe-servings">
+            <div className="recipe-show-servings">
               {/* <span>Servings: {recipe.servings}</span> */}
               <CommentsPopout
                 spanContent={`Servings:  ${recipe.servings}`}
@@ -118,7 +118,7 @@ class RecipeShow extends React.Component {
               />
             </div>
 
-            <div className="recipe-time">
+            <div className="recipe-show-time">
               {/* <span>Total Time: {recipe.time.total}</span> */}
               <CommentsPopout
                 spanContent={`Total Time:  ${recipe.time.total}`}

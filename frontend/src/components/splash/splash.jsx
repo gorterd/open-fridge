@@ -43,6 +43,7 @@ class Splash extends React.Component {
 
   handleSearch(e) {
     e.preventDefault();
+    this.props.clearRecipes();
     this.props.fetchRecipes(this.state.query);
     this.setState.query = "";
   }
