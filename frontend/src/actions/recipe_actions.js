@@ -6,6 +6,7 @@ export const RECEIVE_CURRENT_RECIPE = "RECEIVE_CURRENT_RECIPE";
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
 export const RECEIVE_NEW_RECIPE_ERRORS = "RECEIVE_NEW_RECIPE_ERRORS";
 export const CLEAR_RECIPE_ERRORS = "CLEAR_RECIPE_ERRORS";
+export const CLEAR_RECIPES = "CLEAR_RECIPES";
 
 export const receiveCurrentRecipe = recipe => ({
   type: RECEIVE_CURRENT_RECIPE,
@@ -22,6 +23,7 @@ const receiveRecipes = recipes => ({
   recipes
 })
 
+<<<<<<< HEAD
 const receiveNewRecipeErrors = errors => ({
   type: RECEIVE_NEW_RECIPE_ERRORS,
   errors
@@ -29,6 +31,10 @@ const receiveNewRecipeErrors = errors => ({
 
 export const clearRecipeErrors = () => ({
   type: CLEAR_RECIPE_ERRORS
+=======
+export const clearRecipes = () => ({
+  type: CLEAR_RECIPES,
+>>>>>>> master
 })
 
 export const fetchRecipe = recipeId => dispatch => {
