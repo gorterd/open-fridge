@@ -42,7 +42,7 @@ class RecipeShow extends React.Component {
     if ( !recipe ) { return <></> };
 
     const image = recipe.image ? (
-      <img className="recipe-image" src={recipe.image} alt="recipe" />
+      <img className="recipe-show-image" src={recipe.image} alt="recipe" />
     ) : null;
 
     const author = recipe.author ? (
