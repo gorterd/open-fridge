@@ -30,7 +30,7 @@ class RecipeShow extends React.Component {
       case "time":
       case "servings":
       case "recipe":
-        return comments.filter( comment => comment.section.key === key);
+        return comments.filter( comment => ( comment && comment.section.key === key));
       default:
         return null;
     }
