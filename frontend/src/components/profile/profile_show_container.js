@@ -1,16 +1,20 @@
 import { connect } from "react-redux";
 import ProfileShow from "./profile_show"
-import { fetchPinnedRecipes, fetchOwnRecipes } from "../../util/recipe_api_util.js";
+import { fetchPinnedRecipes, fetchOwnRecipes } from "../../actions/recipe_actions";
 
-const mSTP = ({ session, entities: { users } }) => {
+const mSTP = (state) => {
   return {
-    currentUser: session.user,
+    currentUser: state.session.user,
+    pinnedRecipes: state.entities.recipes
+    // pinnedRecipes: state.entities.questions[ownProps.match.params.questionId]
   };
 };
 
-const mDTP = dispatch => ({
+const mDTP = dispatch => {
+  return {
   fetchPinnedRecipes: userId => dispatch(fetchPinnedRecipes(userId)),
-  fetchOwnRecipes: userId => dispatch(fetchOwnRecipes(userId))
-})
+  // fetchOwnRecipes: userId => dispatch(fetchOwnRecipes(userId))
+  }
+}
 
 export default connect(mSTP, mDTP)(ProfileShow);

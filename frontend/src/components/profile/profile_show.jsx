@@ -1,6 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
-
 import './profile_show.css';
 import NavBar from '../navbar/navbar_container';
 
@@ -11,11 +9,15 @@ class ProfileShow extends React.Component {
 
   componentDidMount() {
     this.props.fetchPinnedRecipes(this.props.match.params.userId);
-    this.props.fetchOwnRecipes(this.props.match.params.userId)
+    // this.props.fetchOwnRecipes(this.props.match.params.userId)
   }
 
   render() {
-    return (
+    if (!this.props.pinnedRecipes) {
+            return null;
+        }; 
+
+    return ( 
       <>
         <NavBar />
         <div className="userProfile-main">
@@ -25,8 +27,12 @@ class ProfileShow extends React.Component {
             <h3>{this.props.currentUser.username}</h3>
           </div>
 
-          <div className="pinned-recipes"></div>
-
+          <div className="own-recipes"></div>
+            {/* <ul>
+              {this.props.pinnedRecipes.map((recipe) => (
+                <li>recipe.instructions</li>
+              ))}
+            </ul> */}
           {/* <div className="upm-pinnedRecipes">
             <h4>Pinned Recipes (2)</h4>
             <ul>

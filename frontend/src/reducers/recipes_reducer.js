@@ -16,7 +16,6 @@ const recipesReducer = (state = {}, action) => {
       let normalizedRecipes = {};
       action.recipes.forEach(recipe =>
         (normalizedRecipes[recipe._id] = recipe));
-
       return Object.assign({}, state, normalizedRecipes);
     case CLEAR_RECIPES:
       return {};

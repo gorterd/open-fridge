@@ -6,7 +6,6 @@ import './navbar.css';
 class NavBar extends React.Component {
   render() {
     const { currentUser, logout } = this.props;
-    
     const navbarRight = !currentUser ? (
       <div className="navbar-right">
         <Link className="signupButton sessionButton" to="/signup">
@@ -18,7 +17,7 @@ class NavBar extends React.Component {
       </div>
     ) : (
       <div className="navbar-right">
-        <p>Welcome, <Link to={`/users/${currentUser._id}`}>{currentUser.username}</Link></p>
+        <p>Welcome, <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link></p>
         <button onClick={logout}>Logout</button>
       </div>
     )

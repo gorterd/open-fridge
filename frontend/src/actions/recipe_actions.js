@@ -47,6 +47,7 @@ export const fetchPinnedRecipes = (userId) => (dispatch) => {
 };
 
 export const fetchOwnRecipes = (userId) => (dispatch) => {
+  // debugger
   return RecipeAPIUtil.fetchOwnRecipes(userId)
     .then((recipes) => {
       dispatch(receiveRecipes(recipes.data));

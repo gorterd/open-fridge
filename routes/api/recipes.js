@@ -71,7 +71,7 @@ router.post(
 router.patch(
   "/:recipeId/pin",
   passport.authenticate("jwt", { session: false }), (req, res) => {
-    Recipe.findById(req.params.recipeId, function (err, recipe) {
+    Recipe.find({_id: req.params.recipeId}, {author: 0, name:0, time:0, servings:0, image:0, source: 0}, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
         { $addToSet: { pinnedRecipes: recipe } }, 
