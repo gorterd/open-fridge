@@ -7,6 +7,8 @@ const FilterResults = require('../../util/filter_results');
 
 const Recipe = require("../../models/Recipe");
 const User = require("../../models/User");
+// const Comment = require("../../models/Comment");
+
 // available query string params:
   // ingredients: comma-separated list of ingredients recipes should include
   // skip: buffer / offset, how far into the results to start (for fetching
@@ -158,6 +160,5 @@ router.delete("/:recipeId", passport.authenticate("jwt", { session: false }),(re
     });
   }
 );
-
 
 module.exports = router;

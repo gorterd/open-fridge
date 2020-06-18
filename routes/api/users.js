@@ -11,8 +11,6 @@ const Recipe = require("../../models/Recipe");
 const validateSignupInput = require("../../validation/signup");
 const validateLoginInput = require("../../validation/login");
 
-router.get("/test", (req, res) => res.json({ msg: "This is the users route" }));
-
 
 router.post("/signup", (req, res) => {
   const { errors, isValid } = validateSignupInput(req.body);
