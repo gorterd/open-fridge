@@ -60,9 +60,9 @@ class SessionForm extends React.Component {
     }
 
     let usernameErrors = null;
-    let userErrorsCN = ""
+    let userErrorsCN = "";
     let emailErrors = null;
-    let emailErrorsCN = ""
+    let emailErrorsCN = "";
     let passwordErrors = null;
     let passErrorsCN = "";
     if (this.props.errors) {

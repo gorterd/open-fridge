@@ -9,7 +9,7 @@ class RecipeCreate extends React.Component {
       name: "",
       servings: "",
       ingredients: [],
-      instructions: "",
+      instructions: [],
       image: "",
       time: "",
       inputs: [
@@ -26,9 +26,8 @@ class RecipeCreate extends React.Component {
         "input-10",
         "input-11",
         "input-12",
-        // "input-8",
       ],
-      ingredientString: {}, //{ input-0 : "1 large peeled potato" },
+      ingredientString: {},
       errors: this.props.errors,
     };
 
@@ -47,7 +46,12 @@ class RecipeCreate extends React.Component {
 
   update(field) {
     return (e) => {
-      this.setState({ [field]: e.currentTarget.value });
+      if (field === 'instructions') {
+        let instruct = e.currentTarget.value.split(/\r?\n/)
+        this.setState({instructions: instruct})
+      } else {
+        this.setState({ [field]: e.currentTarget.value });
+      }
     };
   }
 
@@ -70,12 +74,35 @@ class RecipeCreate extends React.Component {
     };
   }
 
-  renderErrors(){
-
-  }
-
-
   render() {
+    let errors = this.props.errors;
+    let ingErrors = null;
+    let ingErrorsCN = "";
+    let instructErrors = null;
+    let instructErrorsCN = "";
+    let nameErrors = null;
+    let nameErrorsCN = "";
+    let servingErrors = null;
+    let servingErrorsCN = "";
+    if (errors) {
+      if (errors.ingredients) {
+        ingErrors = errors.ingredients;
+        ingErrorsCN = "ingredientErrors";
+      }
+      if (errors.instructions) {
+        instructErrors = errors.instructions;
+        instructErrorsCN = "instructionErrors";
+      }
+      if (errors.name) {
+        nameErrors = errors.name;
+        nameErrorsCN = "nameErrors";
+      }
+      if (errors.servings) {
+        servingErrors = errors.servings;
+        servingErrorsCN = "servingsErrors";
+      }
+    }
+
     return (
       <div className="recipe-create-div">
         <img
@@ -89,7 +116,8 @@ class RecipeCreate extends React.Component {
           <div className="recipe-create-right">
             <form onSubmit={this.addInput()} className="ingredient-outer-form">
               <div className="recipe-ingredients-div">
-                <label className="recipe-ingredients">
+                <div className={`${ingErrorsCN}-create`}>{ingErrors}</div>
+                <label className={`recipe-ingredients ${ingErrorsCN}`}>
                   Ingredients:
                   <button id="add-ingredient-btn">+</button>
                   {this.state.inputs.map((input, idx) => (
@@ -127,7 +155,11 @@ class RecipeCreate extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div className="recipe-not-ingredients">
                 <h1>Recipe</h1>
-                <label htmlFor="recipe-name" className="recipe-name">
+                <div className={`${nameErrorsCN}-create`}>{nameErrors}</div>
+                <label
+                  htmlFor="recipe-name"
+                  className={`recipe-name ${nameErrorsCN}`}
+                >
                   Recipe Name:
                   <input
                     type="text"
@@ -136,7 +168,13 @@ class RecipeCreate extends React.Component {
                   />
                 </label>
 
-                <label htmlFor="recipe-servings" className="recipe-servings">
+                <div className={`${servingErrorsCN}-create`}>
+                  {servingErrors}
+                </div>
+                <label
+                  htmlFor="recipe-servings"
+                  className={`recipe-servings ${servingErrorsCN}`}
+                >
                   Serving Size:
                   <input
                     type="text"
@@ -145,17 +183,18 @@ class RecipeCreate extends React.Component {
                   />
                 </label>
 
+                <div className={`${instructErrorsCN}-create`}>{instructErrors}</div>
                 <label
                   htmlFor="recipe-directions"
                   className="recipe-directions"
                 >
-                  Directions:
+                  Instructions:
                   <textarea
                     id="recipe-directions"
                     cols="30"
-                    rows="20"
-                    onChange={this.update("instructions")}
-                  />
+                    rows="17"
+                    className={`${instructErrorsCN}`}
+                    onChange={this.update("instructions")}/>
                 </label>
 
                 <button id="recipe-create-btn">Chef</button>
