@@ -2,11 +2,17 @@ import React from 'react';
 
 import NavBar from '../navbar/navbar';
 import './splash.css';
-import { FaSearch, FaGithub } from "react-icons/fa";
+import { FaSearch, FaGithub } from 'react-icons/fa';
+import { GrNext, GrPrevious } from 'react-icons/gr';
 
-// NEED TO FIX:
-// recipes showing up twice once you navigate to recipe show page and back 
-// recipe is stored in state
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+import "pure-react-carousel/dist/react-carousel.es.css";
 
 class Splash extends React.Component {
   constructor(props) {
@@ -14,17 +20,23 @@ class Splash extends React.Component {
     this.state = {
       query: "",
     }
-    this.handleSearch = this.handleSearch.bind(this);
     this.update = this.update.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchRecipes({"num": "8"});
+    // debugger;
+    this.props.fetchRecipes({"num": "24"});
   }
 
   update(e) {
     const { value } = e.target;
-    let searchTerms = value.split(", ")
+    let searchTerms;
+    if (value.split(", ").length > 1) {
+      searchTerms = value.split(", ");
+    } else {
+      searchTerms = value.split(" ");
+    }
     searchTerms = { "ingredients": searchTerms };
     this.setState({ query: searchTerms });
   }
@@ -32,13 +44,14 @@ class Splash extends React.Component {
   handleSearch(e) {
     e.preventDefault();
     this.props.fetchRecipes(this.state.query);
-    this.setState.query = {};
+    this.setState.query = "";
   }
 
   render() {
     const { recipes, openModal } = this.props;
-
-    const recipeGrid = recipes.map(recipe => {
+    
+    const RecipeItem = props => {
+      const { recipe } = props;
       return (
         <li className="splashGrid-item" key={recipe._id}>
           <button
@@ -47,12 +60,51 @@ class Splash extends React.Component {
               openModal({ type: "recipePreview", data: recipe });
             }}
           >
-            <img className="splashGrid-recipeImg" src={recipe.image} alt="recipe-img"></img>
+            <img
+              className="splashGrid-recipeImg"
+              src={recipe.image}
+              alt="recipe-img"
+            ></img>
             <h3 className="splashGrid-recipeName">{recipe.name}</h3>
           </button>
         </li>
-      );
-    })
+      )
+    };
+
+    const recipesPart1 = recipes.slice(0, 8);
+    const recipesPart2 = recipes.slice(8, 16);
+    const recipesPart3 = recipes.slice(16, 24);
+
+    const recipeSlide1 = recipesPart1.map(recipe => <RecipeItem recipe={recipe}/>);
+    const recipeSlide2 = recipesPart2.map(recipe => <RecipeItem recipe={recipe}/>);
+    const recipeSlide3 = recipesPart3.map(recipe => <RecipeItem recipe={recipe}/>);
+
+    const recipesCarousel = (
+      <CarouselProvider
+        naturalSlideWidth={100}
+        naturalSlideHeight={100}
+        totalSlides={3}
+      >
+        <Slider>
+          <Slide className="carouselSlide" index={0}>
+            {recipeSlide1}
+          </Slide>
+          <Slide className="carouselSlide" index={1}>
+            {recipeSlide2}
+          </Slide>
+          <Slide className="carouselSlide" index={2}>
+            {recipeSlide3}
+          </Slide>
+        </Slider>
+
+        <ButtonBack className="carouselButton">
+          <GrPrevious />
+        </ButtonBack>
+        <ButtonNext className="carouselButton">
+          <GrNext />
+        </ButtonNext>
+      </CarouselProvider>
+    );
 
     return (
       <>
@@ -75,7 +127,7 @@ class Splash extends React.Component {
 
           <div className="splash-main-recipes">
             <h2>Explore recipes</h2>
-            <ul className="smc-trendingRecipes">{recipeGrid}</ul>
+            <div className="smc-recipes">{recipesCarousel}</div>
           </div>
 
           <div className="splash-main-tagline">
