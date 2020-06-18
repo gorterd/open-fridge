@@ -1,25 +1,32 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './navbar.css';
+import { logout } from '../../actions/session_actions';
 
 class NavBar extends React.Component {
   render() {
     const { currentUser, logout } = this.props;
     const navbarRight = !currentUser ? (
-      <div className="navbar-right">
+      <>
         <Link className="signupButton sessionButton" to="/signup">
           Sign Up
           </Link>
         <Link className="loginButton sessionButton" to="/login">
           Log In
           </Link>
-      </div>
+      </>
     ) : (
+<<<<<<< HEAD
       <div className="navbar-right">
         <p>Welcome, <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link></p>
+=======
+      <>
+        <p>Welcome, <Link to={`/users/${currentUser._id}`}>{currentUser.username}</Link></p>
+>>>>>>> master
         <button onClick={logout}>Logout</button>
-      </div>
+      </>
     )
 
     return (
@@ -30,10 +37,20 @@ class NavBar extends React.Component {
           </Link>
         </div>
 
-        {navbarRight}
+        <div className="navbar-right">
+          {navbarRight}
+        </div>
       </div>
     );
   }
 }
 
-export default NavBar;
+const mSTP = ({ session }) => ({
+  currentUser: session.user,
+})
+
+const mDTP = dispatch => ({
+  logout: () => dispatch(logout()),
+})
+
+export default connect(mSTP, mDTP)(NavBar);

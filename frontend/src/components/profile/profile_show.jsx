@@ -1,6 +1,6 @@
 import React from 'react';
 import './profile_show.css';
-import NavBar from '../navbar/navbar_container';
+import NavBar from '../navbar/navbar';
 
 class ProfileShow extends React.Component {
   constructor(props) {
