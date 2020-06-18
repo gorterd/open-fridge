@@ -1,5 +1,5 @@
 .navbar-main {
-  background: #fff0c2;
+  background: #FFFAEB;
   color: #393E41;
   display: flex;
   justify-content: space-between;
@@ -14,12 +14,7 @@
 }
 
 .sessionButton {
-  /* background: #499F68; */
   color: #499F68;
-  /* border-radius: 3px; */
   font-size: 15px; 
   margin-right: 10px;
-  /* padding: 3px 15px;
-  text-align: center;
-  width: 90px;  */
 }

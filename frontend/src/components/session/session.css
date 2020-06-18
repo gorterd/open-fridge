@@ -8,8 +8,8 @@ body {
 }
 
 .signup-container {
-  background-image: url("./session-ingredients.jpg");
-  background-size: cover;
+  background-image: url("./session-ingredients1.jpg");
+  background-size: 100%;
   width: 100vw;
   height: 100vh;
   display: flex;
