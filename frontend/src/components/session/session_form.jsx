@@ -10,7 +10,7 @@ class SessionForm extends React.Component {
       email: "",
       password: "",
       toggle: false,
-      // errors: {}, ///render errors on tab to input
+      errors: this.props.errors ///prepare local state
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
