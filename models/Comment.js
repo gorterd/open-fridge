@@ -8,15 +8,14 @@ const CommentSchema = new Schema({
         ref: 'users',
     },
 
-    body: {
+    text: {
         type: String,
         required: true
     },
 
-    type: {
+    section: {
         key: String,
-        property: String,
-        // index: String,
+        index: String
     },
 
     date: {
