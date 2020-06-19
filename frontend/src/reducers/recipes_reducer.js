@@ -6,10 +6,10 @@ const recipesReducer = (state = {}, action) => {
   let recipe, comments;
   switch(action.type) {
     case RECEIVE_RECIPE:
-      comments = action.recipe.comments ? (
-        action.recipe.comments.map( comment => comment._id )
-        ) : null;
-      recipe = Object.assign({}, action.recipe, { comments });
+      comments = action.data.comments ? (
+        action.data.comments.map( comment => comment._id )
+        ) : [];
+      recipe = Object.assign({}, action.data.recipe, { comments });
 
       return Object.assign({}, state, { [recipe._id]: recipe });
     case RECEIVE_RECIPES:
