@@ -109,9 +109,17 @@ router.delete(
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
     .then(recipe => {
-      Comment.find({ recipe: recipe._id }).then( comments => {
-        res.json({recipe, comments});
-      })
+      if (recipe.author){
+        User.findById({_id: recipe.author}, (err, user) => {
+          Comment.find({ recipe: recipe._id }).then( comments => {
+            res.json({ recipe, comments, authorUsername: user.username});
+          })
+        })
+      } else {    
+        Comment.find({ recipe: recipe._id }).then( comments => {
+          res.json({ recipe, comments});
+        })
+      }
     })
     .catch(err =>
       res.status(404).json({ norecipefound: 'No recipe found with that ID' })

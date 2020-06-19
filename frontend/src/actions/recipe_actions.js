@@ -40,7 +40,10 @@ export const clearRecipes = () => ({
 export const fetchRecipe = recipeId => dispatch => {
   return RecipeAPIUtil.fetchRecipe(recipeId)
     .then(recipe => verifyRecipePhoto(recipe.data))
-    .then(recipe => dispatch(receiveRecipe(recipe)), 
+    .then(recipe => {
+      recipe.recipe.authorUsername = recipe.authorUsername;
+      dispatch(receiveRecipe(recipe));
+    }, 
       err => dispatch(receiveErrors(err.response.data)));
 }
 

@@ -3,6 +3,7 @@ import Comments from './comments/comments';
 import CommentsPopout from './comments/comments_popout';
 import NavBar from '../navbar/navbar';
 import './recipe.scss'
+import { Link } from 'react-router-dom';
 
 class RecipeShow extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ class RecipeShow extends React.Component {
   };
 
   componentDidMount(){
+    window.scrollTo(0,0);
     this.props.fetchRecipe(this.props.recipeId);
   }
 
@@ -46,8 +48,12 @@ class RecipeShow extends React.Component {
     ) : null;
 
     const author = recipe.author ? (
-      <span className="recipe-author"><span>Submitted by</span>{recipe.author}</span>
-    ) : <span className="recipe-author"><span>Source:</span>{recipe.source}</span>;
+      <span className="recipe-author"><span>Submitted by:</span>
+        <Link to={`/users/${recipe.author}`}>{recipe.authorUsername}</Link>
+      </span>
+    ) : <span className="recipe-author"><span>Source:</span>
+          <a href={recipe.url}>{recipe.source}</a>
+        </span>;
 
     const ingredients = recipe.ingredients.map( (ingredient, idx) => (
       <li key={ingredient._id}>
