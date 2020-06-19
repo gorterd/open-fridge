@@ -79,7 +79,6 @@
     }
 
     li > .comments-container, > .comments-container {
-      border-radius: 5px;
       display: flex;
       justify-content: space-between;
       position: relative;
@@ -88,7 +87,7 @@
       }
 
       &:hover, &.active {
-        background: rgba(200,200,200,0.3);
+        background: hsl(132, 15%, 94%);
 
         > .recipe-comments-popout > span{
             visibility: visible;
@@ -101,9 +100,9 @@
         >span {
           visibility: hidden;
           position: relative;
-          color: rgb(150,150,180);
+          color: rgb(120,120,120);
           &:hover {
-            color: rgb(20,20,50);
+            color: rgb(20,20,20);
           }
         }
 
@@ -202,7 +201,7 @@
               }
               
               .comment-username {
-                // text-align: right;
+                margin-top: auto;
                 color: #1b7abf;
                 font-style: italic;
               }
