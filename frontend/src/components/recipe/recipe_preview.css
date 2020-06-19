@@ -1,8 +1,7 @@
 .recipePreview-main {
   display: flex;
   flex-direction: column;
-  height: 365px;
-  padding: 20px 40px;
+  padding: 30px;
 }
 
 .rpm-time {
@@ -17,10 +16,11 @@
 .recipePreview-main h3 {
   font-size: 24px;
   font-weight: 400;
-  margin-top: 10px;
+  margin-top: 5px;
 }
 
 .rpm-ingredientsList {
+  font-size: 14px;
   margin: 10px 0;
   height: 300px;
   overflow: auto;
@@ -45,3 +45,20 @@
   color: white;
 }
 
+.rmp-infoStats {
+  color: #999;
+  font-size: 18px;
+  margin: 10px 0 10px 0;
+}
+
+.rmp-infoStats td {
+  border-right: 1px solid lightgrey;
+  padding-left: 10px;
+}
+
+.rmp-infoStats p {
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 5px;
+}
