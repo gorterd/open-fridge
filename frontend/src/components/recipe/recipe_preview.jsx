@@ -39,6 +39,9 @@ const RecipePreview = props => {
         <Link to={`/recipes/${currentRecipe._id}`} onClick={() => closeModal()}>
           View Recipe
         </Link>
+        <button>
+          Pin Recipe
+        </button>
       </div>
     </>
   );
@@ -49,6 +52,7 @@ const mSTP = ({ ui: { modal }}) => ({
 })
 
 const mDTP = dispatch => ({
+  pinRecipe: recipeId => dispatch(pinRecipe(recipeId)),
   closeModal: () => dispatch(closeModal()),
 })
 
