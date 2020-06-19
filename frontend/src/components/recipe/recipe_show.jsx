@@ -19,6 +19,8 @@ class RecipeShow extends React.Component {
     this.props.fetchRecipe(this.props.recipeId);
   }
 
+
+
   _comments(key, idx){
     const {comments} = this.props;
     if (!comments) { return null };
