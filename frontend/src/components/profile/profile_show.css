@@ -30,15 +30,16 @@
 
 .userProfile-main {
   height: 120vh;
-  background-color: #fff;
+  background-color: #faf9f2;
 }
 
 .recipes-section {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   align-items: flex-start;
   width: 75vw;
   margin: auto;
+  overflow: hidden;
 }
 
 /* .recipes-section li {
@@ -54,6 +55,11 @@
   font-weight: 600;
   font-size: 25px;
 }
+/* 
+.list-recipes li:nth-of-type(1n+4) {
+  position: absolute;
+} */
+
 
 .list-recipes {
   display: flex;
