@@ -5,7 +5,7 @@ import { fetchPinnedRecipes, fetchOwnRecipes } from "../../actions/recipe_action
 const mSTP = (state) => {
   return {
     currentUser: state.session.user,
-    pinnedRecipes: state.entities.recipes
+    allRecipes: Object.values(state.entities.recipes)
     // pinnedRecipes: state.entities.questions[ownProps.match.params.questionId]
   };
 };
@@ -13,7 +13,7 @@ const mSTP = (state) => {
 const mDTP = dispatch => {
   return {
   fetchPinnedRecipes: userId => dispatch(fetchPinnedRecipes(userId)),
-  // fetchOwnRecipes: userId => dispatch(fetchOwnRecipes(userId))
+  fetchOwnRecipes: userId => dispatch(fetchOwnRecipes(userId))
   }
 }
 

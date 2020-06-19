@@ -16,7 +16,7 @@ export const fetchPinnedRecipes = userId => {
 }
 
 export const fetchOwnRecipes = userId => {
-  return axios.get(`/api/recipes/${userId}`)
+  return axios.get(`/api/recipes/user/${userId}`)
 }
 
 export const createRecipe = recipe => {

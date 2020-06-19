@@ -42,7 +42,6 @@ class NavBar extends React.Component {
 }
 
 const mSTP = ({ session }) => {
-  debugger
   return ({
   currentUser: session.user,
   })
