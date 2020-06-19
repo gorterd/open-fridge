@@ -1,6 +1,16 @@
 import React from 'react';
 import './profile_show.css';
 import NavBar from '../navbar/navbar';
+import { Link } from "react-router-dom";
+
+import {
+  CarouselProvider,
+  Slider,
+  Slide,
+  ButtonBack,
+  ButtonNext,
+} from "pure-react-carousel";
+
 
 class ProfileShow extends React.Component {
   constructor(props) {
@@ -8,18 +18,20 @@ class ProfileShow extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearRecipes();
     this.props.fetchPinnedRecipes(this.props.match.params.userId);
-    // this.props.fetchOwnRecipes(this.props.match.params.userId)
+    this.props.fetchOwnRecipes(this.props.match.params.userId)
   }
 
   render() {
-    if (!this.props.pinnedRecipes) {
+    if (!this.props.allRecipes) {
             return null;
         }; 
 
-    return ( 
+    return (
       <>
         <NavBar />
+
         <div className="userProfile-main">
           <div className="upm-profileDetails">
             <div className="profile-banner"></div>
@@ -27,36 +39,45 @@ class ProfileShow extends React.Component {
             <h3>{this.props.currentUser.username}</h3>
           </div>
 
-          <div className="own-recipes"></div>
-            {/* <ul>
-              {this.props.pinnedRecipes.map((recipe) => (
-                <li>recipe.instructions</li>
-              ))}
-            </ul> */}
-          {/* <div className="upm-pinnedRecipes">
-            <h4>Pinned Recipes (2)</h4>
-            <ul>
-              <li>
-                <img src="" alt="" />
-                <div>
-                  <p>Test 1</p>
-                  <p>35 minutes</p>
-                </div>
-              </li>
-              <li>
-                <img src="" alt="" />
-                <div>
-                  <p>Test 2</p>
-                  <p>10 minutes</p>
-                </div>
-              </li>
-            </ul>
-          </div>
+          <section className="recipes-section">
+            <div className="pinned-recipes">
+              Pinned Recipes
+              <ul className="list-recipes">
+                {this.props.allRecipes.map((recipe) => {
+                  if (recipe.author !== this.props.currentUser.id) {
+                    return (
+                      <div className="single-recipe">
+                        <img src={recipe.image} alt="recipe-img"></img>
+                        <li>
+                          <Link to={`/recipes/${recipe._id}`} id="link">{recipe.name}</Link>
+                        </li>
+                      </div>
+                    );
+                  }
+                })}
+              </ul>
+            </div>
 
-          <div className="upm-uploadedRecipes">
-            <h4>Recipes (0)</h4>
-            <ul></ul>
-          </div> */}
+            <div className="own-recipes">
+              Your Recipes
+              <ul className="list-recipes">
+                {this.props.allRecipes.map((recipe) => {
+                  if (recipe.author === this.props.currentUser.id) {
+                    return (
+                      <div className="single-recipe">
+                        <img src={recipe.image} alt="recipe-img"></img>
+                        <li>
+                          <Link to={`/recipes/${recipe._id}`} id="link">
+                            {recipe.name}
+                          </Link>
+                        </li>
+                      </div>
+                    );
+                  }
+                })}
+              </ul>
+            </div>
+          </section>
         </div>
       </>
     );
