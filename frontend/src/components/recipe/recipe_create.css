@@ -223,3 +223,9 @@ input textarea {
   top: 40px;
   left: 40px;
 }
+
+.recipe-create-logo {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}

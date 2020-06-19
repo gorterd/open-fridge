@@ -7,7 +7,8 @@ import Root from "./components/root";
 import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
 import { logout } from "./actions/session_actions";
-import { receivePinnedRecipes } from './actions/recipe_actions'
+import { receivePinnedRecipes } from "./actions/recipe_actions";
+import { fetchPinnedRecipes } from "./util/recipe_api_util";
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
