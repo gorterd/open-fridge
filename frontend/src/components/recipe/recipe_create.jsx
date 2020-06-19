@@ -110,6 +110,7 @@ class RecipeCreate extends React.Component {
     return (
 
       <div className="recipe-create-div">
+        <Link className="session-logo recipe-create-logo" to="/"></Link>
         <img
           src={storage}
           alt="openFridge"
@@ -215,7 +216,7 @@ class RecipeCreate extends React.Component {
             </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

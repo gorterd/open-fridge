@@ -343,10 +343,13 @@ body {
   background-size: 100%;
   border-radius: 50%;
   height: 35px;
-  position: absolute;
   bottom: 50px;
   left: 50%;
   width: 35px;
+}
+
+.login-logo {
+  position: absolute;
 }
 
 .session-linkedin, .session-github {

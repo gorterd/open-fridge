@@ -83,15 +83,9 @@ class SessionForm extends React.Component {
 
     return this.props.formType === "login" ? (
       <div className={`${session}-div`}>
-        <Link className="session-logo" to="/"></Link>
+        <Link className="session-logo login-logo" to="/"></Link>
 
         <div className={`${session}-container`}>
-          {/* <Link className={`logo-small ${session}-logo`} to="/">
-            <img
-              src={window.small_logo}  ///////////////NEED LOGO
-              className={`logo-small ${session}-logo`}
-              draggable="false"/>
-          </Link> */}
           <div className="session-github">
             <a href="https://github.com/gorterd/open-fridge.git" id="of-github">oF</a>
             <a href="https://github.com/gorterd" id="dg-github">DG</a>
