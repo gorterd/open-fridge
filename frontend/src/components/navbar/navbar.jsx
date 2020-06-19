@@ -29,6 +29,7 @@ class NavBar extends React.Component {
       <div className="navbar-main">
         <div className="navbar-left">
           <Link className="nbl-homeLink" to="/">
+            <div className="nbl-logo"></div>
             openFridge
           </Link>
         </div>

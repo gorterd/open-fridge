@@ -82,6 +82,8 @@ class SessionForm extends React.Component {
 
     return this.props.formType === "login" ? (
       <div className={`${session}-div`}>
+        <Link className="session-logo" to="/"></Link>
+
         <div className={`${session}-container`}>
           {/* <Link className={`logo-small ${session}-logo`} to="/">
             <img
@@ -113,25 +115,26 @@ class SessionForm extends React.Component {
 
             <button className={`${session}-submit`}>Login</button>
 
-          <div className="other-link-wrap">
-            <div className={loginErrorClass}>{loginErrorMsg}</div>
-            <Link to={`/${otherLink}`} className={`${session}-other-link`}>
-              Create an Account
-            </Link>
+            <div className="other-link-wrap">
+              <div className={loginErrorClass}>{loginErrorMsg}</div>
+              <Link to={`/${otherLink}`} className={`${session}-other-link`}>
+                Create an Account
+              </Link>
 
-            <button
-              onClick={this.demoUser()}
-              className={`${session}-demo-button`}>
-              Demo Page
-            </button>
-          </div>
+              <button
+                onClick={this.demoUser()}
+                className={`${session}-demo-button`}
+              >
+                Demo Page
+              </button>
+            </div>
           </form>
-          
-
         </div>
       </div>
     ) : (
       <div className="signup-container">
+        <Link className="session-logo" to="/"></Link>
+
         <div className={`${session}-div`}>
           {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
             <img
@@ -183,7 +186,7 @@ class SessionForm extends React.Component {
                 </Link>
 
                 <button
-                  onClick={this.demoUser() }
+                  onClick={this.demoUser()}
                   className={`${session}-demo-button`}
                 >
                   Demo Page
