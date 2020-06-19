@@ -8,7 +8,7 @@ import { logout } from '../../actions/session_actions';
 class NavBar extends React.Component {
   render() {
     const { currentUser, logout } = this.props;
-    
+    console.log(currentUser);
     const navbarRight = !currentUser ? (
       <>
         <Link className="signupButton sessionButton" to="/signup">
@@ -20,7 +20,7 @@ class NavBar extends React.Component {
       </>
     ) : (
       <>
-        <p>Welcome, <Link to={`/users/${currentUser._id}`}>{currentUser.username}</Link></p>
+        <p>Welcome, <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link></p>
         <button onClick={logout}>Logout</button>
       </>
     )
@@ -41,12 +41,16 @@ class NavBar extends React.Component {
   }
 }
 
-const mSTP = ({ session }) => ({
+const mSTP = ({ session }) => {
+  return ({
   currentUser: session.user,
-})
+  })
+};
 
 const mDTP = dispatch => ({
   logout: () => dispatch(logout()),
 })
 
 export default connect(mSTP, mDTP)(NavBar);
+
+

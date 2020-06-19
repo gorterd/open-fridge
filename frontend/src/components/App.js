@@ -8,7 +8,7 @@ import LoginFormContainer from "./session/login_container";
 import SignupFormContainer from "./session/signup_container";
 import RecipeCreateContainer from "./recipe/recipe_create_container";
 import RecipeShowContainer from "./recipe/recipe_show_container";
-import ProfileShow from './profile/profile_show';
+import ProfileShowContainer from './profile/profile_show_container';
 
 const App = () => (
   <div>
@@ -20,7 +20,7 @@ const App = () => (
       
       <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} /> 
-      <ProtectedRoute exact path="/users/:userId" component={ProfileShow} />
+      <ProtectedRoute exact path="/users/:userId" component={ProfileShowContainer} />
     </Switch>
   </div>
 );

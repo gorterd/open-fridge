@@ -49,6 +49,22 @@ export const fetchRecipes = query => dispatch => {
     .catch(err => dispatch(receiveErrors(err.response.data)));
 }
 
+export const fetchPinnedRecipes = (userId) => (dispatch) => {
+  return RecipeAPIUtil.fetchPinnedRecipes(userId)
+    .then((recipes) => {
+      dispatch(receiveRecipes(recipes.data));
+    })
+    .catch((err) => dispatch(receiveErrors(err.response.data)));
+};
+
+export const fetchOwnRecipes = (userId) => (dispatch) => {
+  // debugger
+  return RecipeAPIUtil.fetchOwnRecipes(userId)
+    .then((recipes) => {
+      dispatch(receiveRecipes(recipes.data));
+    })
+    .catch((err) => dispatch(receiveErrors(err.response.data)));
+};
 export const createNewRecipe = recipe => dispatch => {
   return RecipeAPIUtil.createRecipe(recipe)
     .then(recipe => {
