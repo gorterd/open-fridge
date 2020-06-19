@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import ProfileShow from "./profile_show"
-import { fetchPinnedRecipes, fetchOwnRecipes } from "../../actions/recipe_actions";
+import { fetchPinnedRecipes, fetchOwnRecipes, clearRecipes } from "../../actions/recipe_actions";
 
 const mSTP = (state) => {
   return {
@@ -12,9 +12,10 @@ const mSTP = (state) => {
 
 const mDTP = dispatch => {
   return {
-  fetchPinnedRecipes: userId => dispatch(fetchPinnedRecipes(userId)),
-  fetchOwnRecipes: userId => dispatch(fetchOwnRecipes(userId))
-  }
+    clearRecipes: () => dispatch(clearRecipes()),
+    fetchPinnedRecipes: (userId) => dispatch(fetchPinnedRecipes(userId)),
+    fetchOwnRecipes: (userId) => dispatch(fetchOwnRecipes(userId)),
+  };
 }
 
 export default connect(mSTP, mDTP)(ProfileShow);

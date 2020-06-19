@@ -25,6 +25,7 @@
   font-size: 30px;
   padding: 10px;
   transform: translateY(-50px);
+  font-weight: bold;
 }
 
 .userProfile-main {
@@ -49,8 +50,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-weight: 600;
   font-size: 25px;
 }
 
@@ -58,7 +59,7 @@
   display: flex;
   flex-direction: row;
   padding: 10px;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
 }
 
 .single-recipe {
@@ -67,16 +68,17 @@
   padding: 10px;
   font-size: 1rem;
   align-items: center;
+  width: 270px;
 }
 .single-recipe img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   box-shadow: 0 0 8px 2px rgba(85, 84, 84, 0.404);
+  margin-right: 10px;
 }
 
 .single-recipe #link {
-  padding-left: 10px;
   font-size: 20px;
   font-weight: 900;
 }
@@ -85,8 +87,8 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: bold;
+  font-family: Baskerville, "Baskerville Old Face", "Hoefler Text", Garamond, "Times New Roman", serif;
+  font-weight: 600;
   font-size: 25px;
   padding-top: 50px;
 }

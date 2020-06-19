@@ -72,7 +72,7 @@ router.post(
 router.patch(
   "/:recipeId/pin",
   passport.authenticate("jwt", { session: false }), (req, res) => {
-    Recipe.find({_id: req.params.recipeId}, {author: 0, time:0, servings:0, source: 0}, function (err, recipe) {
+    Recipe.find({_id: req.params.recipeId}, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
         { $addToSet: { pinnedRecipes: recipe } }, 
@@ -93,12 +93,12 @@ router.delete(
     Recipe.findById(req.params.recipeId, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
-        { $pull: { pinnedRecipes: recipe } }, 
+        { $pull: { pinnedRecipes: {name: recipe.name} } }, 
         function (err, user) {
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json("Unpinned successfully");
+            res.json(user);
           }
         }
       );

@@ -18,6 +18,7 @@ class ProfileShow extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearRecipes();
     this.props.fetchPinnedRecipes(this.props.match.params.userId);
     this.props.fetchOwnRecipes(this.props.match.params.userId)
   }
