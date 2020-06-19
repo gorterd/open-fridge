@@ -7,11 +7,6 @@ import Root from "./components/root";
 import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
 import { logout } from "./actions/session_actions";
-import { pinRecipe } from './actions/recipe_actions';
-
-// for testing purposes
-import { receivePinnedRecipes } from './actions/recipe_actions';
-import { fetchPinnedRecipes } from "./util/recipe_api_util";
 
 document.addEventListener("DOMContentLoaded", () => {
   let store;
@@ -40,8 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
     store = configureStore({});
   }
   const root = document.getElementById("root");
-  window.dispatch = store.dispatch;
-  window.pinRecipe = pinRecipe;
 
   ReactDOM.render(<Root store={store} />, root);
 });

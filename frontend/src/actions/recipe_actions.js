@@ -104,7 +104,7 @@ export const createNewRecipe = recipe => dispatch => {
 export const pinRecipe = recipeId => dispatch => {
   return RecipeAPIUtil.pinRecipe(recipeId)
     .then(recipe => {
-      dispatch(receivePinnedRecipe(recipe.data._id))
+      dispatch(receivePinnedRecipe(recipe.data[0]._id))
     })
 }
 
