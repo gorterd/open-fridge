@@ -22,3 +22,11 @@ export const fetchOwnRecipes = userId => {
 export const createRecipe = recipe => {
   return axios.post('/api/recipes/', recipe)
 }
+
+export const pinRecipe = recipeId => {
+  return axios.patch(`api/recipes/${recipeId}/pin`)
+}
+
+export const unpinRecipe = recipeId => {
+  return axios.delete(`api/recipes/${recipeId}/pin`)
+}
