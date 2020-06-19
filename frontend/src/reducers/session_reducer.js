@@ -2,6 +2,8 @@ import {
   RECEIVE_CURRENT_USER, 
   LOGOUT_CURRENT_USER } from '../actions/session_actions';
 
+import { RECEIVE_PINNED_RECIPE, RECEIVE_PINNED_RECIPES, REMOVE_PINNED_RECIPE } from '../actions/recipe_actions'
+
 const _nullSession = { 
   isAuthenticated: false, 
   user: null,
@@ -17,7 +19,7 @@ const sessionReducer = (state = _nullSession, action) => {
     case LOGOUT_CURRENT_USER:
       return _nullSession;
     case RECEIVE_PINNED_RECIPES:
-      return Object.assign({}, state, {pinnedRecipes: action.pinnedRecipes})
+      return Object.assign({}, state, {pinnedRecipes: action.recipes})
     case RECEIVE_PINNED_RECIPE:
       newPins = Array.from(state.pinnedRecipes)
       if (!newPins.includes(action.recipeId)) { newPins.push(action.recipeId)}
