@@ -93,12 +93,12 @@ router.delete(
     Recipe.findById(req.params.recipeId, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
-        { $pull: { pinnedRecipes: recipe } }, 
+        { $pull: { pinnedRecipes: {name: recipe.name} } }, 
         function (err, user) {
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json("Unpinned successfully");
+            res.json(recipe);
           }
         }
       );
@@ -118,7 +118,7 @@ router.get('/:recipeId', (req, res) => {
     );
 });
 
-router.get("/:userId", (req, res) => {
+router.get("/user/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>
