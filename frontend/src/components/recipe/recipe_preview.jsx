@@ -8,7 +8,19 @@ import { pinRecipe } from '../../actions/recipe_actions';
 import { BsPlusCircleFill } from "react-icons/bs";
 
 const RecipePreview = props => {
-  const { currentRecipe, closeModal, pinRecipe } = props;
+  const { session, currentRecipe, closeModal, pinRecipe } = props;
+
+  const pinRecipeButton = session.isAuthenticated ? (
+    <button onClick={() => pinRecipe(currentRecipe._id)}>
+      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+      <span className="rpm-pinRecipe-text">Pin this recipe</span>
+    </button>
+  ) : (
+    <Link to="/login" onClick={() => closeModal()}>
+      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+      <span className="rpm-signin-text">Log in to pin this recipe</span>
+    </Link>
+  );
 
   return (
     <>
@@ -46,17 +58,16 @@ const RecipePreview = props => {
           View Recipe
         </Link>
         <div className="rpm-pinRecipe-container">
-          <button onClick={() => pinRecipe(currentRecipe._id)}>
-            <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-            <span className="rpm-pinRecipe-text">Pin this recipe</span>
-          </button>
+          {pinRecipeButton}
         </div>
       </div>
     </>
   );
 }
 
-const mSTP = ({ ui: { modal }}) => ({
+const mSTP = ({ session, ui: { modal }}) => ({
+  session,
+  currentUser: session.user,
   currentRecipe: modal.data,
 })
 

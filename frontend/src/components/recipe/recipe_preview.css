@@ -79,11 +79,13 @@
   margin-right: 15px;
 }
 
-.rpm-pinRecipe-text {
+.rpm-pinRecipe-text,
+.rpm-signin-text {
   display: none;
 }
 
-.rpm-pinRecipe-button:hover + .rpm-pinRecipe-text {
+.rpm-pinRecipe-button:hover + .rpm-pinRecipe-text,
+.rpm-pinRecipe-button:hover + .rpm-signin-text {
   background: #F25C0E;
   border-radius: 25px;
   color: white;
@@ -97,5 +99,14 @@
   top: 596px;
   transition: ease-out 5s;
   right: 45px;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-pinRecipe-text {
   width: 125px;
 }
+
+.rpm-pinRecipe-button:hover + .rpm-signin-text {
+  width: 200px;
+}
+
+
