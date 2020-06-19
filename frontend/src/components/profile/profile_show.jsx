@@ -49,13 +49,16 @@ class ProfileShow extends React.Component {
                       <div className="single-recipe">
                         <img src={recipe.image} alt="recipe-img"></img>
                         <li>
-                          <Link to={`/recipes/${recipe._id}`} id="link">{recipe.name}</Link>
+                          <Link to={`/recipes/${recipe._id}`} id="link">
+                            {recipe.name}
+                          </Link>
                         </li>
                       </div>
                     );
                   }
                 })}
               </ul>
+              <button className="button">see more</button>
             </div>
 
             <div className="own-recipes">
@@ -76,6 +79,7 @@ class ProfileShow extends React.Component {
                   }
                 })}
               </ul>
+              <button className="button">see more</button>
             </div>
           </section>
         </div>
