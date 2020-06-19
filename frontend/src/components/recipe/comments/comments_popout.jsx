@@ -15,7 +15,7 @@ class CommentsPopout extends React.Component {
 
   toggleBubble() {
     this.disableBlur = true;
-    this.setState({ display: !this.state.display })
+    window.setTimeout( () => this.setState({ display: !this.state.display }), 10);
   }
 
   handleBlur() {
@@ -26,7 +26,7 @@ class CommentsPopout extends React.Component {
       }
 
       this.disableBlur = false;
-    }, 20)
+    }, 150)
   }
 
   render() {
