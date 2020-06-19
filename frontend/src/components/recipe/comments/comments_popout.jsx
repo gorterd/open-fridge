@@ -26,7 +26,7 @@ class CommentsPopout extends React.Component {
       }
 
       this.disableBlur = false;
-    }, 10)
+    }, 20)
   }
 
   render() {

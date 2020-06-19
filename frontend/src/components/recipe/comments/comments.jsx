@@ -38,9 +38,9 @@ class Comments extends React.Component {
           Add Comment
         </span>
       </form>
-    ) : <>
+    ) : <div className='prompt-signin-comment'>
       <Link className='link-login' to='/login'>Login</Link> to comment
-    </>;
+    </div>;
 
 
     return (
@@ -52,7 +52,6 @@ class Comments extends React.Component {
               <div className='comment-author'>
                 {(session.user && session.user.id === comment.author._id) ? 
                 (<span className='comment-delete' onClick={ () => {
-                  // debugger;
                     deleteComment(comment._id)
                   }}><i className="fas fa-times-circle"></i></span>) : null}
                 <span className='comment-username'>{comment.author.username}</span>
