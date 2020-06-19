@@ -4,7 +4,7 @@ body {
 }
 
 [class*="signup"] {
-  font-family: sans-serif
+  font-family: sans-serif;
 }
 
 .signup-container {
@@ -156,8 +156,9 @@ body {
 }
 
 [class*="login-"] {
-  font-family: loginFont;
-  /* font-family: inherit; */
+  /* font-family: loginFont; */
+  font-family: 'Courier New';
+  letter-spacing: -1px;
 }
 
 .login-div {
@@ -190,7 +191,7 @@ body {
 }
 
 .login-container > h1 {
-  font-family: inherit;
+  font-family: loginFont;
   font-size: 80px;
   text-align: center;
   width: 100%;
@@ -238,32 +239,33 @@ body {
 }
 
 .other-link-wrap {
-  /* display: flex;
-  flex-direction: column;
-  align-items: flex-end; */
   display: grid;
-  grid-template-columns: 50% 50%;
+  /* grid-template-columns: 50% 50%; */
+  grid-template-areas: 
+    '.login-error-class .login-other-link',
+    '.login-error-class .login-demo-button';
   width: 528px;
-  /* padding-right: 95px; */
   margin-top: 20px;
   margin-left: auto;
   margin-right: auto;
 }
 
 .login-other-link {
-  font-size: 18px;
-  letter-spacing: 1px;
+  font-size: 17px;
   text-align: right;
 }
 
 .login-demo-button {
-  letter-spacing: 1px;
   grid-column-start: 2;
   text-align: right;
+  font-size: 17px;
+  padding-top: 3px;
 }
 
 .login-error-class {
   color: rgb(172, 84, 84);
+  font-size: 13px;
+  letter-spacing: -1px;
 }
 
 
@@ -346,3 +348,38 @@ body {
   left: 50%;
   width: 35px;
 }
+
+.session-linkedin, .session-github {
+  position: fixed;
+  cursor: pointer;
+  right: 5px;
+  font-size: 30px;
+}
+
+.session-github {
+  top: 5px;
+  display: flex;
+}
+
+.session-github > a {
+  visibility: hidden;  
+  opacity: 0;
+  transition: visibility 0s, opacity 1.5s linear;
+  margin-left: 5px;
+  margin-right: 5px;
+  font-size: 16px;
+  /* display: inline-block; */
+  border-radius: 60px;
+  box-shadow: 0px 0px 2px white;
+  padding: 0.5em 0.6em;
+  color: white;
+}
+
+.session-github:hover > a {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* .session-linkedin {
+  top: 40px;
+} */

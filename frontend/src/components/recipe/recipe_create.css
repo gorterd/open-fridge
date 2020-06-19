@@ -112,38 +112,54 @@ label {
   margin-right: auto;
 }
 
-.ingredient-input-div {
-  display: flex;
-  flex-direction: column;
-}
-
-.recipe-ingredients {
-  display: flex;
-  flex-direction: column;
-  margin-top: 15px;
-  margin-bottom: 8px;
-  background-color: white;
-  border: 3px solid black;
-  border-radius: 6px;
+.recipe-create-ingredient-header {
   width: 85%;
-  height: 100%;
-  overflow-y: scroll;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 8px;
+  background-color: white;
+  border-radius: 6px 6px 0px 0px;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
 }
 
-[class*="ingredient-num-"] {
+.recipe-create-ingredients-wrap {
+  width: 85%;
+  background-color: white;
+  overflow-y: scroll;
+  border-radius: 0px 0px 6px 6px;
+  border-bottom: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-create-ingredients-wrap > input {
   border-bottom: 1px solid gray;
   padding-top: 5px;
   font-size: 18px;
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 10px;
+  width: 92%;
+}
+
+.plabel {
+  font-size: 20px;
+  /* align-self: center; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 25px;
 }
 
 #add-ingredient-btn {
-  position: absolute;
-  font-size: 25px;
-  font-weight: bold;
-  right: 15vh;
+  font-size: 15px;
+  padding-right: 5px;
 }
 
 #recipe-create-btn {
@@ -154,8 +170,8 @@ label {
   height: 50px;
   margin-top: 10px;
   border: 4px;
-  border-radius: 6px;
   border-style: outset;
+  border-radius: 6px;
 
   border: solid 8px rgb(126, 126, 126); 
   clip-path: polygon( 
@@ -170,7 +186,7 @@ label {
 
 #recipe-create-btn:hover {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  border-color: rgb(45, 164, 45)
+  border-color: #2a4e5c /* rgb(45, 164, 45) */
 }
 
 input textarea {
@@ -200,4 +216,10 @@ input textarea {
 
 .servingsErrors-create {
   margin-top: -24px;
+}
+
+.recipe-create-home-btn {
+  position: fixed;
+  top: 40px;
+  left: 40px;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import './session.css';
+import { FaLinkedin, FaGithub } from "react-icons/fa";
 
 class SessionForm extends React.Component {
   constructor(props) {
@@ -91,6 +92,21 @@ class SessionForm extends React.Component {
               className={`logo-small ${session}-logo`}
               draggable="false"/>
           </Link> */}
+          <div className="session-github">
+            <a href="https://github.com/gorterd/open-fridge.git" id="of-github">oF</a>
+            <a href="https://github.com/gorterd" id="dg-github">DG</a>
+            <a href="https://github.com/EricLo1321" id="dg-github">EL</a>
+            <a href="https://github.com/keely-lee" id="dg-github">KL</a>
+            <a href="https://github.com/tt954" id="dg-github">TT</a>
+            <FaGithub />
+          </div>
+          {/* <div className="session-linkedin">
+            <FaLinkedin />
+            <a href="" id="dg-linkedin">TT</a>
+            <a href="https://www.linkedin.com/in/keely-lee1/" id="dg-linkedin">KL</a>
+            <a href="" id="dg-linkedin">EL</a>
+            <a href="" id="dg-linkedin">DG</a>
+          </div> */}
 
           <h1>Member Login</h1>
 
