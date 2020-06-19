@@ -117,7 +117,7 @@ class Splash extends React.Component {
       <CarouselProvider
         naturalSlideWidth={100}
         naturalSlideHeight={100}
-        totalSlides={40}
+        totalSlides={50}
         hasMasterSpinner={imagesLoading}
       >
         <Slider>
