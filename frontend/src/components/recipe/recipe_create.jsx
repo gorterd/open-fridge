@@ -44,7 +44,6 @@ class RecipeCreate extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    console.log(this.state)
     this.props.createRecipe(this.state);
   }
 
@@ -135,7 +134,8 @@ class RecipeCreate extends React.Component {
                   {this.state.inputs.map((input, idx) => (
                     <input
                       type="text"
-                      id="recipe-name"
+                      key={`recipe-ingredient-${idx}`}
+                      id={`recipe-ingredient-${idx}`}
                       onChange={this.update("name")}
                     />
                   ))}

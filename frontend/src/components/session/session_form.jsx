@@ -23,8 +23,13 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) this.props.demoUser(user);
-    else this.props.processForm(user);
+    if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) {
+      this.props.demoUser(user);
+    }
+    else {
+      this.props.processForm(user)
+        .then( () => { this.props.history.goBack() })
+    }
   }
 
   update(field) {
