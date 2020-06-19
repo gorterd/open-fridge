@@ -15,42 +15,6 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 
-const RecipeItem = props => {
-  const { recipe, openModal } = props;
-  return (
-    <li className="splashGrid-item" key={recipe._id}>
-      <button
-        type="button"
-        onClick={() => {
-          openModal({ type: "recipePreview", data: recipe });
-        }}
-      >
-        <img
-          className="splashGrid-recipeImg"
-          src={recipe.image}
-          alt="recipe-img"
-        ></img>
-        <h3 className="splashGrid-recipeName">{recipe.name}</h3>
-      </button>
-    </li>
-  )
-};
-
-class Reset extends React.Component {
-
-  componentDidUpdate(prevProps){
-    if (!prevProps.reset && this.props.reset){
-      this.props.carouselStore.setStoreState({currentSlide: 0});
-    }
-  }
-
-  render() {
-    return <> </>
-  }
-};
-
-const ResetCarousel = WithStore(Reset);
-
 const _defaultSlides = Array.from(Array(50), i => null);
 
 class Splash extends React.Component {
@@ -61,6 +25,7 @@ class Splash extends React.Component {
       imagesLoading: true,
       slides: _defaultSlides
     }
+
     this.slideIdx = 0;
     this.maxIdx = 2;
 
@@ -72,32 +37,15 @@ class Splash extends React.Component {
 
   componentDidMount() {
     this.props.fetchRecipes({"num": "24"}).then( () => {
-      const { recipes, openModal } = this.props;
-      let newSlides = Array.from(this.state.slides);
-      let i = this.maxIdx -2;
-      while (i <= this.maxIdx) {
-        newSlides[i] = (recipes[i * 8]) ?
-          recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem recipe={recipe} openModal={openModal}/>)
-          : <></>;
-        i++;
-      }
-      this.setState({ slides: newSlides, imagesLoading: false });
+      this.setState({ slides: this._generateSlides(), imagesLoading: false });
     });
   }
 
   componentDidUpdate(prevProps){
-    const {recipes, openModal} = this.props;
+    const { recipes } = this.props;
     if ( recipes.length > prevProps.recipes.length && recipes.length > 24 ){
       this.maxIdx += 3;
-      let newSlides = Array.from(this.state.slides);
-      let i = this.maxIdx - 2;
-      while (i <= this.maxIdx) {
-        newSlides[i] = (recipes[i * 8]) ?
-          recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem recipe={recipe} openModal={openModal}/>)
-          : <></>;
-        i++;
-      }
-      this.setState({ slides: newSlides });
+      this.setState({ slides: this._generateSlides() });
     }
   }
 
@@ -119,18 +67,9 @@ class Splash extends React.Component {
     this.props.clearRecipes();
     this.maxIdx = 2;
     this.slideIdx = 0;
+
     this.props.fetchRecipes({"num": "24", ...this.state.query}).then( () => {
-      const { recipes, openModal } = this.props;
-      let newSlides = _defaultSlides;
-      let i = 0;
-      while (i <= this.maxIdx) {
-        newSlides[i] = (recipes[i * 8]) ?
-          recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem recipe={recipe} openModal={openModal} />)
-          : <></>;
-        i++;
-      }
-      this.setState({ slides: newSlides, imagesLoading: false });
-      this.setState({ imagesLoading: false })
+      this.setState({ slides: this._generateSlides(), imagesLoading: false });
     });
   }
 
@@ -146,18 +85,32 @@ class Splash extends React.Component {
     if (this.slideIdx + 2 < this.maxIdx ){
       this.slideIdx += 1;
     } else if (this.slideIdx + 2 === this.maxIdx) {
-      // debugger;
       this.slideIdx += 1;
       this.props.fetchRecipes({ 
         "num": "24", 
         "skip": numRecipes, 
         ...this.state.query
-    });
+      });
     } 
   }
 
-  render() {
+  _generateSlides(){
     const { recipes, openModal } = this.props;
+
+    let newSlides = Array.from(this.state.slides);
+    let i = this.maxIdx - 2;
+
+    while (i <= this.maxIdx) {
+      newSlides[i] = (recipes[i * 8]) ?
+        recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem recipe={recipe} openModal={openModal} />)
+        : <></>;
+      i++;
+    }
+
+    return newSlides;
+  }
+
+  render() {
     const { imagesLoading } = this.state;
     
     const recipesCarousel = (
@@ -237,5 +190,41 @@ class Splash extends React.Component {
     );
   }
 }
+
+const RecipeItem = props => {
+  const { recipe, openModal } = props;
+  return (
+    <li className="splashGrid-item" key={recipe._id}>
+      <button
+        type="button"
+        onClick={() => {
+          openModal({ type: "recipePreview", data: recipe });
+        }}
+      >
+        <img
+          className="splashGrid-recipeImg"
+          src={recipe.image}
+          alt="recipe-img"
+        ></img>
+        <h3 className="splashGrid-recipeName">{recipe.name}</h3>
+      </button>
+    </li>
+  )
+};
+
+class Reset extends React.Component {
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.reset && this.props.reset) {
+      this.props.carouselStore.setStoreState({ currentSlide: 0 });
+    }
+  }
+
+  render() {
+    return <> </>
+  }
+};
+
+const ResetCarousel = WithStore(Reset);
 
 export default Splash;
