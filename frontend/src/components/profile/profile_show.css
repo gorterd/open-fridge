@@ -99,3 +99,8 @@
   padding-top: 50px;
 }
 
+.button {
+  margin-left: 1000px;
+  font-size: 1.2rem;
+  color: green;
+}
