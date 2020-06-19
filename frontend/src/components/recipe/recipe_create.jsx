@@ -1,5 +1,6 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 import './recipe_create.css';
 import storage from './create-storage.jpg'
 import { FaPlus } from "react-icons/fa";
@@ -107,8 +108,8 @@ class RecipeCreate extends React.Component {
     }
 
     return (
+
       <div className="recipe-create-div">
-        <Link to="/" className="recipe-create-home-btn">Home</Link>
         <img
           src={storage}
           alt="openFridge"
@@ -132,10 +133,9 @@ class RecipeCreate extends React.Component {
                 <div className="recipe-create-ingredients-wrap">
                   {this.state.inputs.map((input, idx) => (
                     <input
-                      key={input}
                       type="text"
-                      onChange={this.updateIngredient(input)}
-                      className={`ingredient-num-${idx}`}
+                      id="recipe-name"
+                      onChange={this.update("name")}
                     />
                   ))}
                 </div>
@@ -215,7 +215,7 @@ class RecipeCreate extends React.Component {
             </form>
           </div>
         </div>
-      </div>
+      </>
     );
   }
 }

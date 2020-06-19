@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
-import { BsThreeDots } from 'react-icons/bs';
 import { closeModal } from '../../actions/modal_actions';
 
 const RecipePreview = props => {
@@ -11,28 +10,35 @@ const RecipePreview = props => {
 
   return (
     <>
-      <img src={currentRecipe.image} alt="" />
-      <div className="recipePreview-main">
-        <div className="rpm-time">{currentRecipe.time.total}</div>
+      <img className="rpm-img" src={currentRecipe.image} alt="recipe-img" />
 
-        <h3>{currentRecipe.name}</h3>
+      <table className="rmp-infoStats">
+        <tbody>
+          <tr>
+            <td>
+              <h4>Servings</h4>
+              <p>{currentRecipe.servings}</p>
+            </td>
+            <td>
+              <h4>Total time</h4>
+              <p>{currentRecipe.time.total}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-        <ul className="rpm-ingredientsList">
-          {currentRecipe.ingredients.map((ingredient) => (
-            <li key={ingredient._id}>{ingredient.fullName}</li>
-          ))}
-        </ul>
+      <h3>{currentRecipe.name}</h3>
 
-        <div className="rpm-servings">Servings: {currentRecipe.servings}</div>
-
-        <div className="rpm-navLinks">
-          <Link
-            to={`/recipes/${currentRecipe._id}`}
-            onClick={() => closeModal()}
-          >
-            <BsThreeDots />
-          </Link>
-        </div>
+      <ul className="rpm-ingredientsList">
+        {currentRecipe.ingredients.map((ingredient) => (
+          <li key={ingredient._id}>{ingredient.fullName}</li>
+        ))}
+      </ul>
+    
+      <div className="rpm-navLinks">
+        <Link to={`/recipes/${currentRecipe._id}`} onClick={() => closeModal()}>
+          View Recipe
+        </Link>
       </div>
     </>
   );

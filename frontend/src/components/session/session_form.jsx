@@ -83,6 +83,8 @@ class SessionForm extends React.Component {
 
     return this.props.formType === "login" ? (
       <div className={`${session}-div`}>
+        <Link className="session-logo" to="/"></Link>
+
         <div className={`${session}-container`}>
           {/* <Link className={`logo-small ${session}-logo`} to="/">
             <img
@@ -147,6 +149,8 @@ class SessionForm extends React.Component {
       </div>
     ) : (
       <div className="signup-container">
+        <Link className="session-logo" to="/"></Link>
+
         <div className={`${session}-div`}>
           {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
             <img

@@ -15,6 +15,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .signup-div {
@@ -168,6 +169,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .login-container {
@@ -336,6 +338,16 @@ body {
   animation-name: shake;
 }
 
+.session-logo {
+  background: url('../navbar/lemon-slice.svg');
+  background-size: 100%;
+  border-radius: 50%;
+  height: 35px;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  width: 35px;
+}
 
 .session-linkedin, .session-github {
   position: fixed;
@@ -371,5 +383,3 @@ body {
 /* .session-linkedin {
   top: 40px;
 } */
-
-
