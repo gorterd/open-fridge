@@ -107,7 +107,7 @@ class RecipeShow extends React.Component {
 
           {image}
           
-          {pinButton}
+          {/* {pinButton} */}
 
           <div className='recipe-show-information'>
             <h1>{recipe.name}</h1>

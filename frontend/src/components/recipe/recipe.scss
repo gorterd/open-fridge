@@ -146,7 +146,7 @@
 
           .prompt-signin-comment {
             width: 100%;
-            border: 1px solid hsl(0, 0%, 75%);
+            border: 1px solid black;
             background-color: white;
             border-radius: 5px;
             min-height: 100px;
@@ -192,7 +192,7 @@
               flex-direction: column;
               align-items: flex-end;
               justify-content: space-between;
-              padding-bottom: 10px;
+              padding-bottom: 12px;
               
               .comment-delete {
                 font-weight: bold;
@@ -366,7 +366,7 @@
       flex-direction: column;
       align-items: flex-end;
       justify-content: space-between;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
       
       .comment-delete {
         font-weight: bold;
@@ -379,6 +379,8 @@
         // text-align: right;
         color: #1b7abf;
         font-style: italic;
+        margin-top: auto;
+
       }
     }
   }
