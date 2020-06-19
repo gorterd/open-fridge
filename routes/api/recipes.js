@@ -98,7 +98,7 @@ router.delete(
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json(user);
+            res.json(recipe);
           }
         }
       );
