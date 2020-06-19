@@ -18,7 +18,7 @@
 }
 
 .nbl-logo {
-  background: url(/static/media/of-icon01.8582c59b.png);
+  background: url(./lemon-slice.svg);
   background-size: 100%;
   border-radius: 2px;
   height: 25px;
@@ -39,4 +39,36 @@
   color: #499F68;
   font-size: 15px; 
   margin-right: 10px;
+}
+
+.nbr-uploadContainer {
+  display: flex;
+  align-items: center;
+  display: relative;
+}
+
+.nbr-uploadButton {
+  color: #F25C0E;
+  margin-right: 15px;
+}
+
+.nbr-uploadText {
+  display: none;
+}
+
+.nbr-uploadButton:hover + .nbr-uploadText {
+  background: #F25C0E;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  height: 25px;
+  position: absolute;
+  top: 40px;
+  transition: ease-out 5s;
+  right: 233px;
+  width: 125px;
 }

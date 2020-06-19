@@ -337,13 +337,12 @@ body {
 }
 
 .session-logo {
-  background: url('./of-icon02.png');
+  background: url('../navbar/lemon-slice.svg');
   background-size: 100%;
   border-radius: 50%;
-  box-shadow: 2px 0px 5px whitesmoke;
   height: 35px;
   position: absolute;
   bottom: 50px;
-  left: 49%;
+  left: 50%;
   width: 35px;
 }
