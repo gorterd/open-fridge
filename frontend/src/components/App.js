@@ -15,7 +15,7 @@ const App = () => (
     <Modal />
     <Switch>
       <Route exact path="/" component={SplashContainer} />
-      <Route exact path="/new-recipe" component={RecipeCreateContainer} />
+      <ProtectedRoute exact path="/new-recipe" component={RecipeCreateContainer} />
       <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> 
       
       <AuthRoute exact path="/login" component={LoginFormContainer} />

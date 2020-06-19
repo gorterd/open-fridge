@@ -8,9 +8,6 @@ import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
 import { logout } from "./actions/session_actions";
 
-// for testing purposes
-import { fetchRecipes } from './actions/recipe_actions';
-
 document.addEventListener("DOMContentLoaded", () => {
   let store;
 
@@ -27,17 +24,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const currentTime = Date.now() / 1000;
 
     if (decodedUser.exp < currentTime) {
-      // store.dispatch(logout());
+      store.dispatch(logout());
       window.location.href = "/#/login";
     }
   } else {
     store = configureStore({});
   }
   const root = document.getElementById("root");
-
-  window.getState = store.getState;
-  window.dispatch = store.dispatch;
-  window.fetchRecipes = fetchRecipes;
 
   ReactDOM.render(<Root store={store} />, root);
 });
