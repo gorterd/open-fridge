@@ -4,6 +4,8 @@ import CommentsPopout from './comments/comments_popout';
 import NavBar from '../navbar/navbar';
 import './recipe.scss'
 import { Link } from 'react-router-dom';
+import { BsPlusCircleFill } from "react-icons/bs";
+
 
 class RecipeShow extends React.Component {
   constructor(props) {
@@ -39,7 +41,7 @@ class RecipeShow extends React.Component {
   }
 
   render() {
-    const { recipe, addComment, deleteComment, session } = this.props;
+    const { recipe, addComment, deleteComment, session, pinRecipe, unpinRecipe } = this.props;
 
     if ( !recipe ) { return <></> };
 
@@ -86,6 +88,17 @@ class RecipeShow extends React.Component {
         />
       </li>
     ));
+
+    // const pinButton = ( session.isAuthenticated && session.pinnedRecipes.includes(recipe._id) ) ?
+    //     <button className='recipe-show-pin' onClick={() => pinRecipe(recipe._id)}>
+    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+    //       <span className="rpm-pinRecipe-text pin-button">Pin recipe</span>
+    //     </button>
+    //   :
+    //   <button className='recipe-show-unpin' onClick={() => unpinRecipe(recipe._id)}>
+    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+    //       <span className="rpm-pinRecipe-text unpin-button">Unpin recipe</span>
+    //     </button>
     
     return (
       <section className='recipe-show-page'>
@@ -93,6 +106,8 @@ class RecipeShow extends React.Component {
         <div className='recipe-show-container'>
 
           {image}
+          
+          {pinButton}
 
           <div className='recipe-show-information'>
             <h1>{recipe.name}</h1>

@@ -87,7 +87,7 @@
       }
 
       &:hover, &.active {
-        background: hsl(132, 15%, 94%);
+        background-color: hsl(32, 82%, 83%);
 
         > .recipe-comments-popout > span{
             visibility: visible;
@@ -100,9 +100,9 @@
         >span {
           visibility: hidden;
           position: relative;
-          color: rgb(120,120,120);
+          color: rgb(20,20,20);
           &:hover {
-            color: rgb(20,20,20);
+            color: hsla(27, 90%, 40%, 1);
           }
         }
 
@@ -140,7 +140,7 @@
           width: calc((100vw / 3) );
           min-height: 150px;
           left: 60px;
-          background-color: hsl(45, 100%, 98%);
+          background-color: hsl(32, 82%, 83%);
           // border: 1px solid black;
           border-radius: 10px;
 
@@ -172,7 +172,7 @@
             align-items: flex-end;
             width: 100%;
             margin-bottom: 15px;
-            border-bottom: 1px solid lightgrey;
+            border-bottom: 1px solid black;
 
             &:first-child {
               margin-top: 0;
@@ -196,9 +196,9 @@
               
               .comment-delete {
                 font-weight: bold;
-                color: hsl(0, 40%, 75%);
+                color: hsl(0, 75%, 35%);
                 cursor: pointer;
-                &:hover { color: darkred; }
+                &:hover { color: hsl(0, 100%, 45%); }
               }
               
               .comment-username {
@@ -370,9 +370,9 @@
       
       .comment-delete {
         font-weight: bold;
-        color: hsl(0, 40%, 75%);
+        color: hsl(0, 75%, 35%);
         cursor: pointer;
-        &:hover { color: darkred; }
+        &:hover { color: hsl(0, 100%, 45%); }
       }
       
       .comment-username {
