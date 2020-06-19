@@ -1,9 +1,7 @@
 .recipe-show-page {
   
   .navbar-main {
-    // position: absolute;
     width: 100%;
-    // opacity: 0.85;  
   }
 }
 
@@ -40,10 +38,6 @@
       text-align: center;
       max-height: 265px;
       overflow: auto;
-
-      // &.long{
-      //   box-shadow: inset 0px -40px 12px -23px rgba(150, 150, 150, 0.5);
-      // }
     }
 
     > span {
@@ -56,6 +50,12 @@
       padding: 20px;
       border-radius: 10px;
       box-shadow: inset 0 0 5px 0 rgb(56, 56, 56);
+
+      a {
+        font-weight: 600;
+        color: hsl(205, 75%, 35%);
+        &:hover { text-decoration: underline;}
+      }
 
       span { 
         font-style: italic; 
@@ -87,7 +87,7 @@
       }
 
       &:hover, &.active {
-        background: hsl(132, 15%, 94%);
+        background-color: hsl(32, 82%, 83%);
 
         > .recipe-comments-popout > span{
             visibility: visible;
@@ -100,9 +100,9 @@
         >span {
           visibility: hidden;
           position: relative;
-          color: rgb(120,120,120);
+          color: rgb(20,20,20);
           &:hover {
-            color: rgb(20,20,20);
+            color: hsla(27, 90%, 40%, 1);
           }
         }
 
@@ -140,12 +140,13 @@
           width: calc((100vw / 3) );
           min-height: 150px;
           left: 60px;
-          background-color: hsl(45, 100%, 98%);
+          background-color: hsl(32, 82%, 83%);
+          // border: 1px solid black;
           border-radius: 10px;
 
           .prompt-signin-comment {
             width: 100%;
-            border: 1px solid hsl(0, 0%, 75%);
+            border: 1px solid black;
             background-color: white;
             border-radius: 5px;
             min-height: 100px;
@@ -171,7 +172,7 @@
             align-items: flex-end;
             width: 100%;
             margin-bottom: 15px;
-            border-bottom: 1px solid lightgrey;
+            border-bottom: 1px solid black;
 
             &:first-child {
               margin-top: 0;
@@ -191,13 +192,13 @@
               flex-direction: column;
               align-items: flex-end;
               justify-content: space-between;
-              padding-bottom: 10px;
+              padding-bottom: 12px;
               
               .comment-delete {
                 font-weight: bold;
-                color: hsl(0, 40%, 75%);
+                color: hsl(0, 75%, 35%);
                 cursor: pointer;
-                &:hover { color: darkred; }
+                &:hover { color: hsl(0, 100%, 45%); }
               }
               
               .comment-username {
@@ -216,7 +217,7 @@
 
 .recipe-show-ingredients {
   border: 1px solid black;
-  background-color: hsl(45, 100%, 98%);;
+  background-color: hsl(45, 100%, 98%);
   border-radius: 10px;
   padding-bottom: 20px;
 
@@ -365,19 +366,21 @@
       flex-direction: column;
       align-items: flex-end;
       justify-content: space-between;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
       
       .comment-delete {
         font-weight: bold;
-        color: hsl(0, 40%, 75%);
+        color: hsl(0, 75%, 35%);
         cursor: pointer;
-        &:hover { color: darkred; }
+        &:hover { color: hsl(0, 100%, 45%); }
       }
       
       .comment-username {
         // text-align: right;
         color: #1b7abf;
         font-style: italic;
+        margin-top: auto;
+
       }
     }
   }

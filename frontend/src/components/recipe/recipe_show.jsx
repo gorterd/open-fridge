@@ -3,6 +3,9 @@ import Comments from './comments/comments';
 import CommentsPopout from './comments/comments_popout';
 import NavBar from '../navbar/navbar';
 import './recipe.scss'
+import { Link } from 'react-router-dom';
+import { BsPlusCircleFill } from "react-icons/bs";
+
 
 class RecipeShow extends React.Component {
   constructor(props) {
@@ -12,6 +15,7 @@ class RecipeShow extends React.Component {
   };
 
   componentDidMount(){
+    window.scrollTo(0,0);
     this.props.fetchRecipe(this.props.recipeId);
   }
 
@@ -37,7 +41,7 @@ class RecipeShow extends React.Component {
   }
 
   render() {
-    const { recipe, addComment, deleteComment, session } = this.props;
+    const { recipe, addComment, deleteComment, session, pinRecipe, unpinRecipe } = this.props;
 
     if ( !recipe ) { return <></> };
 
@@ -46,8 +50,12 @@ class RecipeShow extends React.Component {
     ) : null;
 
     const author = recipe.author ? (
-      <span className="recipe-author"><span>Submitted by</span>{recipe.author}</span>
-    ) : <span className="recipe-author"><span>Source:</span>{recipe.source}</span>;
+      <span className="recipe-author"><span>Submitted by:</span>
+        <Link to={`/users/${recipe.author}`}>{recipe.authorUsername}</Link>
+      </span>
+    ) : <span className="recipe-author"><span>Source:</span>
+          <a href={recipe.url}>{recipe.source}</a>
+        </span>;
 
     const ingredients = recipe.ingredients.map( (ingredient, idx) => (
       <li key={ingredient._id}>
@@ -80,6 +88,17 @@ class RecipeShow extends React.Component {
         />
       </li>
     ));
+
+    // const pinButton = ( session.isAuthenticated && session.pinnedRecipes.includes(recipe._id) ) ?
+    //     <button className='recipe-show-pin' onClick={() => pinRecipe(recipe._id)}>
+    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+    //       <span className="rpm-pinRecipe-text pin-button">Pin recipe</span>
+    //     </button>
+    //   :
+    //   <button className='recipe-show-unpin' onClick={() => unpinRecipe(recipe._id)}>
+    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+    //       <span className="rpm-pinRecipe-text unpin-button">Unpin recipe</span>
+    //     </button>
     
     return (
       <section className='recipe-show-page'>
@@ -87,6 +106,8 @@ class RecipeShow extends React.Component {
         <div className='recipe-show-container'>
 
           {image}
+          
+          {/* {pinButton} */}
 
           <div className='recipe-show-information'>
             <h1>{recipe.name}</h1>

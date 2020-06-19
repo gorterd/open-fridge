@@ -72,7 +72,7 @@ router.post(
 router.patch(
   "/:recipeId/pin",
   passport.authenticate("jwt", { session: false }), (req, res) => {
-    Recipe.find({_id: req.params.recipeId}, {author: 0, name:0, time:0, servings:0, image:0, source: 0}, function (err, recipe) {
+    Recipe.find({_id: req.params.recipeId}, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
         { $addToSet: { pinnedRecipes: recipe } }, 
@@ -80,7 +80,7 @@ router.patch(
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json("Pinned successfully");
+            res.json(recipe);
           }
         }
       );
@@ -93,12 +93,12 @@ router.delete(
     Recipe.findById(req.params.recipeId, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
-        { $pull: { pinnedRecipes: recipe } }, 
+        { $pull: { pinnedRecipes: {name: recipe.name} } }, 
         function (err, user) {
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json("Unpinned successfully");
+            res.json(recipe);
           }
         }
       );
@@ -109,16 +109,24 @@ router.delete(
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
     .then(recipe => {
-      Comment.find({ recipe: recipe._id }).then( comments => {
-        res.json({recipe, comments});
-      })
+      if (recipe.author){
+        User.findById({_id: recipe.author}, (err, user) => {
+          Comment.find({ recipe: recipe._id }).then( comments => {
+            res.json({ recipe, comments, authorUsername: user.username});
+          })
+        })
+      } else {    
+        Comment.find({ recipe: recipe._id }).then( comments => {
+          res.json({ recipe, comments});
+        })
+      }
     })
     .catch(err =>
       res.status(404).json({ norecipefound: 'No recipe found with that ID' })
     );
 });
 
-router.get("/:userId", (req, res) => {
+router.get("/user/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>

@@ -8,7 +8,7 @@ mongoose
   .then(() => console.log("Connected to MongoDB successfully"))
   .catch(err => console.log(err));
 
-seedYummly('./recipes/recipes_01-10.json', null, true)
+seedYummly('./recipes/recipes_01-15.json', null, true)
 
 async function seedYummly(file, numRecipes, drop = false){
 
@@ -43,6 +43,7 @@ function processRecipe(recipe){
 async function dropYummly(bool) {
   if (bool) {
     await Recipe.deleteMany({ source: 'yummly' });
+    // await Recipe.deleteMany({ });
   } else {
     return null;
   }

@@ -27,6 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
       window.location.href = "/#/";
       store.dispatch(logout());
     }
+
+    fetchPinnedRecipes(decodedUser.id).then( res => {
+      store.dispatch(receivePinnedRecipes(res.data.map( recipe => recipe._id)));
+    })
   } else {
     store = configureStore({});
   }

@@ -16,7 +16,6 @@
 .recipePreview-main h3 {
   font-size: 24px;
   font-weight: 400;
-  margin-top: 5px;
 }
 
 .rpm-ingredientsList {
@@ -32,6 +31,12 @@
 }
 
 .rpm-navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rpm-viewRecipe-button {
   border: 1px solid #F25C0E;
   border-radius: 4px;
   font-size: 18px;
@@ -40,7 +45,7 @@
   width: 120px;
 }
 
-.rpm-navLinks:hover {
+.rpm-viewRecipe-button:hover {
   background: #F25C0E;
   color: white;
 }
@@ -62,3 +67,52 @@
   font-weight: 500;
   margin-top: 5px;
 }
+
+.rpm-pinRecipe-container {
+  display: flex;
+  align-items: center;
+  display: relative;
+}
+
+.rpm-pinRecipe-button {
+  color: #F25C0E;
+  margin-right: 15px;
+}
+
+.rpm-addpin-text,
+.rpm-removepin-text,
+.rpm-signin-text  {
+  display: none;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-addpin-text,
+.rpm-pinRecipe-button:hover + .rpm-removepin-text,
+.rpm-pinRecipe-button:hover + .rpm-signin-text {
+  background: #F25C0E;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  height: 25px;
+  position: absolute;
+  top: 596px;
+  transition: ease-out 5s;
+  right: 45px;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-addpin-text {
+  width: 125px;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-removepin-text {
+  width: 150px;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-signin-text {
+  width: 200px;
+}
+
+

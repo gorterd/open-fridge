@@ -5,7 +5,7 @@ const fs = require('fs');
 
 require('events').EventEmitter.defaultMaxListeners = 20;
 
-scrapeRecipes(1,1,'./test/recipes_01.json')
+scrapeRecipes(1,15,'./recipes/recipes_01-15 .json')
 
 
 async function scrapeRecipes(pageStart, pageEnd, writeFile){

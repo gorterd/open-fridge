@@ -4,9 +4,36 @@ import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
 import { closeModal } from '../../actions/modal_actions';
+import { pinRecipe, unpinRecipe } from '../../actions/recipe_actions';
+import { BsPlusCircleFill } from 'react-icons/bs';
+import { FaCheckCircle } from 'react-icons/fa'
 
 const RecipePreview = props => {
-  const { currentRecipe, closeModal } = props;
+  const { session, currentRecipe, pinnedRecipes, 
+    closeModal, pinRecipe, unpinRecipe } = props;
+  
+  const pinButton = pinnedRecipes.includes(currentRecipe._id) ? (
+    <button onClick={() => unpinRecipe(currentRecipe._id)}>
+      <FaCheckCircle className="rpm-pinRecipe-button" size={25} />
+      <span className="rpm-removepin-text">Remove pinned recipe</span>
+    </button>
+  ) : (
+    <button onClick={() => pinRecipe(currentRecipe._id)}>
+      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+      <span className="rpm-addpin-text">Pin this recipe</span>
+    </button>
+  );
+
+  const pinRecipeButton = session.isAuthenticated ? (
+    <>
+      {pinButton}
+    </>
+  ) : (
+    <Link to="/login" onClick={() => closeModal()}>
+      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+      <span className="rpm-signin-text">Log in to pin this recipe</span>
+    </Link>
+  );
 
   return (
     <>
@@ -34,21 +61,35 @@ const RecipePreview = props => {
           <li key={ingredient._id}>{ingredient.fullName}</li>
         ))}
       </ul>
-    
+
       <div className="rpm-navLinks">
-        <Link to={`/recipes/${currentRecipe._id}`} onClick={() => closeModal()}>
+        <Link
+          className="rpm-viewRecipe-button"
+          to={`/recipes/${currentRecipe._id}`}
+          onClick={() => closeModal()}
+        >
           View Recipe
         </Link>
+        <div className="rpm-pinRecipe-container">
+          {pinRecipeButton}
+        </div>
       </div>
     </>
   );
 }
 
-const mSTP = ({ ui: { modal }}) => ({
-  currentRecipe: modal.data,
-})
+const mSTP = ({ session, ui: { modal }}) => {
+  return {
+    session,
+    pinnedRecipes: session.pinnedRecipes,
+    currentUser: session.user,
+    currentRecipe: modal.data,
+  }
+}
 
 const mDTP = dispatch => ({
+  pinRecipe: recipeId => dispatch(pinRecipe(recipeId)),
+  unpinRecipe: recipeId => dispatch(unpinRecipe(recipeId)),
   closeModal: () => dispatch(closeModal()),
 })
 

@@ -16,9 +16,17 @@ export const fetchPinnedRecipes = userId => {
 }
 
 export const fetchOwnRecipes = userId => {
-  return axios.get(`/api/recipes/${userId}`)
+  return axios.get(`/api/recipes/user/${userId}`)
 }
 
 export const createRecipe = recipe => {
   return axios.post('/api/recipes/', recipe)
+}
+
+export const pinRecipe = recipeId => {
+  return axios.patch(`api/recipes/${recipeId}/pin`)
+}
+
+export const unpinRecipe = recipeId => {
+  return axios.delete(`api/recipes/${recipeId}/pin`)
 }

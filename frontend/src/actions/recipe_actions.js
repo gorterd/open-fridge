@@ -9,6 +9,10 @@ export const RECEIVE_NEW_RECIPE_ERRORS = "RECEIVE_NEW_RECIPE_ERRORS";
 export const CLEAR_RECIPE_ERRORS = "CLEAR_RECIPE_ERRORS";
 export const CLEAR_RECIPES = "CLEAR_RECIPES";
 
+export const RECEIVE_PINNED_RECIPES = "RECEIVE_PINNED_RECIPES";
+export const RECEIVE_PINNED_RECIPE = "RECEIVE_PINNED_RECIPE";
+export const REMOVE_PINNED_RECIPE = "REMOVE_PINNED_RECIPE";
+
 export const receiveCurrentRecipe = recipe => ({
   type: RECEIVE_CURRENT_RECIPE,
   recipe
@@ -22,6 +26,21 @@ const receiveRecipe = data => ({
 const receiveRecipes = recipes => ({
   type: RECEIVE_RECIPES,
   recipes
+})
+
+export const receivePinnedRecipes = recipes => ({
+  type: RECEIVE_PINNED_RECIPES,
+  recipes
+})
+
+const receivePinnedRecipe = recipeId => ({
+  type: RECEIVE_PINNED_RECIPE,
+  recipeId
+})
+
+const removePinnedRecipe = recipeId => ({
+  type: REMOVE_PINNED_RECIPE,
+  recipeId
 })
 
 const receiveNewRecipeErrors = errors => ({
@@ -40,7 +59,10 @@ export const clearRecipes = () => ({
 export const fetchRecipe = recipeId => dispatch => {
   return RecipeAPIUtil.fetchRecipe(recipeId)
     .then(recipe => verifyRecipePhoto(recipe.data))
-    .then(recipe => dispatch(receiveRecipe(recipe)), 
+    .then(recipe => {
+      recipe.recipe.authorUsername = recipe.authorUsername;
+      dispatch(receiveRecipe(recipe));
+    }, 
       err => dispatch(receiveErrors(err.response.data)));
 }
 
@@ -56,13 +78,13 @@ export const fetchPinnedRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchPinnedRecipes(userId)
     .then(recipes => verifyAllRecipePhotos(recipes.data))
     .then((recipes) => {
+      dispatch(receivePinnedRecipes(recipes.map( r => r._id)))
       dispatch(receiveRecipes(recipes));
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
 
 export const fetchOwnRecipes = (userId) => (dispatch) => {
-  // debugger
   return RecipeAPIUtil.fetchOwnRecipes(userId)
     .then(recipes => verifyAllRecipePhotos(recipes.data))
     .then((recipes) => {
@@ -77,6 +99,18 @@ export const createNewRecipe = recipe => dispatch => {
     .then(recipe => {
       dispatch(receiveRecipe(recipe))}) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
+}
+
+export const pinRecipe = recipeId => dispatch => {
+  return RecipeAPIUtil.pinRecipe(recipeId)
+    .then(recipe => {
+      dispatch(receivePinnedRecipe(recipe.data[0]._id))
+    })
+}
+
+export const unpinRecipe = recipeId => dispatch => {
+  return RecipeAPIUtil.unpinRecipe(recipeId)
+    .then(recipe => dispatch(removePinnedRecipe(recipe.data._id)))
 }
 
 async function verifyRecipePhoto(data) {
