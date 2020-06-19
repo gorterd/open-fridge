@@ -34,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     fetchPinnedRecipes(decodedUser.id).then( res => {
-      debugger;
       store.dispatch(receivePinnedRecipes(res.data.map( recipe => recipe._id)));
     })
   } else {
