@@ -32,7 +32,16 @@
 }
 
 .rpm-navLinks {
-  font-size: 24px;
-  margin-top: 5px;
+  border: 1px solid #F25C0E;
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 5px 5px;
+  text-align: center;
+  width: 120px;
+}
+
+.rpm-navLinks:hover {
+  background: #F25C0E;
+  color: white;
 }
 

@@ -3,16 +3,18 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
-import { BsThreeDots } from 'react-icons/bs';
 import { closeModal } from '../../actions/modal_actions';
+
+// fix the modal design, resize images 
 
 const RecipePreview = props => {
   const { currentRecipe, closeModal } = props;
 
   return (
     <>
-      <img src={currentRecipe.image} alt="" />
       <div className="recipePreview-main">
+        <img className="rpm-img" src={currentRecipe.image} alt="recipe-img" />
+
         <div className="rpm-time">{currentRecipe.time.total}</div>
 
         <h3>{currentRecipe.name}</h3>
@@ -30,7 +32,7 @@ const RecipePreview = props => {
             to={`/recipes/${currentRecipe._id}`}
             onClick={() => closeModal()}
           >
-            <BsThreeDots />
+            View Recipe
           </Link>
         </div>
       </div>
