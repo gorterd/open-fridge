@@ -49,7 +49,6 @@ export const fetchRecipes = query => dispatch => {
     .catch(err => dispatch(receiveErrors(err.response.data)));
 }
 
-<<<<<<< HEAD
 export const fetchPinnedRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchPinnedRecipes(userId)
     .then((recipes) => {
@@ -66,7 +65,6 @@ export const fetchOwnRecipes = (userId) => (dispatch) => {
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
-=======
 export const createNewRecipe = recipe => dispatch => {
   return RecipeAPIUtil.createRecipe(recipe)
     .then(recipe => {
@@ -74,4 +72,3 @@ export const createNewRecipe = recipe => dispatch => {
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
 }
 
->>>>>>> master
