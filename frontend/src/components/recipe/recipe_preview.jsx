@@ -4,9 +4,11 @@ import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
 import { closeModal } from '../../actions/modal_actions';
+import { pinRecipe } from '../../actions/recipe_actions';
+import { BsPlusCircleFill } from "react-icons/bs";
 
 const RecipePreview = props => {
-  const { currentRecipe, closeModal } = props;
+  const { currentRecipe, closeModal, pinRecipe } = props;
 
   return (
     <>
@@ -34,14 +36,21 @@ const RecipePreview = props => {
           <li key={ingredient._id}>{ingredient.fullName}</li>
         ))}
       </ul>
-    
+
       <div className="rpm-navLinks">
-        <Link to={`/recipes/${currentRecipe._id}`} onClick={() => closeModal()}>
+        <Link
+          className="rpm-viewRecipe-button"
+          to={`/recipes/${currentRecipe._id}`}
+          onClick={() => closeModal()}
+        >
           View Recipe
         </Link>
-        <button>
-          Pin Recipe
-        </button>
+        <div className="rpm-pinRecipe-container">
+          <button onClick={() => pinRecipe(currentRecipe._id)}>
+            <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+            <span className="rpm-pinRecipe-text">Pin this recipe</span>
+          </button>
+        </div>
       </div>
     </>
   );

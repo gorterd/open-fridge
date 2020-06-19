@@ -6,7 +6,6 @@ export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_CURRENT_RECIPE = "RECEIVE_CURRENT_RECIPE";
 export const RECEIVE_RECIPES = "RECEIVE_RECIPES";
 export const RECEIVE_NEW_RECIPE_ERRORS = "RECEIVE_NEW_RECIPE_ERRORS";
-export const RECEIVE_NEW_PINNED_RECIPE = "RECEIVE_NEW_PINNED_RECIPE";
 export const CLEAR_RECIPE_ERRORS = "CLEAR_RECIPE_ERRORS";
 export const CLEAR_RECIPES = "CLEAR_RECIPES";
 
@@ -77,6 +76,11 @@ export const createNewRecipe = recipe => dispatch => {
     .then(recipe => {
       dispatch(receiveRecipe(recipe))}) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
+}
+
+export const pinRecipe = recipeId => dispatch => {
+  return RecipeAPIUtil.pinRecipe(recipeId)
+    .then(recipe => dispatch(receiveRecipe(recipe)))
 }
 
 async function verifyRecipePhoto(data) {

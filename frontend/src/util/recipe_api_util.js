@@ -26,3 +26,7 @@ export const createRecipe = recipe => {
 export const pinRecipe = recipeId => {
   return axios.patch(`api/recipes/${recipeId}/pin`)
 }
+
+export const unpinRecipe = recipeId => {
+  return axios.delete(`api/recipes/${recipeId}/pin`)
+}

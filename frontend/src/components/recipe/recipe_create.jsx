@@ -215,7 +215,7 @@ class RecipeCreate extends React.Component {
             </form>
           </div>
         </div>
-      </>
+      </div>
     );
   }
 }

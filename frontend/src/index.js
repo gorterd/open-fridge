@@ -8,6 +8,8 @@ import configureStore from "./store/store";
 import { setAuthToken } from "./util/session_api_util";
 import { logout } from "./actions/session_actions";
 
+import { pinRecipe } from './actions/recipe_actions';
+
 document.addEventListener("DOMContentLoaded", () => {
   let store;
 
@@ -31,6 +33,10 @@ document.addEventListener("DOMContentLoaded", () => {
     store = configureStore({});
   }
   const root = document.getElementById("root");
+
+  window.dispatch = store.dispatch;
+  window.pinRecipe = pinRecipe;
+  // window.unpinRecipe = unpinRecipe;
 
   ReactDOM.render(<Root store={store} />, root);
 });
