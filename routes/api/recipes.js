@@ -80,7 +80,7 @@ router.patch(
           if (err) {
             return res.status(400).json(err);
           } else {
-            res.json("Pinned successfully");
+            res.json(recipe);
           }
         }
       );

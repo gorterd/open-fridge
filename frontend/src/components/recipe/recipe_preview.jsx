@@ -3,35 +3,53 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
-import { BsThreeDots } from 'react-icons/bs';
 import { closeModal } from '../../actions/modal_actions';
+import { pinRecipe } from '../../actions/recipe_actions';
+import { BsPlusCircleFill } from "react-icons/bs";
 
 const RecipePreview = props => {
-  const { currentRecipe, closeModal } = props;
+  const { currentRecipe, closeModal, pinRecipe } = props;
 
   return (
     <>
-      <img src={currentRecipe.image} alt="" />
-      <div className="recipePreview-main">
-        <div className="rpm-time">{currentRecipe.time.total}</div>
+      <img className="rpm-img" src={currentRecipe.image} alt="recipe-img" />
 
-        <h3>{currentRecipe.name}</h3>
+      <table className="rmp-infoStats">
+        <tbody>
+          <tr>
+            <td>
+              <h4>Servings</h4>
+              <p>{currentRecipe.servings}</p>
+            </td>
+            <td>
+              <h4>Total time</h4>
+              <p>{currentRecipe.time.total}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-        <ul className="rpm-ingredientsList">
-          {currentRecipe.ingredients.map((ingredient) => (
-            <li key={ingredient._id}>{ingredient.fullName}</li>
-          ))}
-        </ul>
+      <h3>{currentRecipe.name}</h3>
 
-        <div className="rpm-servings">Servings: {currentRecipe.servings}</div>
+      <ul className="rpm-ingredientsList">
+        {currentRecipe.ingredients.map((ingredient) => (
+          <li key={ingredient._id}>{ingredient.fullName}</li>
+        ))}
+      </ul>
 
-        <div className="rpm-navLinks">
-          <Link
-            to={`/recipes/${currentRecipe._id}`}
-            onClick={() => closeModal()}
-          >
-            <BsThreeDots />
-          </Link>
+      <div className="rpm-navLinks">
+        <Link
+          className="rpm-viewRecipe-button"
+          to={`/recipes/${currentRecipe._id}`}
+          onClick={() => closeModal()}
+        >
+          View Recipe
+        </Link>
+        <div className="rpm-pinRecipe-container">
+          <button onClick={() => pinRecipe(currentRecipe._id)}>
+            <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
+            <span className="rpm-pinRecipe-text">Pin this recipe</span>
+          </button>
         </div>
       </div>
     </>
@@ -43,6 +61,7 @@ const mSTP = ({ ui: { modal }}) => ({
 })
 
 const mDTP = dispatch => ({
+  pinRecipe: recipeId => dispatch(pinRecipe(recipeId)),
   closeModal: () => dispatch(closeModal()),
 })
 

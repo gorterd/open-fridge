@@ -76,3 +76,7 @@ table {
 	border-spacing: 0;
 }
 
+a, button {
+  cursor: pointer;
+}
+

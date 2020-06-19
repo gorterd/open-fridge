@@ -1,8 +1,7 @@
 .recipePreview-main {
   display: flex;
   flex-direction: column;
-  height: 365px;
-  padding: 20px 40px;
+  padding: 30px;
 }
 
 .rpm-time {
@@ -17,10 +16,10 @@
 .recipePreview-main h3 {
   font-size: 24px;
   font-weight: 400;
-  margin-top: 10px;
 }
 
 .rpm-ingredientsList {
+  font-size: 14px;
   margin: 10px 0;
   height: 300px;
   overflow: auto;
@@ -32,7 +31,71 @@
 }
 
 .rpm-navLinks {
-  font-size: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.rpm-viewRecipe-button {
+  border: 1px solid #F25C0E;
+  border-radius: 4px;
+  font-size: 18px;
+  padding: 5px 5px;
+  text-align: center;
+  width: 120px;
+}
+
+.rpm-viewRecipe-button:hover {
+  background: #F25C0E;
+  color: white;
+}
+
+.rmp-infoStats {
+  color: #999;
+  font-size: 18px;
+  margin: 10px 0 10px 0;
+}
+
+.rmp-infoStats td {
+  border-right: 1px solid lightgrey;
+  padding-left: 10px;
+}
+
+.rmp-infoStats p {
+  color: #333;
+  font-size: 20px;
+  font-weight: 500;
   margin-top: 5px;
 }
 
+.rpm-pinRecipe-container {
+  display: flex;
+  align-items: center;
+  display: relative;
+}
+
+.rpm-pinRecipe-button {
+  color: #F25C0E;
+  margin-right: 15px;
+}
+
+.rpm-pinRecipe-text {
+  display: none;
+}
+
+.rpm-pinRecipe-button:hover + .rpm-pinRecipe-text {
+  background: #F25C0E;
+  border-radius: 25px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  height: 25px;
+  position: absolute;
+  top: 596px;
+  transition: ease-out 5s;
+  right: 45px;
+  width: 125px;
+}
