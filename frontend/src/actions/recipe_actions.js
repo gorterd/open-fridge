@@ -65,7 +65,6 @@ export const fetchPinnedRecipes = (userId) => (dispatch) => {
 };
 
 export const fetchOwnRecipes = (userId) => (dispatch) => {
-  // debugger
   return RecipeAPIUtil.fetchOwnRecipes(userId)
     .then(recipes => verifyAllRecipePhotos(recipes.data))
     .then((recipes) => {
@@ -80,6 +79,11 @@ export const createNewRecipe = recipe => dispatch => {
     .then(recipe => {
       dispatch(receiveRecipe(recipe))}) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
+}
+
+export const pinRecipe = recipeId => dispatch => {
+  return RecipeAPIUtil.pinRecipe(recipeId)
+    .then(recipe => dispatch(receiveRecipe(recipe)))
 }
 
 async function verifyRecipePhoto(data) {

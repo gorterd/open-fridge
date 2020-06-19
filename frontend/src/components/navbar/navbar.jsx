@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
+import { BsPlusCircleFill } from 'react-icons/bs';
 
 class NavBar extends React.Component {
   render() {
@@ -13,22 +14,32 @@ class NavBar extends React.Component {
       <>
         <Link className="signupButton sessionButton" to="/signup">
           Sign Up
-          </Link>
+        </Link>
         <Link className="loginButton sessionButton" to="/login">
           Log In
-          </Link>
+        </Link>
       </>
     ) : (
       <>
-        <p>Welcome, <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link></p>
+        <div className="nbr-uploadContainer">
+          <Link to="/new-recipe">
+            <BsPlusCircleFill className="nbr-uploadButton" size={25} />
+            <span className="nbr-uploadText">Upload a recipe</span>
+          </Link>
+        </div>
+        <p>
+          Welcome,{" "}
+          <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
+        </p>
         <button onClick={logout}>Logout</button>
       </>
-    )
+    );
 
     return (
       <div className="navbar-main">
         <div className="navbar-left">
           <Link className="nbl-homeLink" to="/">
+            <div className="nbl-logo"></div>
             openFridge
           </Link>
         </div>

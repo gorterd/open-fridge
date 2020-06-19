@@ -1,6 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import './recipe_create.css';
 import storage from './create-storage.jpg'
+import { FaPlus } from "react-icons/fa";
 
 class RecipeCreate extends React.Component {
   constructor(props) {
@@ -26,6 +29,7 @@ class RecipeCreate extends React.Component {
         "input-10",
         "input-11",
         "input-12",
+        "input-13",
       ],
       ingredientString: {},
       errors: this.props.errors,
@@ -104,6 +108,7 @@ class RecipeCreate extends React.Component {
     }
 
     return (
+
       <div className="recipe-create-div">
         <img
           src={storage}
@@ -117,18 +122,23 @@ class RecipeCreate extends React.Component {
             <form onSubmit={this.addInput()} className="ingredient-outer-form">
               <div className="recipe-ingredients-div">
                 <div className={`${ingErrorsCN}-create`}>{ingErrors}</div>
-                <label className={`recipe-ingredients ${ingErrorsCN}`}>
-                  Ingredients:
-                  <button id="add-ingredient-btn">+</button>
+                <div className="recipe-create-ingredient-header">
+                  <span className={`plabel recipe-ingredients ${ingErrorsCN}`}>
+                    Ingredients:
+                  </span>
+                  <button id="add-ingredient-btn">
+                    add <FaPlus />
+                  </button>
+                </div>
+                <div className="recipe-create-ingredients-wrap">
                   {this.state.inputs.map((input, idx) => (
                     <input
-                      key={input}
                       type="text"
-                      onChange={this.updateIngredient(input)}
-                      className={`ingredient-num-${idx}`}
+                      id="recipe-name"
+                      onChange={this.update("name")}
                     />
                   ))}
-                </label>
+                </div>
               </div>
             </form>
 
@@ -200,7 +210,7 @@ class RecipeCreate extends React.Component {
                   />
                 </label>
 
-                  <button id="recipe-create-btn">Chef</button>
+                <button id="recipe-create-btn">Create Recipe!</button>
               </div>
             </form>
           </div>
