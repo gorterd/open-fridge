@@ -7,7 +7,7 @@ const FilterResults = require('../../util/filter_results');
 
 const Recipe = require("../../models/Recipe");
 const User = require("../../models/User");
-// const Comment = require("../../models/Comment");
+const Comment = require("../../models/Comment");
 
 // available query string params:
   // ingredients: comma-separated list of ingredients recipes should include
@@ -40,6 +40,8 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     const { errors, isValid } = validateRecipeInput(req.body);
+    
+    console.log(req.body)
 
     if (!isValid) {
       return res.status(400).json(errors);
@@ -67,11 +69,10 @@ router.post(
   }
 );
 
-
 router.patch(
   "/:recipeId/pin",
   passport.authenticate("jwt", { session: false }), (req, res) => {
-    Recipe.findById(req.params.recipeId, function (err, recipe) {
+    Recipe.find({_id: req.params.recipeId}, {author: 0, name:0, time:0, servings:0, image:0, source: 0}, function (err, recipe) {
       User.findOneAndUpdate(
         { _id: req.user.id }, 
         { $addToSet: { pinnedRecipes: recipe } }, 
@@ -107,21 +108,23 @@ router.delete(
 
 router.get('/:recipeId', (req, res) => {
   Recipe.findById(req.params.recipeId)
-    .then(recipe => res.json(recipe))
+    .then(recipe => {
+      Comment.find({ recipe: recipe._id }).then( comments => {
+        res.json({recipe, comments});
+      })
+    })
     .catch(err =>
       res.status(404).json({ norecipefound: 'No recipe found with that ID' })
     );
 });
 
-router.get("/user/:userId", (req, res) => {
+router.get("/:userId", (req, res) => {
   Recipe.find({ author: req.params.userId })
     .then((recipes) => res.json(recipes))
     .catch((err) =>
       res.status(404).json({ norecipesfound: "No recipes found from that user" })
     );
 }); //finds all recipes authored by the same user
-
-
 
 router.patch('/:recipeId', passport.authenticate('jwt', { session: false }), (req, res) => {
   Recipe.findById(req.params.recipeId, function (err, recipe) {

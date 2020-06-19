@@ -1,5 +1,6 @@
 import React from 'react';
 import './recipe_create.css';
+import storage from './create-storage.jpg'
 
 class RecipeCreate extends React.Component {
   constructor(props) {
@@ -7,8 +8,10 @@ class RecipeCreate extends React.Component {
     this.state = {
       name: "",
       servings: "",
-      ingredients: [],//{input:val},
-      instructions: "",
+      ingredients: [],
+      instructions: [],
+      image: "",
+      time: "",
       inputs: [
         "input-0",
         "input-1",
@@ -16,29 +19,47 @@ class RecipeCreate extends React.Component {
         "input-3",
         "input-4",
         "input-5",
+        "input-6",
+        "input-7",
+        "input-8",
+        "input-9",
+        "input-10",
+        "input-11",
+        "input-12",
       ],
-      test: "",
+      ingredientString: {},
+      errors: this.props.errors,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentWillUnmount() {
+    this.props.clearErrors();
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     console.log(this.state)
-    // console.log("handleSubmit"); // this.props.generateRecipe(); //////////
+    this.props.createRecipe(this.state);
   }
 
   update(field) {
     return (e) => {
-      this.setState({ [field]: e.currentTarget.value });
+      if (field === 'instructions') {
+        let instruct = e.currentTarget.value.split(/\r?\n/)
+        this.setState({instructions: instruct})
+      } else {
+        this.setState({ [field]: e.currentTarget.value });
+      }
     };
   }
 
   updateIngredient(key) {
     return (e) => {
-      // if (this.state.ingredients[key])
-        // this.setState({ ingredients: this.state.ingredients
+        const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
+        this.setState({ ingredientString: update })
+        this.setState({ ingredients: Object.values(this.state.ingredientString) });
     }
   }
 
@@ -53,57 +74,136 @@ class RecipeCreate extends React.Component {
     };
   }
 
-
   render() {
+    let errors = this.props.errors;
+    let ingErrors = null;
+    let ingErrorsCN = "";
+    let instructErrors = null;
+    let instructErrorsCN = "";
+    let nameErrors = null;
+    let nameErrorsCN = "";
+    let servingErrors = null;
+    let servingErrorsCN = "";
+    if (errors) {
+      if (errors.ingredients) {
+        ingErrors = errors.ingredients;
+        ingErrorsCN = "ingredientErrors";
+      }
+      if (errors.instructions) {
+        instructErrors = errors.instructions;
+        instructErrorsCN = "instructionErrors";
+      }
+      if (errors.name) {
+        nameErrors = errors.name;
+        nameErrorsCN = "nameErrors";
+      }
+      if (errors.servings) {
+        servingErrors = errors.servings;
+        servingErrorsCN = "servingsErrors";
+      }
+    }
+
     return (
       <div className="recipe-create-div">
+        <img
+          src={storage}
+          alt="openFridge"
+          draggable="false"
+          className="recipe-create-image"
+        />
+
         <div className="recipe-create-div-wrap">
-          <form onSubmit={this.addInput()} className="ingredient-outer-form">
-            <div className="recipe-ingredients-div">
-              <label className="recipe-ingredients">
-                Ingredients:
-                <button id="add-ingredient-btn">+</button>
-                {this.state.inputs.map((input, idx) => (
+          <div className="recipe-create-right">
+            <form onSubmit={this.addInput()} className="ingredient-outer-form">
+              <div className="recipe-ingredients-div">
+                <div className={`${ingErrorsCN}-create`}>{ingErrors}</div>
+                <label className={`recipe-ingredients ${ingErrorsCN}`}>
+                  Ingredients:
+                  <button id="add-ingredient-btn">+</button>
+                  {this.state.inputs.map((input, idx) => (
+                    <input
+                      key={input}
+                      type="text"
+                      onChange={this.updateIngredient(input)}
+                      className={`ingredient-num-${idx}`}
+                    />
+                  ))}
+                </label>
+              </div>
+            </form>
+
+            <label htmlFor="recipe-time" className="recipe-time">
+              Time to Cook:
+              <input
+                type="text"
+                id="recipe-time"
+                onChange={this.update("time")}
+              />
+            </label>
+
+            <label htmlFor="recipe-image" className="recipe-image">
+              Link to image:
+              <input
+                type="text"
+                id="recipe-image"
+                onChange={this.update("image")}
+              />
+            </label>
+          </div>
+
+          <div className="recipe-create-left">
+            <form onSubmit={this.handleSubmit}>
+              <div className="recipe-not-ingredients">
+                <h1>Recipe</h1>
+                <div className={`${nameErrorsCN}-create`}>{nameErrors}</div>
+                <label
+                  htmlFor="recipe-name"
+                  className={`recipe-name ${nameErrorsCN}`}
+                >
+                  Recipe Name:
                   <input
-                    key={input}
                     type="text"
-                    onChange={this.updateIngredient(input)}
-                    className={`ingredient-num-${idx}`}
+                    id="recipe-name"
+                    onChange={this.update("name")}
                   />
-                ))}
-              </label>
-            </div>
-          </form>
+                </label>
 
-          <form onSubmit={this.handleSubmit}>
-            <div className="recipe-not-ingredients">
-              <h1>Recipe</h1>
-              <label htmlFor="recipe-name" className="recipe-name">
-                Recipe Name:
-                <input
-                  type="text"
-                  id="recipe-name"
-                  onChange={this.update("name")}
-                />
-              </label>
+                <div className={`${servingErrorsCN}-create`}>
+                  {servingErrors}
+                </div>
+                <label
+                  htmlFor="recipe-servings"
+                  className={`recipe-servings ${servingErrorsCN}`}
+                >
+                  Servings:
+                  <input
+                    type="text"
+                    id="recipe-servings"
+                    onChange={this.update("servings")}
+                  />
+                </label>
 
-              <label htmlFor="recipe-servings" className="recipe-servings">
-                Serving Size:
-                <input
-                  type="text"
-                  id="recipe-servings"
-                  onChange={this.update("servings")}
-                />
-              </label>
+                <div className={`${instructErrorsCN}-create`}>
+                  {instructErrors}
+                </div>
+                <label
+                  htmlFor="recipe-directions"
+                  className="recipe-directions"
+                >
+                  Instructions:
+                  <textarea
+                    id="recipe-directions"
+                    cols="30"
+                    rows="17"
+                    className={`${instructErrorsCN}`}
+                    onChange={this.update("instructions")}
+                  />
+                </label>
 
-              <label htmlFor="recipe-directions" className="recipe-directions">
-                Directions:
-                <textarea id="recipe-directions" cols="30" rows="10" />
-              </label>
-
-              <button>Chef</button>
-            </div>
-          </form>
+                  <button id="recipe-create-btn">Chef</button>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     );

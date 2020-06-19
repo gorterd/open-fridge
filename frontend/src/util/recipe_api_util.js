@@ -10,3 +10,15 @@ export const fetchRecipes = query => {
     params: query  
   })
 }
+
+export const fetchPinnedRecipes = userId => {
+  return axios.get(`/api/users/${userId}/pins`)
+}
+
+export const fetchOwnRecipes = userId => {
+  return axios.get(`/api/recipes/${userId}`)
+}
+
+export const createRecipe = recipe => {
+  return axios.post('/api/recipes/', recipe)
+}

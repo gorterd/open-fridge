@@ -9,7 +9,6 @@ class SessionForm extends React.Component {
       username: "",
       email: "",
       password: "",
-      toggle: false,
       errors: this.props.errors ///prepare local state
     };
 
@@ -23,16 +22,8 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
-    // if (
-    //   this.props.formType === "signup" &&
-    //   user.username === "**ENTER A SEEDED DEMO USERR**" ///////
-    // )
-    //   this.props.demoUser(user);
-    // this.setState({errors: this.props.errors}) RE-EVAL ERRORS ON INPUT??
-    this.props.processForm(user);
-    if (this.props.formType === "login") {
-      this.setState({toggle: true})
-    }
+    if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) this.props.demoUser(user);
+    else this.props.processForm(user);
   }
 
   update(field) {
@@ -43,13 +34,13 @@ class SessionForm extends React.Component {
 
   demoUser(e) {
     const user = {
-      username: "**ENTER A SEEDED DEMO USERR EMAIL**",
-      email: "**ENTER A SEEDED DEMO USERR EMAIL**",
-      password: "PASSWORD",
+      username: "openFridgeDemo",
+      email: "demoUser@openFridge.com",
+      password: "password",
     };
 
     return () => {
-      this.setState(user);
+      this.setState(user)
     };
   }
 
@@ -69,9 +60,9 @@ class SessionForm extends React.Component {
     }
 
     let usernameErrors = null;
-    let userErrorsCN = ""
+    let userErrorsCN = "";
     let emailErrors = null;
-    let emailErrorsCN = ""
+    let emailErrorsCN = "";
     let passwordErrors = null;
     let passErrorsCN = "";
     if (this.props.errors) {
@@ -121,8 +112,6 @@ class SessionForm extends React.Component {
             </div>
 
             <button className={`${session}-submit`}>Login</button>
-          </form>
-          
 
           <div className="other-link-wrap">
             <div className={loginErrorClass}>{loginErrorMsg}</div>
@@ -136,6 +125,9 @@ class SessionForm extends React.Component {
               Demo Page
             </button>
           </div>
+          </form>
+          
+
         </div>
       </div>
     ) : (
@@ -191,7 +183,6 @@ class SessionForm extends React.Component {
                 </Link>
 
                 <button
-                type="button"
                   onClick={this.demoUser() }
                   className={`${session}-demo-button`}
                 >
