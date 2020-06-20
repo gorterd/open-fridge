@@ -49,8 +49,14 @@ $pumpkin-orange: #F25C0E;
 .nbr-uploadContainer .expanding-button {
   display: flex;
   justify-content: flex-end;
-  padding: 10px 0 10px 10px;
+}
 
+.rpm-pinRecipe-container .expanding-button {
+  padding: 10px 0 10px 10px;
+}
+
+.nbr-uploadContainer .expanding-button {
+  padding-left: 10px;
 }
 
 .rps-pinRecipe-container .expanding-button {
