@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./modal.css";
 
 import { closeModal } from '../../actions/modal_actions';
-import RecipePreview from '../recipe/recipe_preview';
+import RecipePreview from '../recipe/rcp_preview/recipe_preview';
 
 function Modal({ modal, closeModal }) {
   if (!modal.type) {

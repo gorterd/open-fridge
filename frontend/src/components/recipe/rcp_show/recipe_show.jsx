@@ -1,10 +1,10 @@
 import React from 'react';
-import Comments from './comments/comments';
-import CommentsPopout from './comments/comments_popout';
-import NavBar from '../navbar/navbar';
-import './recipe.scss'
+import Comments from '../rcp_comments/comments';
+import CommentsPopout from '../rcp_comments/comments_popout';
+import NavBar from '../../navbar/navbar';
+import './recipe_show.scss'
 import { Link } from 'react-router-dom';
-import { BsPlusCircleFill } from "react-icons/bs";
+import PinButton from '../rcp_shared/pin_button';
 
 
 class RecipeShow extends React.Component {
@@ -18,8 +18,6 @@ class RecipeShow extends React.Component {
     window.scrollTo(0,0);
     this.props.fetchRecipe(this.props.recipeId);
   }
-
-
 
   _comments(key, idx){
     const {comments} = this.props;
@@ -91,17 +89,6 @@ class RecipeShow extends React.Component {
       </li>
     ));
 
-    // const pinButton = ( session.isAuthenticated && session.pinnedRecipes.includes(recipe._id) ) ?
-    //     <button className='recipe-show-pin' onClick={() => pinRecipe(recipe._id)}>
-    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-    //       <span className="rpm-pinRecipe-text pin-button">Pin recipe</span>
-    //     </button>
-    //   :
-    //   <button className='recipe-show-unpin' onClick={() => unpinRecipe(recipe._id)}>
-    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-    //       <span className="rpm-pinRecipe-text unpin-button">Unpin recipe</span>
-    //     </button>
-    
     return (
       <section className='recipe-show-page'>
         <NavBar />
@@ -109,10 +96,13 @@ class RecipeShow extends React.Component {
 
           {image}
           
-          {/* {pinButton} */}
+
 
           <div className='recipe-show-information'>
-            <h1 className={recipe.name.length > 40 ? 'long-title' : ''}>{recipe.name}</h1>
+            <div className="rps-pinRecipe-container">
+              <PinButton recipeId={recipe._id} />
+            </div>
+            <h1 className={recipe.name.length > 44 ? 'long-title' : ''}>{recipe.name}</h1>
             {author}
             <span><span>Servings:</span> {recipe.servings}</span>
             <span><span>Total Time:</span> {recipe.time.total}</span>

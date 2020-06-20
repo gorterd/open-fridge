@@ -1,0 +1,61 @@
+$pumpkin-orange: #F25C0E; 
+
+@keyframes grow {
+  from {
+    width: 25px;
+    color: transparent;
+  }
+
+  30% {
+    color: transparent;
+  }
+
+  to {
+    color: white;
+    width: 100%;
+  }
+}
+
+.rp-pin-button {
+  position: relative;
+
+  &:hover {
+    .rp-pin-icon { display: none; }
+    .rp-pin-text { display: flex; }
+  }
+}
+
+.rp-pin-icon {
+  color: $pumpkin-orange;
+}
+
+.rp-pin-text {
+  background: $pumpkin-orange;
+  align-items: center;
+  color: white;
+  border-radius: 25px;
+  display: none;
+  font-size: 14px;
+  font-weight: 400;
+  height: 25px;
+  padding: 0 10px;
+  white-space: nowrap;
+
+  animation-name: grow;
+  animation-duration: 200ms;
+}
+
+.rpm-pinRecipe-container .rp-pin-button {
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 0 10px 10px;
+
+}
+
+.rps-pinRecipe-container .rp-pin-button {
+  display: flex;
+  justify-content: flex-start;
+  padding: .7vw;
+}
+
+

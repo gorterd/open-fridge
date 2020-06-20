@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
 import RecipeShow from "./recipe_show";
-import { addComment, deleteComment } from "../../actions/comment_actions";
-import { fetchRecipe, pinRecipe, unpinRecipe } from "../../actions/recipe_actions";
-import { recipeComments } from '../../util/selectors'
+import { addComment, deleteComment } from "../../../actions/comment_actions";
+import { fetchRecipe, pinRecipe, unpinRecipe } from "../../../actions/recipe_actions";
+import { recipeComments } from '../../../util/selectors'
 
 const mapStateToProps = (state, ownProps) => {
   const recipeId = ownProps.match.params.recipeId;

@@ -6,8 +6,8 @@ import Modal from './modal/modal';
 import SplashContainer from './splash/splash_container';
 import LoginFormContainer from "./session/login_container";
 import SignupFormContainer from "./session/signup_container";
-import RecipeCreateContainer from "./recipe/recipe_create_container";
-import RecipeShowContainer from "./recipe/recipe_show_container";
+import RecipeCreateContainer from "./recipe/rcp_create/recipe_create_container";
+import RecipeShowContainer from "./recipe/rcp_show/recipe_show_container";
 import ProfileShowContainer from './profile/profile_show_container';
 
 const App = () => (
