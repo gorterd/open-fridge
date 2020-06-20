@@ -11,7 +11,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: hsl(45, 50%, 88%);
+  background-color: hsl(45, 50%, 92%);
   
   .recipe-show-image {
     width: 100%;
@@ -312,6 +312,7 @@
     min-height: 100px;
     margin-bottom: 10px;
     padding: 10px;
+    resize: vertical;
   }
 
   span {
@@ -322,6 +323,7 @@
     background-color: hsl(115, 50%, 50%);
     border-radius: 5px;
     padding: 10px;
+    line-height: 1;
     cursor: pointer;
 
     &:hover {
@@ -424,6 +426,7 @@
       margin-bottom: 10px;
       padding: 10px;
       background-color: white;
+      resize: vertical;
     }
 
     span {
