@@ -1,6 +1,6 @@
 import * as RecipeAPIUtil from '../util/recipe_api_util';
 import { receiveErrors } from './session_actions';
-import baconPie from '../bacon-pie.jpeg'
+import baconPie from '../images/bacon-pie.jpeg'
 
 export const RECEIVE_RECIPE = "RECEIVE_RECIPE";
 export const RECEIVE_CURRENT_RECIPE = "RECEIVE_CURRENT_RECIPE";

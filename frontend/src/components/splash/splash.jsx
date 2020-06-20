@@ -36,6 +36,7 @@ class Splash extends React.Component {
   }
 
   componentDidMount() {
+    this.props.clearRecipes();
     this.props.fetchRecipes({"num": "24"}).then( () => {
       this.setState({ slides: this._generateSlides(), imagesLoading: false });
     });
@@ -102,7 +103,7 @@ class Splash extends React.Component {
 
     while (i <= this.maxIdx) {
       newSlides[i] = (recipes[i * 8]) ?
-        recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem recipe={recipe} openModal={openModal} />)
+        recipes.slice(i * 8, (i + 1) * 8).map(recipe => <RecipeItem key={recipe._id} recipe={recipe} openModal={openModal} />)
         : <></>;
       i++;
     }
@@ -194,7 +195,7 @@ class Splash extends React.Component {
 const RecipeItem = props => {
   const { recipe, openModal } = props;
   return (
-    <li className="splashGrid-item" key={recipe._id}>
+    <div className="splashGrid-item">
       <button
         type="button"
         onClick={() => {
@@ -208,7 +209,7 @@ const RecipeItem = props => {
         ></img>
         <h3 className="splashGrid-recipeName">{recipe.name}</h3>
       </button>
-    </li>
+    </div>
   )
 };
 

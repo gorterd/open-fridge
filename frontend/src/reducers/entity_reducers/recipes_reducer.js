@@ -1,5 +1,5 @@
-import { RECEIVE_RECIPE, RECEIVE_RECIPES, CLEAR_RECIPES } from '../actions/recipe_actions';
-import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../actions/comment_actions';
+import { RECEIVE_RECIPE, RECEIVE_RECIPES, CLEAR_RECIPES } from '../../actions/recipe_actions';
+import { RECEIVE_COMMENT, REMOVE_COMMENT } from '../../actions/comment_actions';
 
 const recipesReducer = (state = {}, action) => {
   Object.freeze(state);

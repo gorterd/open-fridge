@@ -41,7 +41,7 @@ class RecipeShow extends React.Component {
   }
 
   render() {
-    const { recipe, addComment, deleteComment, session, pinRecipe, unpinRecipe } = this.props;
+    const { recipe, addComment, deleteComment, session } = this.props;
 
     if ( !recipe ) { return <></> };
 
@@ -94,8 +94,6 @@ class RecipeShow extends React.Component {
 
           {image}
           
-
-
           <div className='recipe-show-information'>
             <div className="rps-pinRecipe-container">
               <PinButton recipeId={recipe._id} />

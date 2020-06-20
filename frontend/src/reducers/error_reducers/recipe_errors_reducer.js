@@ -2,7 +2,7 @@ import {
   RECEIVE_NEW_RECIPE_ERRORS, 
   CLEAR_RECIPE_ERRORS, 
   RECEIVE_CURRENT_RECIPE 
-} from '../actions/recipe_actions'
+} from '../../actions/recipe_actions'
 
 
 const recipeErrorsReducer = (oldState = {}, action) => {
