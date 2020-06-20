@@ -4,7 +4,7 @@ import CommentsPopout from '../rcp_comments/comments_popout';
 import NavBar from '../../navbar/navbar';
 import './recipe_show.scss'
 import { Link } from 'react-router-dom';
-import PinButton from '../rcp_shared/pin_button';
+import { PinButton } from '../rcp_shared/expanding_buttons';
 
 
 class RecipeShow extends React.Component {
@@ -59,7 +59,6 @@ class RecipeShow extends React.Component {
 
     const ingredients = recipe.ingredients.map( (ingredient, idx) => (
       <li key={ingredient._id}>
-        {/* <span>{ingredient.fullName}</span> */}
         <CommentsPopout 
           spanContent={ingredient.fullName}
           recipeId={recipe._id}
@@ -75,7 +74,6 @@ class RecipeShow extends React.Component {
 
     const instructions = recipe.instructions.map((instruction, idx) => (
       <li key={idx}>
-        {/* <span>{instruction}</span> */}
         <CommentsPopout
           spanContent={<><span>{`${(idx + 1)}. `}</span><span>{instruction}</span></>}
           recipeId={recipe._id}
@@ -120,7 +118,6 @@ class RecipeShow extends React.Component {
             </div>
 
             <div className="recipe-show-servings">
-              {/* <span>Servings: {recipe.servings}</span> */}
               <CommentsPopout
                 spanContent={`Servings:  ${recipe.servings}`}
                 recipeId={recipe._id}
@@ -133,7 +130,6 @@ class RecipeShow extends React.Component {
             </div>
 
             <div className="recipe-show-time">
-              {/* <span>Total Time: {recipe.time.total}</span> */}
               <CommentsPopout
                 spanContent={`Total Time:  ${recipe.time.total}`}
                 recipeId={recipe._id}

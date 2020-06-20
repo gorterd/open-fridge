@@ -16,20 +16,20 @@ $pumpkin-orange: #F25C0E;
   }
 }
 
-.rp-pin-button {
+.expanding-button {
   position: relative;
 
   &:hover {
-    .rp-pin-icon { display: none; }
-    .rp-pin-text { display: flex; }
+    .expanding-button-icon { display: none; }
+    .expanding-button-text { display: flex; }
   }
 }
 
-.rp-pin-icon {
+.expanding-button-icon {
   color: $pumpkin-orange;
 }
 
-.rp-pin-text {
+.expanding-button-text {
   background: $pumpkin-orange;
   align-items: center;
   color: white;
@@ -45,17 +45,22 @@ $pumpkin-orange: #F25C0E;
   animation-duration: 200ms;
 }
 
-.rpm-pinRecipe-container .rp-pin-button {
+.rpm-pinRecipe-container .expanding-button, 
+.nbr-uploadContainer .expanding-button {
   display: flex;
   justify-content: flex-end;
   padding: 10px 0 10px 10px;
 
 }
 
-.rps-pinRecipe-container .rp-pin-button {
+.rps-pinRecipe-container .expanding-button {
   display: flex;
   justify-content: flex-start;
   padding: .7vw;
+}
+
+.nbr-uploadContainer .expanding-button {
+  margin-right: 15px;
 }
 
 

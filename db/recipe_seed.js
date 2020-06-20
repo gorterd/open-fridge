@@ -43,7 +43,6 @@ function processRecipe(recipe){
 async function dropYummly(bool) {
   if (bool) {
     await Recipe.deleteMany({ source: 'yummly' });
-    // await Recipe.deleteMany({ });
   } else {
     return null;
   }

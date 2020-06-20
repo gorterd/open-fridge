@@ -5,25 +5,25 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 import { FaCheckCircle } from 'react-icons/fa'
 
 import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
-import './pin_button.scss'
+import './expanding_buttons.scss'
 import { Link } from 'react-router-dom';
 import { closeModal } from '../../../actions/modal_actions';
 
-const PinButton = ({recipeId, pinned, loggedOut, pinRecipe, unpinRecipe }) => {
+const PinButtonPresentational = ({recipeId, pinned, loggedOut, pinRecipe, unpinRecipe, closeModal }) => {
 
-  const klass = `rp-pin-button ${pinned ? 'pinned' : 'unpinned'}`;
+  const klass = 'expanding-button';
   const clickHandler = () => pinned ? unpinRecipe(recipeId) : pinRecipe(recipeId);
 
   const icon = pinned && !loggedOut ? 
-    <FaCheckCircle className="rp-pin-icon" size={25} /> :
-    <BsPlusCircleFill className="rp-pin-icon" size={25} />;
+    <FaCheckCircle className="expanding-button-icon" size={25} /> :
+    <BsPlusCircleFill className="expanding-button-icon" size={25} />;
 
   let text = pinned ? 'Remove pinned recipe' : 'Pin this recipe';
   if (loggedOut) {
     text = "Log in to pin this recipe";
   }
   
-  const span = <span className="rp-pin-text">{text}</span>;
+  const span = <span className="expanding-button-text">{text}</span>;
 
   return loggedOut ? (
     <Link to="/login" className={klass} onClick={() => closeModal()}>
@@ -53,4 +53,16 @@ const mapDispatch = dispatch => {
   }
 }
 
-export default connect(mapState, mapDispatch)(PinButton);
+export const PinButton = connect(mapState, mapDispatch)(PinButtonPresentational);
+
+export const CreateRecipeButton = () => {
+
+  return (
+    <Link to="/new-recipe" className="expanding-button">
+      <BsPlusCircleFill className="expanding-button-icon" size={25} />
+      <span className="expanding-button-text">Create a recipe</span>
+    </Link>
+  );
+}
+
+

@@ -7,7 +7,7 @@ import { closeModal } from '../../../actions/modal_actions';
 import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
 import { BsPlusCircleFill } from 'react-icons/bs';
 import { FaCheckCircle } from 'react-icons/fa'
-import PinButton from '../rcp_shared/pin_button';
+import {PinButton} from '../rcp_shared/expanding_buttons';
 
 const RecipePreview = props => {
   const { session, currentRecipe, pinnedRecipes, 
@@ -72,8 +72,8 @@ const RecipePreview = props => {
           View Recipe
         </Link>
         <div className="rpm-pinRecipe-container">
-          {pinRecipeButton}
-          {/* <PinButton recipeId={currentRecipe._id} /> */}
+          {/* {pinRecipeButton} */}
+          <PinButton recipeId={currentRecipe._id} />
         </div>
       </div>
     </>

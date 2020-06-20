@@ -1,5 +1,4 @@
 import * as CommentAPIUtil from '../util/comment_api_util';
-// import { receiveErrors } from './session_actions';
 
 export const RECEIVE_COMMENT = "RECEIVE_COMMENT";
 export const REMOVE_COMMENT = "REMOVE_COMMENT";
@@ -25,7 +24,6 @@ export const addComment = comment => dispatch => {
   export const deleteComment = commentId => dispatch => {
     return CommentAPIUtil.deleteComment(commentId)
     .then(res => {
-        // debugger  
         dispatch(removeComment(res.data))
       },() => console.log('Could not delete comment'));
 }
