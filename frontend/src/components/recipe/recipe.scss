@@ -39,7 +39,10 @@
       font-weight: 600;
       text-align: center;
       max-height: 265px;
-      overflow: auto;
+
+      &.long-title {
+        font-size: 2.5rem;
+      }
     }
 
     > span {

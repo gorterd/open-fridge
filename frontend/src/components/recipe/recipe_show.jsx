@@ -112,7 +112,7 @@ class RecipeShow extends React.Component {
           {/* {pinButton} */}
 
           <div className='recipe-show-information'>
-            <h1>{recipe.name}</h1>
+            <h1 className={recipe.name.length > 40 ? 'long-title' : ''}>{recipe.name}</h1>
             {author}
             <span><span>Servings:</span> {recipe.servings}</span>
             <span><span>Total Time:</span> {recipe.time.total}</span>
