@@ -1,10 +1,10 @@
 import React from 'react';
-import Comments from './comments/comments';
-import CommentsPopout from './comments/comments_popout';
-import NavBar from '../navbar/navbar';
-import './recipe.scss'
+import Comments from '../rcp_comments/comments';
+import CommentsPopout from '../rcp_comments/comments_popout';
+import NavBar from '../../navbar/navbar';
+import './recipe_show.scss'
 import { Link } from 'react-router-dom';
-import { BsPlusCircleFill } from "react-icons/bs";
+import { PinButton } from '../rcp_shared/expanding_buttons';
 
 
 class RecipeShow extends React.Component {
@@ -18,8 +18,6 @@ class RecipeShow extends React.Component {
     window.scrollTo(0,0);
     this.props.fetchRecipe(this.props.recipeId);
   }
-
-
 
   _comments(key, idx){
     const {comments} = this.props;
@@ -43,7 +41,7 @@ class RecipeShow extends React.Component {
   }
 
   render() {
-    const { recipe, addComment, deleteComment, session, pinRecipe, unpinRecipe } = this.props;
+    const { recipe, addComment, deleteComment, session } = this.props;
 
     if ( !recipe ) { return <></> };
 
@@ -61,7 +59,6 @@ class RecipeShow extends React.Component {
 
     const ingredients = recipe.ingredients.map( (ingredient, idx) => (
       <li key={ingredient._id}>
-        {/* <span>{ingredient.fullName}</span> */}
         <CommentsPopout 
           spanContent={ingredient.fullName}
           recipeId={recipe._id}
@@ -77,7 +74,6 @@ class RecipeShow extends React.Component {
 
     const instructions = recipe.instructions.map((instruction, idx) => (
       <li key={idx}>
-        {/* <span>{instruction}</span> */}
         <CommentsPopout
           spanContent={<><span>{`${(idx + 1)}. `}</span><span>{instruction}</span></>}
           recipeId={recipe._id}
@@ -91,17 +87,6 @@ class RecipeShow extends React.Component {
       </li>
     ));
 
-    // const pinButton = ( session.isAuthenticated && session.pinnedRecipes.includes(recipe._id) ) ?
-    //     <button className='recipe-show-pin' onClick={() => pinRecipe(recipe._id)}>
-    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-    //       <span className="rpm-pinRecipe-text pin-button">Pin recipe</span>
-    //     </button>
-    //   :
-    //   <button className='recipe-show-unpin' onClick={() => unpinRecipe(recipe._id)}>
-    //       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-    //       <span className="rpm-pinRecipe-text unpin-button">Unpin recipe</span>
-    //     </button>
-    
     return (
       <section className='recipe-show-page'>
         <NavBar />
@@ -109,10 +94,11 @@ class RecipeShow extends React.Component {
 
           {image}
           
-          {/* {pinButton} */}
-
           <div className='recipe-show-information'>
-            <h1>{recipe.name}</h1>
+            <div className="rps-pinRecipe-container">
+              <PinButton recipeId={recipe._id} />
+            </div>
+            <h1 className={recipe.name.length > 44 ? 'long-title' : ''}>{recipe.name}</h1>
             {author}
             <span><span>Servings:</span> {recipe.servings}</span>
             <span><span>Total Time:</span> {recipe.time.total}</span>
@@ -130,7 +116,6 @@ class RecipeShow extends React.Component {
             </div>
 
             <div className="recipe-show-servings">
-              {/* <span>Servings: {recipe.servings}</span> */}
               <CommentsPopout
                 spanContent={`Servings:  ${recipe.servings}`}
                 recipeId={recipe._id}
@@ -143,7 +128,6 @@ class RecipeShow extends React.Component {
             </div>
 
             <div className="recipe-show-time">
-              {/* <span>Total Time: {recipe.time.total}</span> */}
               <CommentsPopout
                 spanContent={`Total Time:  ${recipe.time.total}`}
                 recipeId={recipe._id}

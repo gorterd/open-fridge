@@ -6,7 +6,6 @@ const mSTP = (state) => {
   return {
     currentUser: state.session.user,
     allRecipes: Object.values(state.entities.recipes)
-    // pinnedRecipes: state.entities.questions[ownProps.match.params.questionId]
   };
 };
 

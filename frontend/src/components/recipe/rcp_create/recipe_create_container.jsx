@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import RecipeCreate from "./recipe_create"
-import { createNewRecipe, clearRecipeErrors } from "../../actions/recipe_actions";
+import { createNewRecipe, clearRecipeErrors } from "../../../actions/recipe_actions";
 
 const mSTP = state => ({
   errors: state.errors.recipe

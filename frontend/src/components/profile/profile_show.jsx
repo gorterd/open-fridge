@@ -15,6 +15,13 @@ import {
 class ProfileShow extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      showPinned: false,
+      showOwn: false
+    }
+
+    this.toggleShow = this.toggleShow.bind(this);
   }
 
   componentDidMount() {
@@ -23,10 +30,18 @@ class ProfileShow extends React.Component {
     this.props.fetchOwnRecipes(this.props.match.params.userId)
   }
 
+  toggleShow(category) {
+    return () => this.setState({
+      [category]: !this.state[category]
+    })
+  }
+
   render() {
     if (!this.props.allRecipes) {
-            return null;
-        }; 
+      return null;
+    }; 
+
+    const { showOwn, showPinned } = this.state;
 
     return (
       <>
@@ -42,12 +57,14 @@ class ProfileShow extends React.Component {
           <section className="recipes-section">
             <div className="pinned-recipes">
               Pinned Recipes
-              <ul className="list-recipes">
+              <ul className={"list-recipes " + (showPinned ? "show-more" : 'show-less')}>
                 {this.props.allRecipes.map((recipe) => {
                   if (recipe.author !== this.props.currentUser.id) {
                     return (
                       <div className="single-recipe">
-                        <img src={recipe.image} alt="recipe-img"></img>
+                        <div className='single-recipe-img'>
+                          <img src={recipe.image} alt="recipe-img"></img>
+                        </div>
                         <li>
                           <Link to={`/recipes/${recipe._id}`} id="link">
                             {recipe.name}
@@ -58,17 +75,21 @@ class ProfileShow extends React.Component {
                   }
                 })}
               </ul>
-              <button className="button">see more</button>
+              <button className="button" onClick={this.toggleShow('showPinned')}>
+                { showPinned ? 'show less' : 'show more'}
+              </button>
             </div>
 
             <div className="own-recipes">
               Your Recipes
-              <ul className="list-recipes">
+              <ul className={"list-recipes " + ( showOwn ? "show-more" : 'show-less')}>
                 {this.props.allRecipes.map((recipe) => {
                   if (recipe.author === this.props.currentUser.id) {
                     return (
                       <div className="single-recipe">
-                        <img src={recipe.image} alt="recipe-img"></img>
+                        <div className='single-recipe-img'>
+                          <img src={recipe.image} alt="recipe-img"></img>
+                        </div>
                         <li>
                           <Link to={`/recipes/${recipe._id}`} id="link">
                             {recipe.name}
@@ -79,7 +100,9 @@ class ProfileShow extends React.Component {
                   }
                 })}
               </ul>
-              <button className="button">see more</button>
+              <button className="button" onClick={this.toggleShow('showOwn')}>
+                {showOwn ? 'show less' : 'show more'}
+              </button>
             </div>
           </section>
         </div>
