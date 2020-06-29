@@ -163,7 +163,7 @@ class Splash extends React.Component {
           </div>
 
           <div className="splash-main-tagline">
-            <p>"Tagline here. No ingredients left behind. Blah blah."</p>
+            <p>"No ingredients left behind, open your fridge."</p>
           </div>
 
           <div className="splash-main-footer">
