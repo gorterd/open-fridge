@@ -2,3 +2,4 @@ node_modules
 frontend/node_modules
 config/keys_dev.js
 db/test/
+.DS_Store
