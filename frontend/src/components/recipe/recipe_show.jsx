@@ -102,7 +102,7 @@ class RecipeShow extends React.Component {
     
     return (
       <section className='recipe-show-page'>
-        <NavBar />
+        <NavBar prevPath={`/recipes/${this.props.recipeId}`}/>
         <div className='recipe-show-container'>
 
           {image}
