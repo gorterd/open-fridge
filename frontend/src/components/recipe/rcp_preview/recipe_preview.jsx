@@ -5,36 +5,10 @@ import { Link } from 'react-router-dom';
 import './recipe_preview.css';
 import { closeModal } from '../../../actions/modal_actions';
 import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
-import { BsPlusCircleFill } from 'react-icons/bs';
-import { FaCheckCircle } from 'react-icons/fa'
-import {PinButton} from '../rcp_shared/expanding_buttons';
+import { PinButton } from '../rcp_shared/expanding_buttons';
 
 const RecipePreview = props => {
-  const { session, currentRecipe, pinnedRecipes, 
-    closeModal, pinRecipe, unpinRecipe } = props;
-  
-  const pinButton = pinnedRecipes.includes(currentRecipe._id) ? (
-    <button onClick={() => unpinRecipe(currentRecipe._id)}>
-      <FaCheckCircle className="rpm-pinRecipe-button" size={25} />
-      <span className="rpm-removepin-text">Remove pinned recipe</span>
-    </button>
-  ) : (
-    <button onClick={() => pinRecipe(currentRecipe._id)}>
-      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-      <span className="rpm-addpin-text">Pin this recipe</span>
-    </button>
-  );
-
-  const pinRecipeButton = session.isAuthenticated ? (
-    <>
-      {pinButton}
-    </>
-  ) : (
-    <Link to="/login" onClick={() => closeModal()}>
-      <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
-      <span className="rpm-signin-text">Log in to pin this recipe</span>
-    </Link>
-  );
+  const { currentRecipe, closeModal } = props;
 
   return (
     <>
@@ -72,7 +46,6 @@ const RecipePreview = props => {
           View Recipe
         </Link>
         <div className="rpm-pinRecipe-container">
-          {/* {pinRecipeButton} */}
           <PinButton recipeId={currentRecipe._id} />
         </div>
       </div>

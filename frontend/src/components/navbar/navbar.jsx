@@ -1,16 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
-import { BsPlusCircleFill } from 'react-icons/bs';
-import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
+import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons';
 
-class NavBar extends React.Component {
-  render() {
-    const { currentUser, logout } = this.props;
-    console.log(currentUser);
+const NavBar = props => {
+    const { currentUser, logout } = props;
+    let history = useHistory();
+
+    const logOut = () => {
+      logout(); 
+      history.push("/");
+    }
+
     const navbarRight = !currentUser ? (
       <>
         <Link className="signupButton sessionButton" to="/signup">
@@ -23,17 +27,13 @@ class NavBar extends React.Component {
     ) : (
       <>
         <div className="nbr-uploadContainer">
-          {/* <Link to="/new-recipe">
-            <BsPlusCircleFill className="nbr-uploadButton" size={25} />
-            <span className="nbr-uploadText">Upload a recipe</span>
-          </Link> */}
           <CreateRecipeButton />
         </div>
         <p>
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
-        <button onClick={logout}>Logout</button>
+        <button onClick={logOut}>Logout</button>
       </>
     );
 
@@ -51,14 +51,11 @@ class NavBar extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
-const mSTP = ({ session }) => {
-  return ({
+const mSTP = ({ session }) => ({
   currentUser: session.user,
-  })
-};
+});
 
 const mDTP = dispatch => ({
   logout: () => dispatch(logout()),

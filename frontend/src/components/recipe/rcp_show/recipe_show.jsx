@@ -140,8 +140,6 @@ class RecipeShow extends React.Component {
             </div>
           </div>
 
-          
-
           <div className="recipe-general-comments">
             <h2>Comments</h2>
             <Comments

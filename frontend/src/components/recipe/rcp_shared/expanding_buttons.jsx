@@ -1,12 +1,12 @@
 import React from 'react';
 import { connect} from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { BsPlusCircleFill } from 'react-icons/bs';
-import { FaCheckCircle } from 'react-icons/fa'
+import { FaCheckCircle } from 'react-icons/fa';
 
-import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
 import './expanding_buttons.scss'
-import { Link } from 'react-router-dom';
+import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
 import { closeModal } from '../../../actions/modal_actions';
 
 const PinButtonPresentational = ({recipeId, pinned, loggedOut, pinRecipe, unpinRecipe, closeModal }) => {
@@ -56,7 +56,6 @@ const mapDispatch = dispatch => {
 export const PinButton = connect(mapState, mapDispatch)(PinButtonPresentational);
 
 export const CreateRecipeButton = () => {
-
   return (
     <Link to="/new-recipe" className="expanding-button">
       <BsPlusCircleFill className="expanding-button-icon" size={25} />
