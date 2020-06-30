@@ -39,7 +39,12 @@ class Comments extends React.Component {
         </span>
       </form>
     ) : <div className='prompt-signin-comment'>
-      <Link className='link-login' to='/login'>Login</Link> to comment
+        <Link className='link-login' 
+          to={{ 
+            pathname: '/login',
+            state: {'prevPath': `/recipes/${this.props.recipeId}`}
+          }}>Login
+        </Link> to comment
     </div>;
 
 

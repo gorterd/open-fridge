@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import { AuthRoute, ProtectedRoute } from "../util/route_util";
 
 import Modal from './modal/modal';
@@ -15,11 +15,12 @@ const App = () => (
     <Modal />
     <Switch>
       <Route exact path="/" component={SplashContainer} />
-      <ProtectedRoute exact path="/new-recipe" component={RecipeCreateContainer} />
       <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> 
       
       <AuthRoute exact path="/login" component={LoginFormContainer} />
+      <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} /> 
+      <ProtectedRoute exact path="/new-recipe" component={RecipeCreateContainer} />
       <ProtectedRoute exact path="/users/:userId" component={ProfileShowContainer} />
     </Switch>
   </div>

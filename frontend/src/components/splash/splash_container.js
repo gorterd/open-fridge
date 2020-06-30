@@ -4,11 +4,10 @@ import Splash from './splash';
 import { openModal, closeModal } from '../../actions/modal_actions';
 import { fetchRecipes, clearRecipes } from '../../actions/recipe_actions';
 
-const mSTP = ({ entities: { recipes } }) => {
-  return {
+const mSTP = ({ entities: { recipes } }, ownProps) => ({
     recipes: Object.values(recipes),
-  }
-}
+    prevPath: ownProps.location.pathname
+});
 
 const mDTP = dispatch => ({
   fetchRecipes: query => dispatch(fetchRecipes(query)),

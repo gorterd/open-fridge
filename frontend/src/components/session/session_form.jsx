@@ -14,6 +14,9 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log("sessionprops start")
+    console.log(this.props)
+    console.log("sessionprops end")
   }
 
   componentWillUnmount() {
@@ -29,7 +32,11 @@ class SessionForm extends React.Component {
     else {
       this.props.history.goBack()
       this.props.processForm(user)
-        // .then( () => {  })
+        .then( () => { 
+          if (this.props.location.state && this.props.prevPath.state) {
+            this.props.history.push(this.props.prevPath.state.prevPath)
+          }
+        })
     }
   }
 
@@ -152,13 +159,6 @@ class SessionForm extends React.Component {
         <Link className="session-logo" to="/"></Link>
 
         <div className={`${session}-div`}>
-          {/* <Link className="logo-small signup-logo" to="/">  //SHOULD WE HAVE LOGO FOR SIGNUP?
-            <img
-              src={window.small_logo}  ///////////////NEED LOGO
-              className="logo-small signup-logo"
-              draggable="false"/>
-          </Link> */}
-
           <h1>Member Signup</h1>
 
           <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>

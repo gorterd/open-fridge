@@ -30,7 +30,12 @@ const RecipePreview = props => {
       {pinButton}
     </>
   ) : (
-    <Link to="/login" onClick={() => closeModal()}>
+    <Link onClick={() => closeModal()}
+      to={{
+        pathname: '/login',
+        state: { 'prevPath': `/recipes/${currentRecipe._id}` }
+      }}
+    >
       <BsPlusCircleFill className="rpm-pinRecipe-button" size={25} />
       <span className="rpm-signin-text">Log in to pin this recipe</span>
     </Link>

@@ -10,13 +10,17 @@ import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
 class NavBar extends React.Component {
   render() {
     const { currentUser, logout } = this.props;
-    console.log(currentUser);
+    let prevPath = this.props.prevPath ? this.props.prevPath : "/";
     const navbarRight = !currentUser ? (
       <>
         <Link className="signupButton sessionButton" to="/signup">
           Sign Up
         </Link>
-        <Link className="loginButton sessionButton" to="/login">
+        <Link className="loginButton sessionButton" 
+          to={{
+            pathname: '/login',
+            state: { prevPath }
+          }}>
           Log In
         </Link>
       </>
@@ -33,7 +37,11 @@ class NavBar extends React.Component {
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
-        <button onClick={logout}>Logout</button>
+          <button onClick={() => {
+            console.log(this.props)
+            logout();
+            // this.props.history.push("/");
+          }}>Logout</button>
       </>
     );
 
@@ -54,15 +62,14 @@ class NavBar extends React.Component {
   }
 }
 
-const mSTP = ({ session }) => {
-  return ({
+const mSTP = ({ session }, ownProps) => ({
   currentUser: session.user,
-  })
-};
+  prevPath: ownProps.prevPath,
+});
 
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout()),
-})
+  logout: () => dispatch(logout())
+});
 
 export default connect(mSTP, mDTP)(NavBar);
 
