@@ -1,0 +1,72 @@
+$pumpkin-orange: #F25C0E; 
+
+@keyframes grow {
+  from {
+    width: 25px;
+    color: transparent;
+  }
+
+  30% {
+    color: transparent;
+  }
+
+  to {
+    color: white;
+    width: 100%;
+  }
+}
+
+.expanding-button {
+  position: relative;
+
+  &:hover {
+    .expanding-button-icon { display: none; }
+    .expanding-button-text { display: flex; }
+  }
+}
+
+.expanding-button-icon {
+  color: $pumpkin-orange;
+}
+
+.expanding-button-text {
+  background: $pumpkin-orange;
+  align-items: center;
+  color: white;
+  border-radius: 25px;
+  display: none;
+  font-size: 14px;
+  font-weight: 400;
+  height: 25px;
+  padding: 0 10px;
+  white-space: nowrap;
+
+  animation-name: grow;
+  animation-duration: 200ms;
+}
+
+.rpm-pinRecipe-container .expanding-button, 
+.nbr-uploadContainer .expanding-button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.rpm-pinRecipe-container .expanding-button {
+  padding: 10px 0 10px 10px;
+}
+
+.nbr-uploadContainer .expanding-button {
+  padding-left: 10px;
+}
+
+.rps-pinRecipe-container .expanding-button {
+  display: flex;
+  justify-content: flex-start;
+  padding: .7vw;
+}
+
+.nbr-uploadContainer .expanding-button {
+  margin-right: 15px;
+}
+
+

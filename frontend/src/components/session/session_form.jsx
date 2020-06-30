@@ -30,6 +30,7 @@ class SessionForm extends React.Component {
       this.props.demoUser(user);
     }
     else {
+      this.props.history.goBack()
       this.props.processForm(user)
         .then( () => { 
           if (this.props.location.state && this.props.prevPath.state) {

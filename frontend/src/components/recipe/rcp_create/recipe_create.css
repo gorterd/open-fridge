@@ -1,0 +1,231 @@
+.recipe-create-div {
+  width: 100vw;
+  height: 100vh;
+  /* background-color: khaki; */
+  overflow: hidden;
+  border: 20px solid rgba(245, 245, 245, 0.692);
+  border-radius: 50px;
+  display: flex;
+  background-color: rgba(245, 245, 245, 0.692)
+}
+
+.recipe-create-image {
+  width: 40%;
+  height: auto;
+}
+
+.recipe-create-div-wrap {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-evenly;
+  background-color: rgb(226, 162, 90);
+  width: 60%;
+  height: 100vh;
+}
+
+.recipe-create-left {
+  width: 50%;
+  height: 100vh;
+}
+
+.recipe-not-ingredients {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.recipe-not-ingredients > h1 {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: underline;
+  margin-top: 15px;
+  margin-bottom: 20px;
+}
+
+.recipe-name, .recipe-servings, .recipe-directions {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  border-radius: 6px;
+  width: 85%;
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+}
+
+#recipe-name, #recipe-servings, #recipe-directions {
+  padding-top: 8px;
+  font-size: 18px;
+  /* box-sizing: border-box; */
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+label {
+  font-size: 20px;
+  background-color: white;
+  text-align: center;
+}
+
+/* INGREDIENTS */
+.recipe-create-right {
+  width: 50%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recipe-image, .recipe-time {
+  display: flex;
+  flex-direction: column;
+  border: 3px solid black;
+  border-radius: 6px;
+  width: 85%;
+  margin-top: 10px; 
+  margin-bottom: 10px; 
+}
+
+#recipe-image, #recipe-time {
+  /* padding-top: 8px; */
+  font-size: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.ingredient-outer-form {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 10px;
+  width: 100%;
+  height: 70%;
+}
+
+.recipe-ingredients-div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.recipe-create-ingredient-header {
+  width: 85%;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 15px;
+  padding-bottom: 8px;
+  background-color: white;
+  border-radius: 6px 6px 0px 0px;
+  border-top: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+}
+
+.recipe-create-ingredients-wrap {
+  width: 85%;
+  background-color: white;
+  overflow-y: scroll;
+  border-radius: 0px 0px 6px 6px;
+  border-bottom: 3px solid black;
+  border-left: 3px solid black;
+  border-right: 3px solid black;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-create-ingredients-wrap > input {
+  border-bottom: 1px solid gray;
+  padding-top: 5px;
+  font-size: 18px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  width: 92%;
+}
+
+.plabel {
+  font-size: 20px;
+  /* align-self: center; */
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 25px;
+}
+
+#add-ingredient-btn {
+  font-size: 15px;
+  padding-right: 5px;
+}
+
+#recipe-create-btn {
+  background-color: white;
+  font-size: 20px;
+  text-align: center;
+  width: 85%;
+  height: 50px;
+  margin-top: 10px;
+  border: 4px;
+  border-style: outset;
+  border-radius: 6px;
+
+  border: solid 8px rgb(126, 126, 126); 
+  clip-path: polygon( 
+    calc(0% + 3px) calc(0% + 3px), 
+    calc(100% - 3px) calc(0% + 3px), 
+    calc(100% - 3px) calc(100% - 3px),
+    calc(0% + 3px) calc(100% - 3px)
+  );
+  transition: clip-path 0.3s linear;
+
+}
+
+#recipe-create-btn:hover {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  border-color: #2a4e5c /* rgb(45, 164, 45) */
+}
+
+input textarea {
+  background-color: white;
+  border-radius: 6px;
+}
+    
+/* ERRORS */
+[class*="Errors-create"] {
+  color: #A44A3F;
+  background-color: whitesmoke;
+  border: .5px solid #F19C79;
+  width: 160px;
+  padding: 3px;
+  position: relative;
+  right: 150px;
+  top: 32px;
+  margin-top: -40px;
+  transform: translateX(0px);
+  animation: slide-left 2s;
+}
+
+@keyframes slide-left {
+  from {left: 50px;}
+  to {left: -150px;}
+}
+
+.servingsErrors-create {
+  margin-top: -24px;
+}
+
+.recipe-create-home-btn {
+  position: fixed;
+  top: 40px;
+  left: 40px;
+}
+
+.recipe-create-logo {
+  position: fixed;
+  top: 30px;
+  left: 30px;
+}

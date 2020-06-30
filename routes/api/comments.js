@@ -3,8 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 
 const Comment = require("../../models/Comment")
-const User = require("../../models/User")
-const Recipe = require("../../models/Recipe")
 
 router.post("/", passport.authenticate("jwt", { session: false }), (req, res) => {
 

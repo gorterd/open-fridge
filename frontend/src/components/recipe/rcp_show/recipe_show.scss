@@ -1,0 +1,481 @@
+.recipe-show-page {
+  
+  .navbar-main {
+    width: 100%;
+  }
+
+}
+
+.recipe-show-container{
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: hsl(45, 50%, 92%);
+  
+  .recipe-show-image {
+    width: 100%;
+  }
+
+  .recipe-show-information{
+    position: absolute;
+    right: 6%;
+    top: calc(105px + 5vw);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(20,20,20);
+    width: 34.5vw;
+    height: 42vw;
+    border-radius: 10px;
+    background-color: rgba(211, 211, 211, 0.8);
+    padding: 0 1.5vw 1.5vw 1.5vw;
+
+    >* { 
+      margin: auto; 
+    }
+
+    .rps-pinRecipe-container {
+      align-self: flex-start;
+      margin: 1vw 0 0 0 ;
+    }
+    
+    h1 {
+      display: block;
+      // font-size: 4rem;
+      font-size: 4.4vw;
+      font-weight: 600;
+      text-align: center;
+      max-height: 265px;
+      margin-top: 0px;
+
+      &.long-title {
+        // font-size: 3rem;
+        font-size: 3.3vw;
+      }
+    }
+
+    > span {
+      display: block;
+      width: 80%;
+      background-color: white;
+      color: black;
+      font-size: 1.9vw;
+      font-weight: 600;
+      padding: 1.4vw;
+      border-radius: 10px;
+      box-shadow: inset 0 0 5px 0 rgb(56, 56, 56);
+
+      a {
+        font-weight: 600;
+        color: hsl(205, 75%, 35%);
+        &:hover { text-decoration: underline;}
+      }
+
+      span { 
+        font-style: italic; 
+        margin-right: 10px;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .recipe-show-main {
+    width: 70%;
+  }
+
+  .recipe-show-ingredients, .recipe-show-instructions, .recipe-show-servings, .recipe-show-time {
+    margin: 40px 0 ;
+    width: 70%;
+    
+    h2 {
+      font-size: 4rem;
+      margin: 40px 0 20px 40px;
+    }
+
+    li > .comments-container, > .comments-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      > span {
+        margin-left: 0;
+      }
+
+      &:hover, &.active {
+        background-color: hsl(32, 82%, 83%);
+
+        > .recipe-comments-popout > span{
+            visibility: visible;
+        }
+      }
+
+
+      .recipe-comments-popout {
+        position: relative;
+        >span {
+          visibility: hidden;
+          position: relative;
+          color: rgb(20,20,20);
+          &:hover {
+            color: hsla(27, 90%, 40%, 1);
+          }
+        }
+
+        &.with-comments > span {
+          visibility: visible;
+
+          .comment-balloon-content {
+            font-size: 0.9rem;
+            right: 9px;
+            bottom: 11.5px;
+          }
+        }
+
+        .comment-balloon-content {
+          position: absolute;
+          right: 10px;
+          bottom: 8.4px;
+          font-size: 1.5rem;
+          font-weight: bold;
+          display: inline-block;
+          width: 10px;
+          text-align: center;
+
+        }
+
+        .recipe-comments {
+          position: absolute;
+          cursor: default;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          padding: 20px 30px;
+          align-items: center;
+          font-size: 1.1rem;
+          width: calc((100vw / 3) );
+          min-height: 150px;
+          left: 60px;
+          background-color: hsl(32, 82%, 83%);
+          // border: 1px solid black;
+          border-radius: 10px;
+          z-index: 0;
+
+          @keyframes fadein {
+            from {
+              opacity: 0;
+              transform: translateX(-300px);
+            }
+            
+            50% {
+              opacity: 0.2;
+              transform: translateX(-80px);
+            }
+
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          animation-name: fadein;
+          animation-iteration-count: 1;
+          animation-duration: 200ms;
+
+          .prompt-signin-comment {
+            width: 100%;
+            border: 1px solid black;
+            background-color: white;
+            border-radius: 5px;
+            min-height: 100px;
+            padding: 10px;     
+          }
+
+          .link-login {
+            line-height: 2rem;
+            color: #1b7abf;
+            text-decoration: underline;
+            
+            &:hover {
+              font-weight: 600;
+              cursor: pointer;
+            }
+          }
+
+          ul { width: 100%; }
+
+          li {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            margin-bottom: 15px;
+            border-bottom: 1px solid black;
+
+            &:first-child {
+              margin-top: 0;
+            }
+
+            > span:first-child {
+              flex: 4;
+              padding: 10px;
+              margin-top: 10px;
+              line-height: 1.7rem;
+            }
+
+            div {
+              align-self: stretch;
+              flex: 1;
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              justify-content: space-between;
+              padding-bottom: 12px;
+              
+              .comment-delete {
+                font-weight: bold;
+                color: hsl(0, 75%, 35%);
+                cursor: pointer;
+                &:hover { color: hsl(0, 100%, 45%); }
+              }
+              
+              .comment-username {
+                margin-top: auto;
+                color: #1b7abf;
+                font-style: italic;
+              }
+            }
+          }
+        }
+        
+      }
+    }
+  }
+}
+
+.recipe-show-ingredients {
+  border: 1px solid black;
+  background-color: hsl(45, 100%, 98%);
+  border-radius: 10px;
+  padding-bottom: 20px;
+
+  > h2:first-child { margin-top: 30px;}
+
+  li > .comments-container {
+    font-size: 1.75rem;
+    padding: 20px;
+    padding-left: 40px;
+    
+    .recipe-comments {
+      top: -20px;
+    }
+  }
+}
+
+.recipe-show-instructions {
+
+  li > .comments-container {
+    font-size: 1.75rem;
+    line-height: 1.75rem;
+    padding: 15px 20px;
+
+    >span { 
+      font-size: 1.25rem;
+      margin-right: 25px;
+
+      >span:first-child {
+        position: absolute;
+      }
+      >span:nth-child(2) {
+        padding-left: 25px;
+        display: inline-block;
+      }
+    }
+
+    .recipe-comments {
+      top: -15px;
+
+    }
+
+  }
+}
+
+.recipe-show-time, .recipe-show-servings {
+  .comments-container {
+    font-size: 1.75rem;
+    line-height: 1.75rem;
+    padding: 20px;
+
+    .recipe-comments {
+      top: -20px;
+    }
+  }
+}
+
+.recipe-comments-popout .recipe-comments form {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  textarea {
+    width: 100%;
+    border: 1px solid hsl(0, 0%, 75%);
+    background-color: white;
+    border-radius: 5px;
+    min-height: 100px;
+    margin-bottom: 10px;
+    padding: 10px;
+    resize: vertical;
+  }
+
+  span {
+    align-self: flex-end;
+    color: white;
+    font-weight: 600;
+    text-shadow: 0.5px 0.5px 0.5px hsl(0, 0, 40%);
+    background-color: hsl(115, 50%, 50%);
+    border-radius: 5px;
+    padding: 10px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background-color: hsl(115, 50%, 46%);
+    }
+
+  }
+
+}
+
+.recipe-general-comments {
+  width: 70%;
+
+  h2 {
+    font-size: 4rem;
+    margin: 40px 0 20px 40px;
+  }
+}
+
+.recipe-general-comments .recipe-comments {
+  border-top: 2px solid rgb(30,30,30);
+  display: flex;
+  flex-direction: column;
+  padding: 20px 30px;
+  align-items: center;
+  font-size: 1.1rem;
+  width: 100%;
+  min-height: 150px;
+
+  .link-login {
+    line-height: 2rem;
+    color: #1b7abf;
+    text-decoration: underline;
+    
+    &:hover {
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+
+  ul { width: 100%; }
+
+  li {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgb(30,30,30);
+
+    &:first-child {
+      margin-top: 30px;
+    }
+
+    > span:first-child {
+      flex: 4;
+      padding: 10px;
+      margin-top: 10px;
+      line-height: 1.7rem;
+    }
+
+    div {
+      align-self: stretch;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-bottom: 15px;
+      
+      .comment-delete {
+        font-weight: bold;
+        color: hsl(0, 75%, 35%);
+        cursor: pointer;
+        &:hover { color: hsl(0, 100%, 45%); }
+      }
+      
+      .comment-username {
+        // text-align: right;
+        color: #1b7abf;
+        font-style: italic;
+        margin-top: auto;
+
+      }
+    }
+  }
+
+  form {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top: 30px;
+
+    textarea {
+      width: 100%;
+      border: 1px solid hsl(0, 0%, 75%);
+      border-radius: 5px;
+      min-height: 150px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: white;
+      resize: vertical;
+    }
+
+    span {
+      align-self: flex-end;
+      color: white;
+      font-weight: 600;
+      text-shadow: 0.5px 0.5px 0.5px hsl(0, 0, 40%);
+      background-color: hsl(115, 50%, 50%);
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: hsl(115, 50%, 46%);
+      }
+    }
+  }
+
+  margin-bottom: 70px;
+
+  .prompt-signin-comment {
+      width: 50%;
+      border: 1px solid hsl(0, 0%, 75%);
+      border-radius: 5px;
+      min-height: 150px;
+      margin: 10px 0;
+      padding: 10px;
+      background-color: white;
+    }
+}
+
+.prompt-signin-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  a { width:100%; text-align: center;}
+}
