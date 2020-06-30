@@ -14,6 +14,9 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    console.log("sessionprops start")
+    console.log(this.props)
+    console.log("sessionprops end")
   }
 
   componentWillUnmount() {
@@ -28,7 +31,10 @@ class SessionForm extends React.Component {
     }
     else {
       this.props.processForm(user)
-        .then( () => { this.props.history.goBack() })
+        .then( () => { 
+          if (this.props.location.state && this.props.prevPath.state)
+            this.props.history.push(this.props.prevPath.state.prevPath)
+         })
     }
   }
 

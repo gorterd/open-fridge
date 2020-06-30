@@ -9,13 +9,16 @@ import { BsPlusCircleFill } from 'react-icons/bs';
 class NavBar extends React.Component {
   render() {
     const { currentUser, logout } = this.props;
-    console.log(currentUser);
     const navbarRight = !currentUser ? (
       <>
         <Link className="signupButton sessionButton" to="/signup">
           Sign Up
         </Link>
-        <Link className="loginButton sessionButton" to="/login">
+        <Link className="loginButton sessionButton" 
+          to={{
+            pathname: '/login',
+            state: { 'prevPath': `${this.props.prevPath}` }
+          }}>
           Log In
         </Link>
       </>
@@ -31,7 +34,7 @@ class NavBar extends React.Component {
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
-        <button onClick={logout}>Logout</button>
+          <button onClick={logout}>Logout</button>
       </>
     );
 
@@ -59,7 +62,7 @@ const mSTP = ({ session }) => {
 };
 
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout())
 })
 
 export default connect(mSTP, mDTP)(NavBar);

@@ -4,7 +4,8 @@ import { login, clearErrors } from "../../actions/session_actions";
 
 const mapStateToProps = (state, ownProps) => ({
   formType: "login",
-  errors: state.errors.session,
+    errors: state.errors.session,
+    prevPath: ownProps.location
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -14,7 +15,8 @@ const mapDispatchToProps = (dispatch) => ({
 
 const LoginFormContainer = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(SessionForm);
+
 
 export default LoginFormContainer;
