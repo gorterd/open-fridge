@@ -33,15 +33,7 @@ class SessionForm extends React.Component {
       this.props.processForm(user)
         .then( () => { 
           if (this.props.location.state && this.props.prevPath.state) {
-            if (this.props.prevPath.state.prevPath === "/") {
-              console.log("TEST TEST TEST RELOAD BEGIN")
-              console.log(e)
-              console.log(this.props.currentUser)
-              console.log("TEST TEST TEST RELOAD END")
-
-            } else {
-              this.props.history.push(this.props.prevPath.state.prevPath)
-            }
+            this.props.history.push(this.props.prevPath.state.prevPath)
           }
         })
     }

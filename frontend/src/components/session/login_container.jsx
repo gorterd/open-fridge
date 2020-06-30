@@ -11,8 +11,8 @@ const mapStateToProps = (state, ownProps) => {
   formType: "login",
   errors: state.errors.session,
   prevPath: ownProps.location,
-  currentUser: state.session.user }
-  // currentUser: sessionReducer.user }
+  currentUser: state.session.user,
+  sessionUser: sessionReducer.user }
 };
 
 const mapDispatchToProps = (dispatch) => ({
