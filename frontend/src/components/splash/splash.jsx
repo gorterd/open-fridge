@@ -140,7 +140,7 @@ class Splash extends React.Component {
 
     return (
       <>
-        <NavBar />
+        <NavBar prevPath={this.props.prevPath}/>
 
         <div className="splash-main">
           <div className="splash-main-searchbar">
