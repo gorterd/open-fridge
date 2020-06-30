@@ -19,9 +19,10 @@ const Comment = require("../../models/Comment");
 
 router.get('/', (req, res) => {
   let results = Recipe.aggregate();
-  let { ingredients, skip, num, include } = req.query;
+  let { ingredients, name, skip, num, include } = req.query;
   
   results = new FilterResults(results)
+    .byName(name)
     .byIngredients(ingredients)
     .with(include)
     .complete();

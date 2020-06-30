@@ -1,6 +1,8 @@
 class FilterResults {
   constructor(results){
     this.results = results;
+    this.sorts = [];
+    this.appends = [];
   }
 
   with(included){
@@ -38,7 +40,20 @@ class FilterResults {
     return this;
   }
 
+  byName(name){
+    if (name){
+      this.results.match({ 'name': { $regex: new RegExp(name, 'i') } });
+    }
+    return this;
+  }
+
   complete() {
+    const sortObject = Object.assign( ...this.sorts, { _id: 1 } );
+    const appendObject = this.appends.length ? Object.assign( {}, ...this.appends) : null;
+
+    this.results.sort(sortObject)
+    if (appendObject) (this.results.append(appendObject));
+
     return this.results;
   }
 
@@ -96,9 +111,13 @@ class FilterResults {
     });
 
     //sort by ingredients weighting, desc, and remove the field for weighting
-    this.results
-      .sort({ingredientsWeight: -1, _id: 1})
-      .append({ $unset: "ingredientsWeight" });
+    this.sorts.push({ ingredientsWeight: -1 });
+    this.appends.push({ $unset: "ingredientsWeight" });
+
+
+    // this.results
+    //   .sort({ingredientsWeight: -1, _id: 1})
+    //   .append({ $unset: "ingredientsWeight" });
 
     return this;
   }
