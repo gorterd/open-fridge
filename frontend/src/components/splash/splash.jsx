@@ -140,7 +140,7 @@ class Splash extends React.Component {
 
     return (
       <>
-        <NavBar />
+        <NavBar prevPath={this.props.prevPath}/>
 
         <div className="splash-main">
           <div className="splash-main-searchbar">
@@ -178,10 +178,10 @@ class Splash extends React.Component {
             </div>
             <div className="smf-promo-links">
               <ul className="teamMembers">
-                <li><a href="https://github.com/gorterd">Daniel Gorter</a></li>
-                <li><a href="https://github.com/Lo-Eric">Eric Lo</a></li>
-                <li><a href="https://github.com/keely-lee">Keely Lee</a></li>
-                <li><a href="https://github.com/tt954">Tieulam Thai</a></li>
+                <li><a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer">Daniel Gorter</a></li>
+                <li><a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer">Eric Lo</a></li>
+                <li><a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer">Keely Lee</a></li>
+                <li><a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer">Tieulam Thai</a></li>
               </ul>
             </div>
           </div>

@@ -7,7 +7,7 @@ import { logout } from '../../actions/session_actions';
 import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons';
 
 const NavBar = props => {
-    const { currentUser, logout } = props;
+    const { currentUser, logout, prevPath } = props;
     let history = useHistory();
 
     const logOut = () => {
@@ -20,7 +20,11 @@ const NavBar = props => {
         <Link className="signupButton sessionButton" to="/signup">
           Sign Up
         </Link>
-        <Link className="loginButton sessionButton" to="/login">
+        <Link className="loginButton sessionButton"
+          to={{
+            pathname: '/login',
+            state: { prevPath },
+          }}>
           Log In
         </Link>
       </>
@@ -53,13 +57,14 @@ const NavBar = props => {
     );
 }
 
-const mSTP = ({ session }) => ({
+const mSTP = ({ session }, ownProps) => ({
   currentUser: session.user,
+  prevPath: ownProps.prevPath,
 });
 
 const mDTP = dispatch => ({
-  logout: () => dispatch(logout()),
-})
+  logout: () => dispatch(logout())
+});
 
 export default connect(mSTP, mDTP)(NavBar);
 
