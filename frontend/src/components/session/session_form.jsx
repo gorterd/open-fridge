@@ -14,9 +14,7 @@ class SessionForm extends React.Component {
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
-    console.log("sessionprops start")
-    console.log(this.props)
-    console.log("sessionprops end")
+    this._redirectAfterSubmit = this._redirectAfterSubmit.bind(this);
   }
 
   componentWillUnmount() {
@@ -27,16 +25,12 @@ class SessionForm extends React.Component {
     e.preventDefault();
     const user = Object.assign({}, this.state);
     if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) {
-      this.props.demoUser(user);
+      this.props.demoUser(user)
+        .then(this._redirectAfterSubmit);
     }
     else {
-      this.props.history.goBack()
       this.props.processForm(user)
-        .then( () => { 
-          if (this.props.location.state && this.props.prevPath.state) {
-            this.props.history.push(this.props.prevPath.state.prevPath)
-          }
-        })
+        .then(this._redirectAfterSubmit);
     }
   }
 
@@ -56,6 +50,16 @@ class SessionForm extends React.Component {
     return () => {
       this.setState(user)
     };
+  }
+
+  _redirectAfterSubmit(user){
+    if (this.props.prevPath.state
+      && this.props.prevPath.state.prevPath !== '/'
+    ) {
+      this.props.history.push(this.props.prevPath.state.prevPath)
+    } else {
+      this.props.history.push(`/users/${user.id}`);
+    }
   }
 
   render() {
@@ -101,19 +105,19 @@ class SessionForm extends React.Component {
         <div className={`${session}-container`}>
           <div className="session-github">
             <a href="https://github.com/gorterd/open-fridge.git" id="of-github">oF</a>
-            <a href="https://github.com/gorterd" id="dg-github">DG</a>
-            <a href="https://github.com/EricLo1321" id="dg-github">EL</a>
-            <a href="https://github.com/keely-lee" id="dg-github">KL</a>
-            <a href="https://github.com/tt954" id="dg-github">TT</a>
+            <a href="https://github.com/gorterd" className="dg-github">DG</a>
+            <a href="https://github.com/EricLo1321" className="dg-github">EL</a>
+            <a href="https://github.com/keely-lee" className="dg-github">KL</a>
+            <a href="https://github.com/tt954" className="dg-github">TT</a>
             <FaGithub />
           </div>
-          {/* <div className="session-linkedin">
+          <div className="session-linkedin">
+            <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" className="dg-linkedin">TT</a>
+            <a href="https://www.linkedin.com/in/keely-lee1/" className="dg-linkedin">KL</a>
+            {/* <a href="" className="dg-linkedin">EL</a> */}
+            <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" className="dg-linkedin">DG</a>
             <FaLinkedin />
-            <a href="" id="dg-linkedin">TT</a>
-            <a href="https://www.linkedin.com/in/keely-lee1/" id="dg-linkedin">KL</a>
-            <a href="" id="dg-linkedin">EL</a>
-            <a href="" id="dg-linkedin">DG</a>
-          </div> */}
+          </div>
 
           <h1>Member Login</h1>
 
@@ -140,7 +144,10 @@ class SessionForm extends React.Component {
 
             <div className="other-link-wrap">
               <div className={loginErrorClass}>{loginErrorMsg}</div>
-              <Link to={`/${otherLink}`} className={`${session}-other-link`}>
+              <Link className={`${session}-other-link`} to={{
+                pathname: `/${otherLink}`,
+                state: { prevPath: this.props.prevPath.state ? this.props.prevPath.state.prevPath : this.props.prevPath }
+              }}>
                 Create an Account
               </Link>
 
@@ -169,7 +176,7 @@ class SessionForm extends React.Component {
                 placeholder="username"
                 onChange={this.update("username")}
                 className={`${session}-input ${session}-username`}
-                id={userErrorsCN}
+                id={userErrorsCN || 'sgn-user'}
               />
               <div className={`${userErrorsCN}-signup`}>{usernameErrors}</div>
 
@@ -179,7 +186,7 @@ class SessionForm extends React.Component {
                 placeholder="email"
                 onChange={this.update("email")}
                 className={`${session}-input ${session}-email`}
-                id={emailErrorsCN}
+                id={emailErrorsCN || 'sgn-email'}
               />
               <div className={`${emailErrorsCN}-signup`}>{emailErrors}</div>
 
@@ -189,7 +196,7 @@ class SessionForm extends React.Component {
                 placeholder="Password (min. 8 characters)"
                 onChange={this.update("password")}
                 className={`${session}-input ${session}-password`}
-                id={passErrorsCN}
+                id={passErrorsCN || 'sgn-password'}
               />
               <div className={`${passErrorsCN}-signup`}>{passwordErrors}</div>
 

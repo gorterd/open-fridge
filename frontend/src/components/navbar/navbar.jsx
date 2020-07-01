@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
-import { BsPlusCircleFill } from 'react-icons/bs';
 import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
 
 class NavBar extends React.Component {
@@ -13,7 +12,11 @@ class NavBar extends React.Component {
     let prevPath = this.props.prevPath ? this.props.prevPath : "/";
     const navbarRight = !currentUser ? (
       <>
-        <Link className="signupButton sessionButton" to="/signup">
+        <Link className="navSignupButton sessionButton" 
+          to={{
+            pathname: '/signup',
+            state: { prevPath }
+          }}>
           Sign Up
         </Link>
         <Link className="loginButton sessionButton" 
@@ -27,10 +30,6 @@ class NavBar extends React.Component {
     ) : (
       <>
         <div className="nbr-uploadContainer">
-          {/* <Link to="/new-recipe">
-            <BsPlusCircleFill className="nbr-uploadButton" size={25} />
-            <span className="nbr-uploadText">Upload a recipe</span>
-          </Link> */}
           <CreateRecipeButton />
         </div>
         <p>
@@ -38,9 +37,7 @@ class NavBar extends React.Component {
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
           <button onClick={() => {
-            console.log(this.props)
             logout();
-            // this.props.history.push("/");
           }}>Logout</button>
       </>
     );

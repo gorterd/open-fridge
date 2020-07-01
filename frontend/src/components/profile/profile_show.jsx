@@ -3,15 +3,6 @@ import './profile_show.css';
 import NavBar from '../navbar/navbar';
 import { Link } from "react-router-dom";
 
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-
-
 class ProfileShow extends React.Component {
   constructor(props) {
     super(props);
@@ -59,9 +50,8 @@ class ProfileShow extends React.Component {
               Pinned Recipes
               <ul className={"list-recipes " + (showPinned ? "show-more" : 'show-less')}>
                 {this.props.allRecipes.map((recipe) => {
-                  if (recipe.author !== this.props.currentUser.id) {
-                    return (
-                      <div className="single-recipe">
+                  return (recipe.author !== this.props.currentUser.id) ? (
+                      <div key={recipe._id} className="single-recipe">
                         <div className='single-recipe-img'>
                           <img src={recipe.image} alt="recipe-img"></img>
                         </div>
@@ -71,8 +61,7 @@ class ProfileShow extends React.Component {
                           </Link>
                         </li>
                       </div>
-                    );
-                  }
+                  ) : null;
                 })}
               </ul>
               <button className="button" onClick={this.toggleShow('showPinned')}>
@@ -84,20 +73,18 @@ class ProfileShow extends React.Component {
               Your Recipes
               <ul className={"list-recipes " + ( showOwn ? "show-more" : 'show-less')}>
                 {this.props.allRecipes.map((recipe) => {
-                  if (recipe.author === this.props.currentUser.id) {
-                    return (
-                      <div className="single-recipe">
-                        <div className='single-recipe-img'>
-                          <img src={recipe.image} alt="recipe-img"></img>
-                        </div>
-                        <li>
-                          <Link to={`/recipes/${recipe._id}`} id="link">
-                            {recipe.name}
-                          </Link>
-                        </li>
+                  return (recipe.author === this.props.currentUser.id) ? (
+                    <div key={recipe._id} className="single-recipe">
+                      <div className='single-recipe-img'>
+                        <img src={recipe.image} alt="recipe-img"></img>
                       </div>
-                    );
-                  }
+                      <li>
+                        <Link to={`/recipes/${recipe._id}`} id="link">
+                          {recipe.name}
+                        </Link>
+                      </li>
+                    </div>
+                  ) : null;
                 })}
               </ul>
               <button className="button" onClick={this.toggleShow('showOwn')}>

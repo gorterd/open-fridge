@@ -38,6 +38,7 @@ export const login = (user) => (dispatch) => {
       sessionUtil.setAuthToken(token);
       const user = jwt_decode(token);
       dispatch(receiveCurrentUser(user));
+      return user;
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 };
@@ -56,6 +57,7 @@ export const signup = (user) => (dispatch) => {
       sessionUtil.setAuthToken(token);
       const user = jwt_decode(token);
       dispatch(receiveCurrentUser(user));
+      return user;
     })
     .catch((err) => dispatch(receiveErrors(err.response.data)));
 }; 

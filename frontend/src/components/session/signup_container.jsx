@@ -5,6 +5,7 @@ import { signup, login, clearErrors } from "../../actions/session_actions";
 const mapStateToProps = (state, ownProps) => ({
   formType: "signup",
   errors: state.errors.session,
+  prevPath: ownProps.location,
 });
 
 const mapDispatchToProps = (dispatch) => ({
