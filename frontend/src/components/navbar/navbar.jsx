@@ -18,14 +18,14 @@ const NavBar = props => {
   
   const navbarRight = !currentUser ? (
     <>
-      <Link className="signupButton sessionButton" 
+      <Link className="sessionButton" 
         to={{
           pathname: "/signup",
           state: { prevPath } 
         }}>
         Sign Up
       </Link>
-      <Link className="loginButton sessionButton" 
+      <Link className="sessionButton" 
         to={{
           pathname: '/login',
           state: { prevPath }

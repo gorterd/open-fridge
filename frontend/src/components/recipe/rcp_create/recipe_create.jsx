@@ -38,7 +38,11 @@ class RecipeCreate extends React.Component {
   }
 
   componentWillUnmount(){
-    this.props.clearErrors();
+    if (this.state.errors) {
+      console.log(this.state.errors)
+      console.log("RECIPECREATEERRORS")
+      this.props.clearErrors();
+    }
   }
 
   handleSubmit(e){
