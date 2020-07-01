@@ -19,6 +19,7 @@ class SessionForm extends React.Component {
 
   componentWillUnmount() {
     if (this.state.errors) {
+      // console.log(this.state.errors)
       this.props.clearErrors();
     }
   }
@@ -40,8 +41,6 @@ class SessionForm extends React.Component {
             this._redirectAfterSubmit(res);
           }
         })
-
-        // .then(this._redirectAfterSubmit)
     }
   }
 
