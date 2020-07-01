@@ -58,7 +58,8 @@ export const clearRecipes = () => ({
 
 export const fetchRecipe = recipeId => dispatch => {
   return RecipeAPIUtil.fetchRecipe(recipeId)
-    .then(recipe => verifyRecipePhoto(recipe.data))
+    .then(recipe => verifyRecipePhoto(recipe.data)
+      .catch(() => console.log('Could not verify recipe photo')))
     .then(recipe => {
       recipe.recipe.authorUsername = recipe.authorUsername;
       dispatch(receiveRecipe(recipe));
@@ -68,7 +69,8 @@ export const fetchRecipe = recipeId => dispatch => {
 
 export const fetchRecipes = query => dispatch => {
   return RecipeAPIUtil.fetchRecipes(query)
-    .then(recipes => verifyAllRecipePhotos(recipes.data))
+    .then(recipes => verifyAllRecipePhotos(recipes.data)
+      .catch(() => console.log('Could not verify recipe photos')))
     .then(recipes => { 
       dispatch(receiveRecipes(recipes)) })
     .catch(err => dispatch(receiveErrors(err.response.data)));
@@ -76,7 +78,8 @@ export const fetchRecipes = query => dispatch => {
 
 export const fetchPinnedRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchPinnedRecipes(userId)
-    .then(recipes => verifyAllRecipePhotos(recipes.data))
+    .then(recipes => verifyAllRecipePhotos(recipes.data)
+      .catch(() => console.log('Could not verify recipe photos')))
     .then((recipes) => {
       dispatch(receivePinnedRecipes(recipes.map( r => r._id)))
       dispatch(receiveRecipes(recipes));
@@ -86,16 +89,19 @@ export const fetchPinnedRecipes = (userId) => (dispatch) => {
 
 export const fetchOwnRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchOwnRecipes(userId)
-    .then(recipes => verifyAllRecipePhotos(recipes.data))
+    .then(recipes => {
+      verifyAllRecipePhotos(recipes.data)
+        .catch( () => console.log('Could not verify recipe photos'))})
     .then((recipes) => {
       dispatch(receiveRecipes(recipes));
     })
-    .catch((err) => dispatch(receiveErrors(err.response.data)));
+    .catch((err) => console.log('No recipes found'));
 };
 
 export const createNewRecipe = recipe => dispatch => {
   return RecipeAPIUtil.createRecipe(recipe)
-    .then(recipe => verifyRecipePhoto(recipe.data))
+    .then(recipe => verifyRecipePhoto(recipe.data)
+      .catch(() => console.log('Could not verify recipe photo')))
     .then(recipe => {
       dispatch(receiveRecipe(recipe))}) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
