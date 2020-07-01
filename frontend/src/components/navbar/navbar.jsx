@@ -1,34 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
+import { BsPlusCircleFill } from 'react-icons/bs';
+import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
 
-import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons';
-
-const NavBar = props => {
-    const { currentUser, logout, prevPath } = props;
-    let history = useHistory();
-
-    const logOut = () => {
-      logout(); 
-      history.push("/");
-    }
-
+class NavBar extends React.Component {
+  render() {
+    const { currentUser, logout } = this.props;
+    let prevPath = this.props.prevPath ? this.props.prevPath : "/";
     const navbarRight = !currentUser ? (
       <>
-        <Link className="navSignupButton sessionButton" 
-          to={{
-            pathname: '/signup',
-            state: { prevPath }
-          }}>
+        <Link className="signupButton sessionButton" to="/signup">
           Sign Up
         </Link>
-        <Link className="loginButton sessionButton"
+        <Link className="loginButton sessionButton" 
           to={{
             pathname: '/login',
-            state: { prevPath },
+            state: { prevPath }
           }}>
           Log In
         </Link>
@@ -36,14 +27,21 @@ const NavBar = props => {
     ) : (
       <>
         <div className="nbr-uploadContainer">
+          {/* <Link to="/new-recipe">
+            <BsPlusCircleFill className="nbr-uploadButton" size={25} />
+            <span className="nbr-uploadText">Upload a recipe</span>
+          </Link> */}
           <CreateRecipeButton />
         </div>
         <p>
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
-
-        <button onClick={logOut}>Logout</button>
+          <button onClick={() => {
+            console.log(this.props)
+            logout();
+            // this.props.history.push("/");
+          }}>Logout</button>
       </>
     );
 
@@ -61,6 +59,7 @@ const NavBar = props => {
         </div>
       </div>
     );
+  }
 }
 
 const mSTP = ({ session }, ownProps) => ({
