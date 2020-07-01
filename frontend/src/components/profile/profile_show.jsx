@@ -3,15 +3,6 @@ import './profile_show.css';
 import NavBar from '../navbar/navbar';
 import { Link } from "react-router-dom";
 
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-
-
 class ProfileShow extends React.Component {
   constructor(props) {
     super(props);

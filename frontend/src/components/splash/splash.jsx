@@ -178,11 +178,10 @@ class Splash extends React.Component {
             </div>
             <div className="smf-promo-links">
               <ul className="teamMembers">
-                {/* add links for linkedin, etc. */}
-                <li>Daniel Gorter</li>
-                <li>Eric Lo</li>
-                <li>Keely Lee</li>
-                <li>Tieulam Thai</li>
+                <li><a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer">Daniel Gorter</a></li>
+                <li><a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer">Eric Lo</a></li>
+                <li><a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer">Keely Lee</a></li>
+                <li><a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer">Tieulam Thai</a></li>
               </ul>
             </div>
           </div>
