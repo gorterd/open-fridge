@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import './recipe_create.css';
 import storage from './create-storage.jpg'
-import { FaPlus } from "react-icons/fa";
 
 class RecipeCreate extends React.Component {
   constructor(props) {
@@ -44,6 +43,7 @@ class RecipeCreate extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
+    console.log(this.state)
     this.props.createRecipe(this.state);
   }
 
@@ -60,9 +60,10 @@ class RecipeCreate extends React.Component {
 
   updateIngredient(key) {
     return (e) => {
-        const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
-        this.setState({ ingredientString: update })
-        this.setState({ ingredients: Object.values(this.state.ingredientString) });
+      const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
+      this.setState({ ingredientString: update })
+      this.setState({ ingredients: Object.values(this.state.ingredientString) });
+      // debugger
     }
   }
 
@@ -73,7 +74,6 @@ class RecipeCreate extends React.Component {
       this.setState((prevState) => ({
         inputs: prevState.inputs.concat([newInput]),
       }));
-      // this.state.inputs[this.state.inputs.length-1].select()
     };
   }
 
@@ -107,7 +107,6 @@ class RecipeCreate extends React.Component {
     }
 
     return (
-
       <div className="recipe-create-div">
         <Link className="session-logo recipe-create-logo" to="/"></Link>
         <img
@@ -126,9 +125,7 @@ class RecipeCreate extends React.Component {
                   <span className={`plabel recipe-ingredients ${ingErrorsCN}`}>
                     Ingredients:
                   </span>
-                  <button id="add-ingredient-btn">
-                    add <FaPlus />
-                  </button>
+                  <button id="add-ingredient-btn"></button>
                 </div>
                 <div className="recipe-create-ingredients-wrap">
                   {this.state.inputs.map((input, idx) => (
@@ -136,7 +133,7 @@ class RecipeCreate extends React.Component {
                       type="text"
                       key={`recipe-ingredient-${idx}`}
                       id={`recipe-ingredient-${idx}`}
-                      onChange={this.update("name")}
+                      onChange={this.updateIngredient(`recipe-ingredient-${idx}`)}
                     />
                   ))}
                 </div>
