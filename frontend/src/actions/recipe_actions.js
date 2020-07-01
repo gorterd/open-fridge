@@ -95,7 +95,10 @@ export const fetchOwnRecipes = (userId) => (dispatch) => {
 export const createNewRecipe = recipe => dispatch => {
   return RecipeAPIUtil.createRecipe(recipe)
     .then(recipe => verifyRecipePhoto({recipe: recipe.data}))
-    .then(recipe => dispatch(receiveRecipe(recipe))) 
+    .then(recipe => {
+      dispatch(receiveRecipe(recipe));
+      return recipe;
+    }) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
 }
 

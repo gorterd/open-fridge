@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import RecipeCreate from "./recipe_create"
 import { createNewRecipe, clearRecipeErrors } from "../../../actions/recipe_actions";
 
-const mSTP = state => ({
+const mSTP = (state, ownProps) => ({
   errors: state.errors.recipe
 });
 

@@ -37,17 +37,17 @@ class RecipeCreate extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(){
     this.props.clearErrors();
   }
 
-  handleSubmit(e) {
+  handleSubmit(e){
     e.preventDefault();
-    console.log(this.state)
-    this.props.createRecipe(this.state);
+    this.props.createRecipe(this.state)
+      .then((recipe) => this.props.history.push(`/recipes/${recipe.recipe._id}`))
   }
 
-  update(field) {
+  update(field){
     return (e) => {
       if (field === 'instructions') {
         let instruct = e.currentTarget.value.split(/\r?\n/)
@@ -58,16 +58,15 @@ class RecipeCreate extends React.Component {
     };
   }
 
-  updateIngredient(key) {
+  updateIngredient(key){
     return (e) => {
       const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
       this.setState({ ingredientString: update })
       this.setState({ ingredients: Object.values(this.state.ingredientString) });
-      // debugger
     }
   }
 
-  addInput() {
+  addInput(){
     const newInput = `input-${this.state.inputs.length}`;
 
     return (e) => {
@@ -77,7 +76,7 @@ class RecipeCreate extends React.Component {
     };
   }
 
-  render() {
+  render(){
     let errors = this.props.errors;
     let ingErrors = null;
     let ingErrorsCN = "";
