@@ -1,15 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
-import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
 
-class NavBar extends React.Component {
-  render() {
-    const { currentUser, logout } = this.props;
-    let prevPath = this.props.prevPath ? this.props.prevPath : "/";
+import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons';
+
+const NavBar = props => {
+    const { currentUser, logout, prevPath } = props;
+    let history = useHistory();
+
+    const logOut = () => {
+      logout(); 
+      history.push("/");
+    }
+
     const navbarRight = !currentUser ? (
       <>
         <Link className="navSignupButton sessionButton" 
@@ -19,10 +25,10 @@ class NavBar extends React.Component {
           }}>
           Sign Up
         </Link>
-        <Link className="loginButton sessionButton" 
+        <Link className="loginButton sessionButton"
           to={{
             pathname: '/login',
-            state: { prevPath }
+            state: { prevPath },
           }}>
           Log In
         </Link>
@@ -36,9 +42,8 @@ class NavBar extends React.Component {
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
-          <button onClick={() => {
-            logout();
-          }}>Logout</button>
+
+        <button onClick={logOut}>Logout</button>
       </>
     );
 
@@ -56,7 +61,6 @@ class NavBar extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 const mSTP = ({ session }, ownProps) => ({

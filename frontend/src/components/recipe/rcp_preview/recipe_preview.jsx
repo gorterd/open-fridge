@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
 import { closeModal } from '../../../actions/modal_actions';
-import {PinButton} from '../rcp_shared/expanding_buttons';
+
+import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
+import { PinButton } from '../rcp_shared/expanding_buttons';
 
 const RecipePreview = props => {
   const { currentRecipe, closeModal } = props;
-  
+
   return (
     <>
       <img className="rpm-img" src={currentRecipe.image} alt="recipe-img" />
