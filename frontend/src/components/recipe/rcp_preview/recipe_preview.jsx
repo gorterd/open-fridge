@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import './recipe_preview.css';
 import { closeModal } from '../../../actions/modal_actions';
 
-import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
+// import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
 import { PinButton } from '../rcp_shared/expanding_buttons';
 
 const RecipePreview = props => {

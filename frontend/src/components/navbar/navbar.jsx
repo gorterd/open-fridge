@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
-import { BsPlusCircleFill } from 'react-icons/bs';
+// import { BsPlusCircleFill } from 'react-icons/bs';
 import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons'
 
 class NavBar extends React.Component {

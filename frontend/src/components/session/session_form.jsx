@@ -28,11 +28,20 @@ class SessionForm extends React.Component {
     const user = Object.assign({}, this.state);
     if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) {
       this.props.demoUser(user)
-        .then(this._redirectAfterSubmit);
+        .then(this._redirectAfterSubmit)
+        .catch(() => console.log("Session form has errors"));
     }
     else {
       this.props.processForm(user)
-        .then(this._redirectAfterSubmit);
+        .then((res) => {
+          if (res.type) {
+            console.log("Session form has errors");
+          } else {
+            this._redirectAfterSubmit(res);
+          }
+        })
+
+        // .then(this._redirectAfterSubmit)
     }
   }
 
@@ -55,6 +64,7 @@ class SessionForm extends React.Component {
   }
 
   _redirectAfterSubmit(user){
+    // debugger
     if (this.props.prevPath.state
       && this.props.prevPath.state.prevPath !== '/'
     ) {
