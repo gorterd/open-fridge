@@ -88,16 +88,14 @@ export const fetchOwnRecipes = (userId) => (dispatch) => {
   return RecipeAPIUtil.fetchOwnRecipes(userId)
     .then(recipes => verifyAllRecipePhotos(recipes.data))
     .then((recipes) => dispatch(receiveRecipes(recipes)))
-    .catch((err) => console.log("NO RECIPES FOUND")); 
+    .catch((err) => console.log("NO RECIPES FOUND"))
     // return dispatch(receiveErrors(err.response.data))});
 };
 
 export const createNewRecipe = recipe => dispatch => {
-  console.log(recipe)
   return RecipeAPIUtil.createRecipe(recipe)
     .then(recipe => verifyRecipePhoto({recipe: recipe.data}))
-    .then(recipe => {
-      dispatch(receiveRecipe(recipe))}) 
+    .then(recipe => dispatch(receiveRecipe(recipe))) 
     .catch((err) => dispatch(receiveNewRecipeErrors(err.response.data)));
 }
 
@@ -121,12 +119,11 @@ async function verifyRecipePhoto(data) {
 
 async function verifyAllRecipePhotos(recipes) {
   let verifyPromises = recipes.map( recipe => {
-    debugger
     return verifyPhoto(recipe.image)
-      .then( newUrl => recipe.image = newUrl );
+      .then( newUrl => recipe.image = newUrl )
   })
-
-  return Promise.all(verifyPromises).then( () => recipes);
+  return Promise.all(verifyPromises)
+    .then( () => recipes);
 }
 
 async function verifyPhoto(url){
