@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import './recipe_preview.css';
 import { closeModal } from '../../../actions/modal_actions';
+
 import { pinRecipe, unpinRecipe } from '../../../actions/recipe_actions';
 import { PinButton } from '../rcp_shared/expanding_buttons';
 
@@ -56,15 +57,12 @@ const RecipePreview = props => {
 const mSTP = ({ session, ui: { modal }}) => {
   return {
     session,
-    pinnedRecipes: session.pinnedRecipes,
     currentUser: session.user,
     currentRecipe: modal.data,
   }
 }
 
 const mDTP = dispatch => ({
-  pinRecipe: recipeId => dispatch(pinRecipe(recipeId)),
-  unpinRecipe: recipeId => dispatch(unpinRecipe(recipeId)),
   closeModal: () => dispatch(closeModal()),
 })
 

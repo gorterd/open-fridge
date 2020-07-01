@@ -352,7 +352,8 @@ body {
   position: absolute;
 }
 
-.session-linkedin, .session-github {
+.session-linkedin, 
+.session-github {
   position: fixed;
   cursor: pointer;
   right: 5px;
@@ -364,7 +365,13 @@ body {
   display: flex;
 }
 
-.session-github > a {
+.session-linkedin {
+  top: 50px;
+  display: flex;
+}
+
+.session-github > a,
+.session-linkedin > a {
   visibility: hidden;  
   opacity: 0;
   transition: visibility 0s, opacity 1.5s linear;
@@ -378,11 +385,9 @@ body {
   color: white;
 }
 
-.session-github:hover > a {
+.session-github:hover > a,
+.session-linkedin:hover > a {
   visibility: visible;
   opacity: 1;
 }
 
-/* .session-linkedin {
-  top: 40px;
-} */

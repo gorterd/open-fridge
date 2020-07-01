@@ -4,6 +4,7 @@ import { Link, useHistory } from 'react-router-dom';
 
 import './navbar.css';
 import { logout } from '../../actions/session_actions';
+
 import { CreateRecipeButton } from '../recipe/rcp_shared/expanding_buttons';
 
 const NavBar = props => {
@@ -17,7 +18,11 @@ const NavBar = props => {
 
     const navbarRight = !currentUser ? (
       <>
-        <Link className="signupButton sessionButton" to="/signup">
+        <Link className="navSignupButton sessionButton" 
+          to={{
+            pathname: '/signup',
+            state: { prevPath }
+          }}>
           Sign Up
         </Link>
         <Link className="loginButton sessionButton"
@@ -37,6 +42,7 @@ const NavBar = props => {
           Welcome,{" "}
           <Link to={`/users/${currentUser.id}`}>{currentUser.username}</Link>
         </p>
+
         <button onClick={logOut}>Logout</button>
       </>
     );
