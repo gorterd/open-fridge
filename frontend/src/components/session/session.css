@@ -31,7 +31,7 @@ body {
 
 .signup-div > h1 {
   text-align: center;
-  margin-top: 40px;
+  margin-top: 5px;
   margin-bottom: 60px;
   font-size: 40px;
   font-weight: bold;
@@ -343,9 +343,9 @@ body {
   background-size: 100%;
   border-radius: 50%;
   height: 35px;
+  width: 35px;
   bottom: 50px;
   left: 50%;
-  width: 35px;
 }
 
 .login-logo {

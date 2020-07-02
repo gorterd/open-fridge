@@ -31,20 +31,23 @@ class RecipeCreate extends React.Component {
         "input-13",
       ],
       ingredientString: {},
-      errors: this.props.errors,
+      errors: {},
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillUnmount(){
-    this.props.clearErrors();
+    if (Object.keys(this.props.errors).length) {
+      this.props.clearErrors();
+    }
   }
 
   handleSubmit(e){
     e.preventDefault();
     this.props.createRecipe(this.state)
       .then((recipe) => this.props.history.push(`/recipes/${recipe.recipe._id}`))
+      .catch(() => console.log("Recipe has errors"))
   }
 
   update(field){
@@ -70,6 +73,7 @@ class RecipeCreate extends React.Component {
     const newInput = `input-${this.state.inputs.length}`;
 
     return (e) => {
+      e.preventDefault();
       this.setState((prevState) => ({
         inputs: prevState.inputs.concat([newInput]),
       }));

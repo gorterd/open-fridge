@@ -18,7 +18,6 @@ const App = () => (
       <Route exact path="/recipes/:recipeId" component={RecipeShowContainer} /> 
       
       <AuthRoute exact path="/login" component={LoginFormContainer} />
-      <AuthRoute exact path="/login" component={LoginFormContainer} />
       <AuthRoute exact path="/signup" component={SignupFormContainer} /> 
       <ProtectedRoute exact path="/new-recipe" component={RecipeCreateContainer} />
       <ProtectedRoute exact path="/users/:userId" component={ProfileShowContainer} />
