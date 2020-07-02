@@ -90,7 +90,7 @@ class RecipeCreate extends React.Component {
     let nameErrorsCN = "";
     let servingErrors = null;
     let servingErrorsCN = "";
-    if (errors) {
+    if (errors) { 
       if (errors.ingredients) {
         ingErrors = errors.ingredients;
         ingErrorsCN = "ingredientErrors";
