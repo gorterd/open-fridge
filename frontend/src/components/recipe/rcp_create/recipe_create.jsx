@@ -31,16 +31,14 @@ class RecipeCreate extends React.Component {
         "input-13",
       ],
       ingredientString: {},
-      errors: this.props.errors,
+      errors: {},
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillUnmount(){
-    if (this.state.errors) {
-      console.log(this.state.errors)
-      console.log("RECIPECREATEERRORS")
+    if (Object.keys(this.props.errors).length) {
       this.props.clearErrors();
     }
   }

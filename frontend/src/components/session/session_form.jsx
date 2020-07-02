@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import './session.css';
 import { FaLinkedin, FaGithub } from "react-icons/fa";
 
+
 class SessionForm extends React.Component {
   constructor(props) {
     super(props);
@@ -10,7 +11,11 @@ class SessionForm extends React.Component {
       username: "",
       email: "",
       password: "",
-      errors: this.props.errors ///prepare local state
+      signupErrors: {
+        username: null,
+        email: null,
+        password: null,
+      },
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -18,9 +23,7 @@ class SessionForm extends React.Component {
   }
 
   componentWillUnmount() {
-    if (this.state.errors) {
-      console.log(this.state.errors)
-      console.log("SESSIONFORM ERRORS")
+    if (Object.keys(this.props.errors).length) {
       this.props.clearErrors();
     }
   }
@@ -28,16 +31,15 @@ class SessionForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const user = Object.assign({}, this.state);
+
     if ( this.props.formType === "signup" && user.username === "openFridgeDemo" ) {
       this.props.demoUser(user)
-        .then(this._redirectAfterSubmit)
-        .catch(() => console.log("Session form has errors"));
-    }
-    else {
+        .then( (res) => this._redirectAfterSubmit(res) )
+    } else {
       this.props.processForm(user)
         .then((res) => {
-          if (res.type) {
-            console.log("Session form has errors");
+          if (res.type){
+            this.setState({ signupErrors: Object.assign({}, res.errors) })
           } else {
             this._redirectAfterSubmit(res);
           }
@@ -47,6 +49,13 @@ class SessionForm extends React.Component {
 
   update(field) {
     return (e) => {
+      if ( this.props.formType === 'login' && Object.keys(this.props.errors).length ){
+        this.props.clearErrors();
+      } else if ( this.props.formType === 'signup' && Object.keys(this.props.errors).length ){
+        const err = Object.assign({}, this.state.signupErrors);
+        err[field] = "";
+        this.setState({ signupErrors: err })
+      }
       this.setState({ [field]: e.currentTarget.value });
     };
   }
@@ -64,7 +73,6 @@ class SessionForm extends React.Component {
   }
 
   _redirectAfterSubmit(user){
-    // debugger
     if (this.props.prevPath.state
       && this.props.prevPath.state.prevPath !== '/'
     ) {
@@ -81,7 +89,7 @@ class SessionForm extends React.Component {
     otherLink = (this.props.formType === "login") ? "signup" : "login";
 
     let loginError = "";
-    let loginErrorMsg = " ";
+    let loginErrorMsg = "";
     let loginErrorClass = "";
     if (this.props.formType === "login" && Object.values(this.props.errors).length) {
       loginError = "animated shake"; 
@@ -89,23 +97,18 @@ class SessionForm extends React.Component {
       loginErrorClass = "login-error-class";
     }
 
-    let usernameErrors = null;
     let userErrorsCN = "";
-    let emailErrors = null;
     let emailErrorsCN = "";
-    let passwordErrors = null;
     let passErrorsCN = "";
+    let signupErrors = this.state.signupErrors;
     if (this.props.errors) {
-      if (this.props.errors.username) {
-        usernameErrors = this.props.errors.username;
+      if (signupErrors.username) {
         userErrorsCN = "userErrors";
       };
-      if (this.props.errors.email) {
-        emailErrors = this.props.errors.email;
+      if (signupErrors.email) {
         emailErrorsCN = "emailErrors";
       };
-      if (this.props.errors.password) {
-        passwordErrors = this.props.errors.password;
+      if (signupErrors.password) {
         passErrorsCN = "passErrors";
       };
     }
@@ -190,7 +193,7 @@ class SessionForm extends React.Component {
                 className={`${session}-input ${session}-username`}
                 id={userErrorsCN || 'sgn-user'}
               />
-              <div className={`${userErrorsCN}-signup`}>{usernameErrors}</div>
+              <div className={`${userErrorsCN}-signup`}>{signupErrors.username}</div>
 
               <input
                 type="text"
@@ -200,7 +203,7 @@ class SessionForm extends React.Component {
                 className={`${session}-input ${session}-email`}
                 id={emailErrorsCN || 'sgn-email'}
               />
-              <div className={`${emailErrorsCN}-signup`}>{emailErrors}</div>
+              <div className={`${emailErrorsCN}-signup`}>{signupErrors.email}</div>
 
               <input
                 type="password"
@@ -210,7 +213,7 @@ class SessionForm extends React.Component {
                 className={`${session}-input ${session}-password`}
                 id={passErrorsCN || 'sgn-password'}
               />
-              <div className={`${passErrorsCN}-signup`}>{passwordErrors}</div>
+              <div className={`${passErrorsCN}-signup`}>{signupErrors.password}</div>
 
               <button className={`${session}-submit`}>Get Cookin'</button>
 
