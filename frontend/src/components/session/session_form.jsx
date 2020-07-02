@@ -178,9 +178,8 @@ class SessionForm extends React.Component {
       </div>
     ) : (
       <div className="signup-container">
-        <Link className="session-logo" to="/"></Link>
-
         <div className={`${session}-div`}>
+          <Link className="session-logo" to="/"></Link>
           <h1>Member Signup</h1>
 
           <form onSubmit={this.handleSubmit} className={`${session}-form-tag`}>
