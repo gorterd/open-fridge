@@ -47,11 +47,19 @@ class RecipeCreate extends React.Component {
     e.preventDefault();
     this.props.createRecipe(this.state)
       .then((recipe) => this.props.history.push(`/recipes/${recipe.recipe._id}`))
-      .catch(() => console.log("Recipe has errors"))
+      .catch(() => {
+        this.setState({errors: this.props.errors })
+        console.log(this.state)
+      })
   }
 
   update(field){
     return (e) => {
+      if (this.state.errors[field]) {
+        let temp = Object.assign({}, this.state.errors);
+        delete temp[field];
+        this.setState({ errors: temp })
+      }
       if (field === 'instructions') {
         let instruct = e.currentTarget.value.split(/\r?\n/)
         this.setState({instructions: instruct})
@@ -64,8 +72,8 @@ class RecipeCreate extends React.Component {
   updateIngredient(key){
     return (e) => {
       const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
-      this.setState({ ingredientString: update })
-      this.setState({ ingredients: Object.values(this.state.ingredientString) });
+      this.setState({ ingredientString: update, ingredients: Object.values(this.state.ingredientString) })
+      // this.setState({ ingredients: Object.values(this.state.ingredientString) });
     }
   }
 
@@ -80,31 +88,24 @@ class RecipeCreate extends React.Component {
     };
   }
 
+
   render(){
-    let errors = this.props.errors;
-    let ingErrors = null;
+    let errors = this.state.errors;
     let ingErrorsCN = "";
-    let instructErrors = null;
     let instructErrorsCN = "";
-    let nameErrors = null;
     let nameErrorsCN = "";
-    let servingErrors = null;
     let servingErrorsCN = "";
     if (errors) { 
       if (errors.ingredients) {
-        ingErrors = errors.ingredients;
         ingErrorsCN = "ingredientErrors";
       }
       if (errors.instructions) {
-        instructErrors = errors.instructions;
         instructErrorsCN = "instructionErrors";
       }
       if (errors.name) {
-        nameErrors = errors.name;
         nameErrorsCN = "nameErrors";
       }
       if (errors.servings) {
-        servingErrors = errors.servings;
         servingErrorsCN = "servingsErrors";
       }
     }
@@ -123,7 +124,7 @@ class RecipeCreate extends React.Component {
           <div className="recipe-create-right">
             <form onSubmit={this.addInput()} className="ingredient-outer-form">
               <div className="recipe-ingredients-div">
-                <div className={`${ingErrorsCN}-create`}>{ingErrors}</div>
+                <div className={`${ingErrorsCN}-create`}>{errors.ingredients}</div>
                 <div className="recipe-create-ingredient-header">
                   <span className={`plabel recipe-ingredients ${ingErrorsCN}`}>
                     Ingredients:
@@ -166,7 +167,7 @@ class RecipeCreate extends React.Component {
             <form onSubmit={this.handleSubmit}>
               <div className="recipe-not-ingredients">
                 <h1>Recipe</h1>
-                <div className={`${nameErrorsCN}-create`}>{nameErrors}</div>
+                <div className={`${nameErrorsCN}-create`}>{errors.name}</div>
                 <label
                   htmlFor="recipe-name"
                   className={`recipe-name ${nameErrorsCN}`}
@@ -180,7 +181,7 @@ class RecipeCreate extends React.Component {
                 </label>
 
                 <div className={`${servingErrorsCN}-create`}>
-                  {servingErrors}
+                  {errors.servings}
                 </div>
                 <label
                   htmlFor="recipe-servings"
@@ -195,7 +196,7 @@ class RecipeCreate extends React.Component {
                 </label>
 
                 <div className={`${instructErrorsCN}-create`}>
-                  {instructErrors}
+                  {errors.instructions}
                 </div>
                 <label
                   htmlFor="recipe-directions"
