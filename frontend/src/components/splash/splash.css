@@ -123,9 +123,42 @@
 .smf-promo-links {
   text-align: right;
   line-height: 16px;
+  cursor: pointer;
 }
 
 .smf-promo-links h3 {
   color: #393E41;
   font-size: 16px;
+}
+
+
+/****************************/
+.teamMembers > li > div {
+  /* display: none; */
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 140px;
+  bottom: 50px;
+  font-size: 40px;
+}
+
+.teamMembers > li > div > a {
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.teamMembers > li:hover > div > a {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  /* right: 140px;
+  bottom: 50px; */
+  justify-content: space-between;
+}
+
+.teamMembers > li:hover {
+  color: blue;
 }

@@ -119,18 +119,18 @@ class SessionForm extends React.Component {
 
         <div className={`${session}-container`}>
           <div className="session-github">
-            <a href="https://github.com/gorterd/open-fridge.git" id="of-github">oF</a>
-            <a href="https://github.com/gorterd" className="dg-github">DG</a>
-            <a href="https://github.com/EricLo1321" className="dg-github">EL</a>
-            <a href="https://github.com/keely-lee" className="dg-github">KL</a>
-            <a href="https://github.com/tt954" className="dg-github">TT</a>
+            <a href="https://github.com/gorterd/open-fridge.git" target="_blank" rel="noopener noreferrer" id="of-github">oF</a>
+            <a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer" className="dg-github">DG</a>
+            <a href="https://github.com/EricLo1321" target="_blank" rel="noopener noreferrer" className="dg-github">EL</a>
+            <a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer" className="dg-github">KL</a>
+            <a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer" className="dg-github">TT</a>
             <FaGithub />
           </div>
           <div className="session-linkedin">
-            <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" className="dg-linkedin">TT</a>
-            <a href="https://www.linkedin.com/in/keely-lee1/" className="dg-linkedin">KL</a>
-            {/* <a href="" className="dg-linkedin">EL</a> */}
-            <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" className="dg-linkedin">DG</a>
+            <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">TT</a>
+            <a href="https://www.linkedin.com/in/keely-lee1/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">KL</a>
+            {/* <a href="" target="_blank" rel="noopener noreferrer" className="dg-linkedin">EL</a> */}
+            <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">DG</a>
             <FaLinkedin />
           </div>
 

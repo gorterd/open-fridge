@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavBar from '../navbar/navbar';
 import './splash.css';
-import { FaSearch, FaGithub } from 'react-icons/fa';
+import { FaSearch, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 
 import {
@@ -178,10 +178,34 @@ class Splash extends React.Component {
             </div>
             <div className="smf-promo-links">
               <ul className="teamMembers">
-                <li><a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer">Daniel Gorter</a></li>
-                <li><a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer">Eric Lo</a></li>
-                <li><a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer">Keely Lee</a></li>
-                <li><a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer">Tieulam Thai</a></li>
+                <li>
+                  <div>
+                    <a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                  </div>
+                  Daniel Gorter
+                </li>
+                <li>
+                  <div>
+                    <a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    {/* <a href="" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a> */}
+                  </div>
+                  Eric Lo
+                </li>
+                <li>
+                  <div>
+                    <a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://www.linkedin.com/in/keely-lee1/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                  </div>
+                  Keely Lee
+                </li>
+                <li>
+                  <div>
+                    <a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                  </div>
+                  Tieulam Thai
+                </li>
               </ul>
             </div>
           </div>
