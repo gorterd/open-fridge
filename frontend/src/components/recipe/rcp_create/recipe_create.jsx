@@ -49,7 +49,6 @@ class RecipeCreate extends React.Component {
       .then((recipe) => this.props.history.push(`/recipes/${recipe.recipe._id}`))
       .catch(() => {
         this.setState({errors: this.props.errors })
-        console.log(this.state)
       })
   }
 
@@ -72,8 +71,7 @@ class RecipeCreate extends React.Component {
   updateIngredient(key){
     return (e) => {
       const update = Object.assign({}, this.state.ingredientString, {[key]:e.currentTarget.value})
-      this.setState({ ingredientString: update, ingredients: Object.values(this.state.ingredientString) })
-      // this.setState({ ingredients: Object.values(this.state.ingredientString) });
+      this.setState({ ingredientString: update, ingredients: Object.values(update) })
     }
   }
 
