@@ -23,7 +23,8 @@ class Splash extends React.Component {
     this.state = {
       query: "",
       imagesLoading: true,
-      slides: _defaultSlides
+      slides: _defaultSlides,
+      activeLink: { gitLink: "", inLink: "" },
     }
 
     this.slideIdx = 0;
@@ -111,6 +112,36 @@ class Splash extends React.Component {
     return newSlides;
   }
 
+  _activate(engineer){
+    console.log(engineer)
+    const gitLinks = {
+      dg: "gorterd",
+      el: "Lo-Eric",
+      kl: "keely-lee",
+      tt: "tt954"
+    }
+    
+    const inLinks = {
+      tt: "tieulam-thai-01bb3112b",
+      kl: "keely-lee1",
+      el: "",
+      dg: "daniel-gorter-87549277",
+    }
+
+    this.setState({ activeLink: {gitLinks: gitLinks[engineer], inLinks: inLinks[engineer]} })
+    console.log( {activeLink: { gitLinks: gitLinks[engineer], inLinks: inLinks[engineer] }} )
+
+    const linksDiv = document.getElementsByClassName("splash-links-div");
+    linksDiv[0].classList.add("-active");
+    return engineer;
+  }
+
+  _deactivate(){
+    const linksDiv = document.getElementsByClassName("splash-links-div");
+    linksDiv[0].classList.remove("-active");
+    console.log(linksDiv)
+  }
+
   render() {
     const { imagesLoading } = this.state;
     
@@ -166,7 +197,7 @@ class Splash extends React.Component {
             <p>"No ingredients left behind, open your fridge."</p>
           </div>
 
-          <div className="splash-main-footer">
+          <div className="splash-main-footer" onMouseLeave={() => this._deactivate()}>
             <div className="smf-social">
               <a
                 href="https://github.com/gorterd/open-fridge"
@@ -179,34 +210,38 @@ class Splash extends React.Component {
             <div className="smf-promo-links">
               <ul className="teamMembers">
                 <li>
-                  <div>
+                  {/* <div>
                     <a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
                     <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                  </div>
-                  Daniel Gorter
+                  </div> */}
+                  <span onMouseOver={() => this._activate("dg")}>Daniel Gorter</span>
                 </li>
                 <li>
                   <div>
-                    <a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    {/* <a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer"><FaGithub /></a> */}
                     {/* <a href="" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a> */}
                   </div>
-                  Eric Lo
+                  <span onMouseOver={() => this._activate("el")}>Eric Lo</span>
+                </li>
+                <li>
+                  {/* <div className="kl-div"> */}
+                    {/* <a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer" className="keely"><FaGithub /></a>
+                    <a href="https://www.linkedin.com/in/keely-lee1/" target="_blank" rel="noopener noreferrer" className="kl"><FaLinkedin /></a> */}
+                  {/* </div> */}
+                  <span onMouseOver={() => this._activate("kl")}>Keely Lee</span>
                 </li>
                 <li>
                   <div>
-                    <a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                    <a href="https://www.linkedin.com/in/keely-lee1/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+                    {/* <a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                    <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a> */}
                   </div>
-                  Keely Lee
-                </li>
-                <li>
-                  <div>
-                    <a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer"><FaGithub /></a>
-                    <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
-                  </div>
-                  Tieulam Thai
+                  <span onMouseOver={() => this._activate("tt")}>Tieulam Thai</span>
                 </li>
               </ul>
+              <div className="splash-links-div">
+                <a href={`https://github.com/${this.state.activeLink.gitLinks}`} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                <a href={`https://www.linkedin.com/in/${this.state.activeLink.inLinks}`} target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+              </div>
             </div>
           </div>
         </div>

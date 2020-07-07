@@ -121,6 +121,7 @@
 }
 
 .smf-promo-links {
+  display: flex;
   text-align: right;
   line-height: 16px;
   cursor: pointer;
@@ -131,34 +132,64 @@
   font-size: 16px;
 }
 
+.splash-links-div {
+  display: none;
+  flex-direction: column;
+  justify-content: space-evenly;
+  font-size: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.splash-links-div.-active {
+  display: flex;
+  color: red
+}
 
 /****************************/
+.teamMembers > li > span:hover {
+  color: blue;
+}
+
+
+
+
 .teamMembers > li > div {
   /* display: none; */
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   position: absolute;
   right: 140px;
   bottom: 50px;
-  font-size: 40px;
+  font-size: 40px; */
 }
 
 .teamMembers > li > div > a {
-  display: none;
-  position: absolute;
+  /* display: none; */
+  /* position: absolute;
   bottom: 0px;
-  right: 0px;
+  right: 0px; */
 }
 
 .teamMembers > li:hover > div > a {
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  position: absolute;
+  position: absolute; */
   /* right: 140px;
   bottom: 50px; */
-  justify-content: space-between;
+  /* justify-content: space-between; */
 }
 
 .teamMembers > li:hover {
+  /* color: blue; */
+}
+
+.kl-div > a{
+  /* display: none; */
+  /* color: red; */
+}
+
+[class*="-active"] {
+  display:block;
   color: blue;
 }
