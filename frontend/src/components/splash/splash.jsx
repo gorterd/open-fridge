@@ -2,7 +2,7 @@ import React from 'react';
 
 import NavBar from '../navbar/navbar';
 import './splash.css';
-import { FaSearch, FaGithub } from 'react-icons/fa';
+import { FaSearch, FaGithub, FaLinkedin } from 'react-icons/fa';
 import { GrNext, GrPrevious } from 'react-icons/gr';
 
 import {
@@ -23,7 +23,8 @@ class Splash extends React.Component {
     this.state = {
       query: "",
       imagesLoading: true,
-      slides: _defaultSlides
+      slides: _defaultSlides,
+      activeLink: { gitLink: "", inLink: "" },
     }
 
     this.slideIdx = 0;
@@ -111,6 +112,48 @@ class Splash extends React.Component {
     return newSlides;
   }
 
+  _activate(engineer){
+    const gitLinks = {
+      dg: "gorterd",
+      el: "Lo-Eric",
+      kl: "keely-lee",
+      tt: "tt954"
+    }
+    
+    const inLinks = {
+      tt: "tieulam-thai-01bb3112b",
+      kl: "keely-lee1",
+      el: "",
+      dg: "daniel-gorter-87549277",
+    }
+
+    this.setState({ activeLink: {gitLinks: gitLinks[engineer], inLinks: inLinks[engineer]} })
+
+    const linksDiv = document.getElementsByClassName("splash-links-div");
+    linksDiv[0].classList.add("-active");
+
+    const oldFocus = document.getElementsByClassName("splash-focus") 
+    if (oldFocus.length) {
+      oldFocus[0].classList.remove("splash-focus")
+    }
+    const focus = document.getElementById(engineer)
+    focus.classList.add("splash-focus")
+
+    const teamNames = document.getElementsByClassName("teamMembers")
+    teamNames[0].classList.add("slide")
+
+    return engineer;
+  }
+
+  _deactivate(){
+    const linksDiv = document.getElementsByClassName("splash-links-div");
+    linksDiv[0].classList.remove("-active");
+    const focus = document.getElementsByClassName("splash-focus");
+    if (focus.length) focus[0].classList.remove("splash-focus");
+    const teamNames = document.getElementsByClassName("teamMembers")
+    teamNames[0].classList.remove("slide")  
+  }
+
   render() {
     const { imagesLoading } = this.state;
     
@@ -166,7 +209,7 @@ class Splash extends React.Component {
             <p>"No ingredients left behind, open your fridge."</p>
           </div>
 
-          <div className="splash-main-footer">
+          <div className="splash-main-footer" onMouseLeave={() => this._deactivate()}>
             <div className="smf-social">
               <a
                 href="https://github.com/gorterd/open-fridge"
@@ -178,11 +221,15 @@ class Splash extends React.Component {
             </div>
             <div className="smf-promo-links">
               <ul className="teamMembers">
-                <li><a href="https://github.com/gorterd" target="_blank" rel="noopener noreferrer">Daniel Gorter</a></li>
-                <li><a href="https://github.com/Lo-Eric" target="_blank" rel="noopener noreferrer">Eric Lo</a></li>
-                <li><a href="https://github.com/keely-lee" target="_blank" rel="noopener noreferrer">Keely Lee</a></li>
-                <li><a href="https://github.com/tt954" target="_blank" rel="noopener noreferrer">Tieulam Thai</a></li>
+                <li id="dg"><span onMouseOver={() => this._activate("dg")}>Daniel Gorter</span></li>
+                <li id="el"><span onMouseOver={() => this._activate("el")}>Eric Lo</span></li>
+                <li id="kl"><span onMouseOver={() => this._activate("kl")}>Keely Lee</span></li>
+                <li id="tt"><span onMouseOver={() => this._activate("tt")}>Tieulam Thai</span></li>
               </ul>
+              <div className="splash-links-div">
+                <a href={`https://github.com/${this.state.activeLink.gitLinks}`} target="_blank" rel="noopener noreferrer"><FaGithub /></a>
+                <a href={`https://www.linkedin.com/in/${this.state.activeLink.inLinks}`} target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+              </div>
             </div>
           </div>
         </div>
