@@ -146,11 +146,11 @@
 }
 
 .splash-links-div.-active > a:hover {
-  color: blue;
+  color: rgb(230, 107, 50)
 }
 
 .splash-focus {
-  color: blue;
+  color: rgb(230, 107, 50)
 }
 
 /* ----------------------------------------------
@@ -175,13 +175,12 @@
 }
 
 .slide {
-  animation: slide-left 2s;
+  animation: slide-left-slow 1s;
   transform: translateX(0px);
-  color: green;
   position: relative;
 }
 
-@keyframes slide-left {
-  from {left: 0px;}
-  to {left: 10px;}
+@keyframes slide-left-slow {
+  from {left: 40px;}
+  to {left: 0px;}
 }
