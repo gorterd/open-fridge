@@ -121,10 +121,10 @@ class Splash extends React.Component {
     }
     
     const inLinks = {
-      tt: "tieulam-thai-01bb3112b",
+      tt: "tieulam",
       kl: "keely-lee1",
-      el: "",
-      dg: "daniel-gorter-87549277",
+      el: "lo-eric",
+      dg: "daniel-gorter",
     }
 
     this.setState({ activeLink: {gitLinks: gitLinks[engineer], inLinks: inLinks[engineer]} })

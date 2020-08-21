@@ -127,10 +127,10 @@ class SessionForm extends React.Component {
             <FaGithub />
           </div>
           <div className="session-linkedin">
-            <a href="https://www.linkedin.com/in/tieulam-thai-01bb3112b/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">TT</a>
+            <a href="https://www.linkedin.com/in/tieulam/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">TT</a>
             <a href="https://www.linkedin.com/in/keely-lee1/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">KL</a>
-            {/* <a href="" target="_blank" rel="noopener noreferrer" className="dg-linkedin">EL</a> */}
-            <a href="https://www.linkedin.com/in/daniel-gorter-87549277/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">DG</a>
+            <a href="https://www.linkedin.com/in/lo-eric/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">EL</a>
+            <a href="https://www.linkedin.com/in/daniel-gorter/" target="_blank" rel="noopener noreferrer" className="dg-linkedin">DG</a>
             <FaLinkedin />
           </div>
 
