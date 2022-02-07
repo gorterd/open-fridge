@@ -1,57 +1,65 @@
 const recipeScraper = require("recipe-scraper");
-const ingParser = require('ingredientparser');
+const Parser = require('ingredientparser');
 const axios = require('axios').default;
-const fs = require('fs');
+const { writeFileSync } = require('fs');
+const { EventEmitter } = require('events');
 
-require('events').EventEmitter.defaultMaxListeners = 20;
+const BATCH_SIZE = 10;
 
-scrapeRecipes(1,15,'./recipes/recipes_01-15 .json')
+EventEmitter.defaultMaxListeners = BATCH_SIZE * 2;
+scrapeRecipes(__dirname + '/test/recipes_01.json', 1);
 
-
-async function scrapeRecipes(pageStart, pageEnd, writeFile){
-  let i = pageStart;
-  let writer = fs.createWriteStream(writeFile);
-  while (i <= pageEnd){
-    if (i === pageEnd){
-      await scrapePage(i).then( (recipes) => {
-        writer.write(recipes, () => writer.close())
-      })
-    } else {
-      await scrapePage(i).then( (recipes) => {
-        writer.write(recipes);
-      })
-    }
-    i++;
+async function scrapeRecipes(destinationFile, pageStart, pageEnd) {
+  pageEnd = pageEnd || pageStart;
+  let recipes = [];
+  for (let pageNum = pageStart; pageNum <= pageEnd; pageNum++) {
+    let pageRecipes = await scrapePage(pageNum);
+    recipes.push(...pageRecipes);
   }
+  let recipesJson = JSON.stringify(recipes, null, 2);
+  writeFileSync(destinationFile, recipesJson);
 }
 
-async function scrapePage(num){
-  let indexUrl = `https://www.yummly.com/sitemap-en-US-${num}.html`
-  let recipes = await axios.get(indexUrl, { responseType: 'text' })
-    .then(({ data }) => batchScrape(data)).catch( err => console.log(err));
-  return recipes;
+async function scrapePage(pageNum) {
+  const indexUrl = `https://www.yummly.com/sitemap-en-US-${pageNum}.html`;
+  const { data } = await axios.get(indexUrl, { responseType: 'text' });
+  return batchScrape(data);
 }
 
 async function batchScrape(htmlText) {
-  let urlMatch = /href="(https:\/\/www\.yummly\.com\/recipe[^"]*)"/g
-  let url = '';
-  let recipes = [];
-  while (url !== null) {
-    let i = 0;
-    let recipePromises = [];
-    while ((url = urlMatch.exec(htmlText)) !== null && i < 15) {
-      let recipeUrl = url[1];
-      recipePromises.push(recipeScraper(recipeUrl).then(recipe => {
-        recipe.ingredients = recipe.ingredients.map(ing => {
-          return Object.assign(ingParser.parse(ing), { fullName: ing });
-        });
-        recipe.time = { total: recipe.time.total };
-        recipe.url = recipeUrl;
-        recipes.push(recipe);
-      }).catch(err => console.log(err)));
-      i++;
-    };
-    await Promise.all(recipePromises).catch( err => console.log(err));
+  const urlRegex = /href="(https:\/\/www\.yummly\.com\/recipe[^"]*)"/g;
+  let urls = Array.from(htmlText.matchAll(urlRegex)).map(match => match[1]);
+
+  const recipes = [];
+  let batchStart = 0;
+  while (batchStart < urls.length) {
+    const scrapePromises = urls
+      .slice(batchStart, batchStart + BATCH_SIZE)
+      .map(url => scrapeRecipe(url));
+    const recipeBatch = (await Promise.all(scrapePromises)).filter(Boolean);
+    recipes.push(...recipeBatch);
+    batchStart += BATCH_SIZE;
   }
-  return JSON.stringify(recipes, null, 2);
+
+  return recipes;
+}
+
+async function scrapeRecipe(recipeUrl) {
+  try {
+    const recipe = await recipeScraper(recipeUrl);
+    const ingredients = recipe.ingredients.map(ingredient => ({
+      ...Parser.parse(ingredient),
+      fullName: ingredient
+    }));
+
+    return {
+      ...recipe,
+      ingredients,
+      time: { total: recipe.time.total },
+      url: recipeUrl
+    };
+  } catch (e) {
+    console.log(`Failed to parse ${recipeUrl}\n`, e.message);
+    return null;
+  }
 }

@@ -1,49 +1,35 @@
-const fs = require('fs');
+const { readFileSync } = require('fs');
 const mongoose = require('mongoose');
-const db = require('../config/keys').mongoURI
+const db = require('../config/keys').mongoURI;
 const Recipe = require("../models/Recipe");
 
-mongoose
-  .connect(db, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("Connected to MongoDB successfully"))
-  .catch(err => console.log(err));
+seedYummly(__dirname + '/test/recipes_01-10.json', {
+  dropYummly: true
+});
 
-seedYummly('./recipes/recipes_01-15.json', null, true)
-
-async function seedYummly(file, numRecipes, drop = false){
-
-  await dropYummly(drop).then( () => {
-    fs.readFile(file, (err, data)=> {
-      if (err){
-        console.log(err)
-      } else {
-        let recipes = JSON.parse(data);
-        numRecipes = numRecipes || recipes.length;
-        
-        for(let i = 0; i < numRecipes; i++){
-          let recipe = processRecipe(recipes[i]);
-          let newRecipe = new Recipe({...recipe});
-          newRecipe.save()
-            .then( () => {
-              if (i + 1 === numRecipes){
-                mongoose.connection.close();
-              }
-            }, err => console.log(err));
-        }
-      }
-    });
+async function seedYummly(file, { numRecipes, dropYummly } = {}) {
+  await mongoose.connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
   });
-}
+  console.log("Connected to MongoDB successfully.");
 
-function processRecipe(recipe){
-  recipe.source = 'yummly';
-  return recipe;
-}
+  try {
+    if (dropYummly) {
+      await Recipe.deleteMany({ source: 'yummly' });
+      console.log('Deleted existing yummly recipes.');
+    }
 
-async function dropYummly(bool) {
-  if (bool) {
-    await Recipe.deleteMany({ source: 'yummly' });
-  } else {
-    return null;
+    const fileContents = readFileSync(file);
+    let recipes = JSON.parse(fileContents);
+
+    if (numRecipes) {
+      recipes = recipes.slice(0, numRecipes);
+    }
+
+    recipes.forEach(recipe => recipe.source = 'yummly');
+    await Recipe.insertMany(recipes, { ordered: false });
+  } finally {
+    mongoose.connection.close();
   }
 }
